@@ -5,6 +5,8 @@
 #SBATCH --time=5-00
 #SBATCH --account=rrg-bourqueg-ad
 
+module load samtools
+
 for bf in ./data/hifi/*; do
   echo "Working on $bf"
   samtools depth -a "$bf"  |  awk '{sum+=$3} END { print "Average = ",sum/NR}'
