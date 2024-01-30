@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import subprocess
 
 from common import SAMPLE_KTS, BASE_PATH, REF_GENOME, bam
