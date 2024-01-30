@@ -8,7 +8,7 @@ gunzip -c ./data/adotto_TRregions_v1.2.bed.gz > ./data/adotto_TRregions_v1.2.bed
 
 # BEGIN STRKIT
 python3 -m venv ../envs/env_strkit
-source env_strkit/bin/activate
+source ../envs/env_strkit/bin/activate
 pip install -U strkit[rustdeps]
 deactivate
 # END STRKIT
