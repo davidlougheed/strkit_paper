@@ -2,7 +2,7 @@
 
 #python3 ./call_longtr.py
 
-source ../env_strkit/bin/activate
+source ../envs/env_strkit/bin/activate
 python3 ./call_strkit.py
 deactivate
 
