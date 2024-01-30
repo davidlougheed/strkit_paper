@@ -10,7 +10,7 @@ fi
 
 # BEGIN STRKIT
 python3 -m venv ../envs/env_strkit
-source ../envs/env_strkit/bin/activate
+source ../envs/env_strkit/bin/activate || exit
 pip install -U strkit[rustdeps]
 deactivate
 # END STRKIT
