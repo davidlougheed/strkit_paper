@@ -6,9 +6,11 @@ module load samtools
 
 cd data || exit
 
-wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/phase2_reference_assembly_sequence/hs37d5.fa.gz
-gunzip -c hs37d5.fa.gz > hs37d5.fa
-samtools faidx hs37d5.fa
+if [[ ! -f "./hs37d5.fa" ]]; then
+  wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/phase2_reference_assembly_sequence/hs37d5.fa.gz
+  gunzip -c hs37d5.fa.gz > hs37d5.fa
+  samtools faidx hs37d5.fa
+fi
 
 wget https://downloads.pacbcloud.com/public/dataset/RepeatExpansionDisorders_NoAmp/analysis/align/m64012_191221_044659.ccsset.bc1015--bc1015.bam
 wget https://downloads.pacbcloud.com/public/dataset/RepeatExpansionDisorders_NoAmp/analysis/align/m64012_191221_044659.ccsset.bc1015--bc1015.bam.bai

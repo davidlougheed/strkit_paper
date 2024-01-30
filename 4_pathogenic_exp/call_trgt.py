@@ -1,6 +1,6 @@
 import subprocess
 
-from .common import SAMPLE_KTS, BASE_PATH, REF_GENOME, bam
+from common import SAMPLE_KTS, BASE_PATH, REF_GENOME, bam
 
 
 def main():
