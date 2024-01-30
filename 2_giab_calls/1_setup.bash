@@ -29,4 +29,5 @@ cd .. || exit
 wget https://github.com/PacificBiosciences/trgt/releases/download/v0.7.0/trgt-v0.7.0-linux_x86_64.gz
 gunzip trgt-v0.7.0-linux_x86_64.gz
 mv ./trgt-v0.7.0-linux_x86_64 ../bin/trgt
+chmod +x ../bin/trgt
 # END TRGT
