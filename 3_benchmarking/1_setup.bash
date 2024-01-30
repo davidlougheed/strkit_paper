@@ -9,40 +9,25 @@ cd data || exit
 wget https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/AshkenazimTrio/HG002_NA24385_son/TandemRepeats_v1.0/GRCh38/HG002_GRCh38_TandemRepeats_v1.0.bed.gz
 wget https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/AshkenazimTrio/HG002_NA24385_son/TandemRepeats_v1.0/GRCh38/HG002_GRCh38_TandemRepeats_v1.0.vcf.gz
 wget https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/AshkenazimTrio/HG002_NA24385_son/TandemRepeats_v1.0/GRCh38/HG002_GRCh38_TandemRepeats_v1.0.vcf.gz.tbi
-
-gunzip -c adotto_TRregions_v1.2.bed.gz > adotto_TRregions_v1.2.bed
+wget https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/AshkenazimTrio/HG002_NA24385_son/TandemRepeats_v1.0/GRCh38/adotto_TRv1.1_4mers.map
+wget https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/AshkenazimTrio/HG002_NA24385_son/TandemRepeats_v1.0/GRCh38/adotto_TRv1.1_4mers.som
 
 cd .. || exit
 
 # END DATA
 
 # BEGIN TRUVARI
-python3 -m venv ./env_truvari
-source env/bin/activate
+python3 -m venv ../envs/env_truvari
+source env_truvari/bin/activate
 pip install -U Truvari==4.2.0
 deactivate
 # END TRUVARI
 
-# BEGIN STRKIT
-python3 -m venv ./env_strkit
-source env/bin/activate
-pip install -U strkit[rustdeps]
+# BEGIN LAYTR
+python3 -m venv ../envs/env_laytr
+source env_laytr/bin/activate
+git clone https://github.com/ACEnglish/laytr.git
+pip install -U --ignore-existing ./laytr
+rm -rf laytr
 deactivate
-# END STRKIT
-
-# BEGIN LONGTR
-rm -rf ./LongTR
-git clone https://github.com/gymrek-lab/LongTR.git
-cd LongTR || exit
-make
-mv ./LongTR ../bin
-cd .. || exit
-# END LONGTR
-
-# BEGIN TRGT
-cd bin || exit
-wget https://github.com/PacificBiosciences/trgt/releases/download/v0.7.0/trgt-v0.7.0-linux_x86_64.gz
-gunzip trgt-v0.7.0-linux_x86_64.gz
-mv ./trgt-v0.7.0-linux_x86_64 ./trgt
-cd .. || exit
-# END TRGT
+# END LAYTR

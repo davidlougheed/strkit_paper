@@ -46,7 +46,7 @@ def main():
     catalog_longtr = []
     catalog_trgt = []
 
-    with open("./data/adotto_TRregions_v1.2.bed", "r") as fh:
+    with open("../3_benchmarking/data/adotto_TRregions_v1.2.bed", "r") as fh:
         reader = csv.reader(fh, delimiter="\t")
         for line in reader:
             catalog_strkit.extend(process_catalog_strkit_line(line))
@@ -57,15 +57,15 @@ def main():
     catalog_longtr.sort(key=lambda x: (chr_order.index(x[0]), int(x[1])))
     catalog_trgt.sort(key=lambda x: (chr_order.index(x[0]), int(x[1])))
 
-    with open("./data/adotto_catalog_strkit.bed", "w") as fh:
+    with open("./out/adotto_catalog_strkit.bed", "w") as fh:
         writer = csv.writer(fh, delimiter="\t")
         writer.writerows(catalog_strkit)
 
-    with open("./data/adotto_catalog_longtr.bed", "w") as fh:
+    with open("./out/adotto_catalog_longtr.bed", "w") as fh:
         writer = csv.writer(fh, delimiter="\t")
         writer.writerows(catalog_longtr)
 
-    with open("./data/adotto_catalog_trgt.bed", "w") as fh:
+    with open("./out/adotto_catalog_trgt.bed", "w") as fh:
         writer = csv.writer(fh, delimiter="\t")
         writer.writerows(catalog_trgt)
 
