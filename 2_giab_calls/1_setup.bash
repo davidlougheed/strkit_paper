@@ -3,7 +3,9 @@
 module load python/3.9
 
 # BEGIN DATA
-gunzip -c ./data/adotto_TRregions_v1.2.bed.gz > ./data/adotto_TRregions_v1.2.bed
+if [[ ! -f "./data/adotto_TRregions_v1.2.bed" ]]; then
+  gunzip -c ./data/adotto_TRregions_v1.2.bed.gz > ./data/adotto_TRregions_v1.2.bed
+fi
 # END DATA
 
 # BEGIN STRKIT
