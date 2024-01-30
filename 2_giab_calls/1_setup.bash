@@ -16,6 +16,7 @@ deactivate
 # END STRKIT
 
 # BEGIN LONGTR
+module load googletest/1.13.0
 rm -rf ./LongTR
 git clone https://github.com/gymrek-lab/LongTR.git
 cd LongTR || exit
