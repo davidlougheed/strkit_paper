@@ -1,4 +1,4 @@
-REF = "/lustre03/project/rrg-bourqueg-ad/dlough2/workdir2022/ref/hg38.analysisSet.fa"
+REF = "../1_cov_subsetting/data/ref/hg38.analysisSet.fa"
 
 SAMPLES = ("HG002", "HG003", "HG004")
 
