@@ -20,6 +20,7 @@ module load googletest/1.13.0
 rm -rf ./LongTR
 git clone https://github.com/gymrek-lab/LongTR.git
 cd LongTR || exit
+sed -i 's/-lspoa/-lspoa -ldeflate/g' Makefile  # need to edit Makefile to add -ldeflate
 make
 mv ./LongTR ../../bin
 cd .. || exit
