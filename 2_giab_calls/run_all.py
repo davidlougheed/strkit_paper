@@ -22,7 +22,7 @@ if __name__ == "__main__":
                 f"REF={REF},"
                 f"TECH={tech},"
                 f"SAMPLE={sample},"
-                f"BAM=../1_cov_subsetting/data/{tech}/{sample}.bam,"
+                f"BAM=../1_cov_subsetting/data/{tech}/{sample}.aligned.bam,"
                 f"HAPLOID_CHRS={haploid_chrs},"
                 f"KARYOTYPE={sex_kary}"
             ),
