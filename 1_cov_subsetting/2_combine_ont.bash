@@ -7,5 +7,6 @@
 
 module load samtools
 cd data/ont || exit
-samtools merge -o "${SLURM_TMPDIR}/HG002.bam" HG002-1.bam HG002-2.bam HG002-3.bam
-mv "${SLURM_TMPDIR}/HG002.bam" ./
+samtools merge -o "${SLURM_TMPDIR}/HG002.bam" HG002-1.bam HG002-2.bam HG002-3.bam || exit
+mv "${SLURM_TMPDIR}/HG002.bam" ./ || exit
+rm HG002-1.bam HG002-2.bam HG002-3.bam

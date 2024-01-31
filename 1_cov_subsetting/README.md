@@ -1,7 +1,8 @@
-# `1_cov_subsetting`
+# Step 1: alignment and coverage subsetting
 
 ```bash
-nohup ./1_download.bash &
+nohup ./1_setup.bash &
 sbatch ./2_combine_ont.bash
-sbatch ./3_print_coverages.bash
+./3_align.bash
+sbatch ./4_print_coverages.bash
 ```
