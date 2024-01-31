@@ -35,6 +35,7 @@ git clone https://github.com/lh3/minimap2.git
 cd minimap2 || exit
 git checkout v2.26
 make
-mv ./minimap2 ../bin/
+mv ./minimap2 ../../bin/
+cd .. || exit
 
 # END MINIMAP2
