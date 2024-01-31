@@ -46,7 +46,7 @@ def main():
     catalog_longtr = []
     catalog_trgt = []
 
-    with open("../3_benchmarking/data/adotto_TRregions_v1.2.bed", "r") as fh:
+    with open("./data/adotto_TRregions_v1.2.bed", "r") as fh:
         reader = csv.reader(fh, delimiter="\t")
         for line in reader:
             catalog_strkit.extend(process_catalog_strkit_line(line))
