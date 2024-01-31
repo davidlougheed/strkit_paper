@@ -2,8 +2,6 @@
 
 module load python/3.9
 
-REF="/lustre03/project/rrg-bourqueg-ad/dlough2/workdir2022/ref/hg38.analysisSet.fa"
-
 mkdir -p ./out/calls/hifi/
 mkdir -p ./out/calls/ont/
 

@@ -19,12 +19,12 @@ if __name__ == "__main__":
             (
                 f"--export="
                 f"SEED=1234,"
-                f"REF=${REF},"
-                f"TECH=${tech},"
-                f"SAMPLE=${sample},"
-                f"BAM=../1_cov_subsetting/data/${tech}/{sample}.bam,"
+                f"REF={REF},"
+                f"TECH={tech},"
+                f"SAMPLE={sample},"
+                f"BAM=../1_cov_subsetting/data/{tech}/{sample}.bam,"
                 f"HAPLOID_CHRS={haploid_chrs},"
-                f"KARYOTYPE=${sex_kary}"
+                f"KARYOTYPE={sex_kary}"
             ),
             script,
         )), shell=True)
