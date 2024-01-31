@@ -7,13 +7,13 @@
 
 module load samtools
 
-for bf in ./data/hifi/*; do
+for bf in ./data/hifi/*.aligned.bam; do
   echo "Working on $bf"
   samtools index "$bf"
   samtools depth -a "$bf" | awk '{sum+=$3} END { print "Average = ",sum/NR}'
 done
 
-for bf in ./data/ont/*; do
+for bf in ./data/ont/*.aligned.bam; do
   echo "Working on $bf"
   samtools index "$bf"
   samtools depth -a "$bf" | awk '{sum+=$3} END { print "Average = ",sum/NR}'

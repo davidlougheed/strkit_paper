@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+module load samtools
+
 # BEGIN DATA
 
 cd data || exit
@@ -7,6 +9,8 @@ cd data || exit
 mkdir -p ref
 cd ref || exit
 wget https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/analysisSet/hg38.analysisSet.fa.gz
+gunzip -c hg38.analysisSet.fa.gz > hg38.analysisSet.fa
+samtools faidx hg38.analysisSet.fa
 cd .. || exit
 
 mkdir -p hifi
