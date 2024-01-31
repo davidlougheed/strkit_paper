@@ -17,4 +17,4 @@ if [[ ! -f "${fastq}" ]]; then
   bedtools bamtofastq -i "${BAM}" -fq "${fastq}"
 fi
 
-../bin/minimap2 -t 8 -ax "map-${TECH}" "${REF}" "${fastq}" | samtools sort -@ 8 - -o "${BAM%.*}.aligned.bam"
+../bin/minimap2 -t 8 -ax "map-${TECH}" "${REF}" "${fastq}" | samtools sort --write-index -@ 8 - -o "${BAM%.*}.aligned.bam"
