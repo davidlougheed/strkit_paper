@@ -1,8 +1,8 @@
 #!/bin/bash
-#SBATCH --mem=64G
+#SBATCH --mem=70G
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=8
-#SBATCH --time=1-00
+#SBATCH --cpus-per-task=10
+#SBATCH --time=1-04
 #SBATCH --account=rrg-bourqueg-ad
 
 module load bedtools samtools
@@ -19,4 +19,7 @@ if [[ ! -f "${fastq_gz}" ]]; then
   gzip "${fastq}"
 fi
 
-../bin/minimap2 -t 8 -ax "map-${TECH}" "${REF}" "${fastq_gz}" | samtools sort --write-index -@ 8 - -o "${BAM%.*}.aligned.bam"
+tmp_bam="${SLURM_TMPDIR}/out.bam"
+
+../bin/minimap2 -t 12 -ax "map-${TECH}" "${REF}" "${fastq_gz}" | samtools sort --write-index -@ 12 - -o "${tmp_bam}"
+mv "${tmp_bam}" "${BAM%.*}.aligned.bam"
