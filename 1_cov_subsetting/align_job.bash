@@ -14,9 +14,12 @@ fastq="${BAM%.*}.fq"
 fastq_gz = "${fastq}.gz"
 echo "fastq=${fastq}"
 
+if [[ ! -f "${fastq}" ]]; then
+  bedtools bamtofastq -i "${BAM}" -fq "${fastq}" || exit
+fi
+
 if [[ ! -f "${fastq_gz}" ]]; then
-  bedtools bamtofastq -i "${BAM}" -fq "${fastq}"
-  gzip "${fastq}"
+  gzip "${fastq}" || exit
 fi
 
 tmp_bam="${SLURM_TMPDIR}/out.bam"
