@@ -11,7 +11,7 @@ echo "BAM=${BAM}"
 echo "REF=${REF}"
 echo "TECH=${TECH}"
 fastq="${BAM%.*}.fq"
-fastq_gz = "${fastq}.gz"
+fastq_gz="${fastq}.gz"
 echo "fastq=${fastq}"
 
 if [[ ! -f "${fastq}" ]]; then
