@@ -19,10 +19,14 @@ if [[ ! -f "${fastq}" ]]; then
 fi
 
 if [[ ! -f "${fastq_gz}" ]]; then
-  gzip "${fastq}" || exit
+  tmp="${SLURM_TMPDIR}/fastq.gz"
+  gzip -3 -c "${fastq}" > "${tmp}"
+  mv "${tmp}" "${fastq_gz}"
 fi
 
 tmp_bam="${SLURM_TMPDIR}/out.bam"
+aligned_bam="${BAM%.*}.aligned.bam"
 
 ../bin/minimap2 -t 12 -ax "map-${TECH}" "${REF}" "${fastq_gz}" | samtools sort --write-index -@ 12 - -o "${tmp_bam}"
-mv "${tmp_bam}" "${BAM%.*}.aligned.bam"
+mv "${tmp_bam}" "${aligned_bam}"
+chgrp rrg-bourqueg-ad "${aligned_bam}"
