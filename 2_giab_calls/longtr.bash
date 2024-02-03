@@ -9,6 +9,7 @@ module load python/3.9
 
 ../bin/LongTR \
   --bams "${BAM}" \
+  --bam-samps "HG002" \
   --fasta "${REF}" \
   --regions ./out/adotto_catalog_longtr.bed \
   --skip-assembly \

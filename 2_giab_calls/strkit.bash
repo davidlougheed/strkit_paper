@@ -5,6 +5,7 @@
 #SBATCH --time=1-00
 #SBATCH --account=rrg-bourqueg-ad
 
+module load python/3.9 parasail
 source ../envs/env_strkit/bin/activate
 
 strkit call \
