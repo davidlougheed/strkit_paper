@@ -8,12 +8,13 @@
 module load python/3.11 parasail
 source ../envs/env_strkit/bin/activate
 
+#  --realign \
 strkit call \
   --ref "${REF}" \
   --loci ./out/adotto_catalog_strkit.bed \
   --sex-chr "${KARYOTYPE}" \
   --hq \
-  --realign \
+  --incorporate-snvs "./data/00-common_all.vcf.gz" \
   --json "./out/calls/${TECH}/${SAMPLE}.strkit.json" \
   --vcf "./out/calls/${TECH}/${SAMPLE}.strkit.vcf" \
   --seed "${SEED}" \
