@@ -14,5 +14,5 @@ module load python/3.9
   --fasta "${REF}" \
   --regions ./out/adotto_catalog_longtr.bed \
   --skip-assembly \
-  --tr-vcf "./out/calls/${TECH}/${SAMPLE}.longtr.vcf" \
+  --tr-vcf "./out/calls/${TECH}/${SAMPLE}.longtr.vcf.gz" \
   --haploid-chrs "${HAPLOID_CHRS}"
