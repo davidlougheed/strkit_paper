@@ -7,17 +7,25 @@ import json
 chr_order = (*map(lambda c: f"chr{c}", range(1, 23)), "chrX", "chrY")
 print(f"chr_order={chr_order}")
 
+MAX_MOTIF_SIZE = 10
 
-def _get_non_overlapping_annos(data: list[str]) -> list[dict]:
-    seen_coords: set[tuple[int, int]] = set()
+
+def _get_non_overlapping_annos(seen_coords: set[tuple[str, int, int]], data: list[str]) -> list[dict]:
     anno_final: list[dict] = []
 
-    for anno in json.loads(data[-1]):
-        coords = (int(anno["start"]), int(anno["end"]))
+    for anno in sorted(json.loads(data[-1]), key=lambda k: len(k["motif"])):
+        motif = anno["motif"]
+        if len(motif) > MAX_MOTIF_SIZE:
+            continue
+        if len(set(motif)) == 1:
+            # skip homopolymers
+            continue
+        coords = (anno["chrom"], anno["start"], anno["end"])
         overlapping: bool = False
         for sc in seen_coords:
-            if coords[0] <= sc[1] and coords[1] >= sc[0]:  # overlap
+            if coords[1] <= sc[2] and coords[2] >= sc[1]:  # overlap
                 overlapping = True
+                break
         if overlapping:
             continue
         seen_coords.add(coords)
@@ -27,18 +35,22 @@ def _get_non_overlapping_annos(data: list[str]) -> list[dict]:
 
 
 def process_catalog_strkit_line(data: list[str]):
-    return [[anno["chrom"], anno["start"], anno["end"], anno["motif"]] for anno in _get_non_overlapping_annos(data)]
+    seen_coords: set[tuple[str, int, int]] = set()
+    return [[anno["chrom"], anno["start"], anno["end"], anno["motif"]]
+            for anno in _get_non_overlapping_annos(seen_coords, data)]
 
 
 def process_catalog_longtr_line(data: list[str]):
+    seen_coords: set[tuple[str, int, int]] = set()
     return [[anno["chrom"], anno["start"], anno["end"], len(anno["motif"]), round(anno["copies"])]
-            for anno in _get_non_overlapping_annos(data)]
+            for anno in _get_non_overlapping_annos(seen_coords, data)]
 
 
 def process_catalog_trgt_line(data: list[str]):
+    seen_coords: set[tuple[str, int, int]] = set()
     return [
         [anno["chrom"], anno["start"], anno["end"], f"ID=anno{idx};MOTIFS={anno['motif']};STRUC=({anno['motif']})n"]
-        for idx, anno in enumerate(_get_non_overlapping_annos(data))]
+        for idx, anno in enumerate(_get_non_overlapping_annos(seen_coords, data))]
 
 
 def main():
@@ -52,6 +64,8 @@ def main():
             catalog_strkit.extend(process_catalog_strkit_line(line))
             catalog_longtr.extend(process_catalog_longtr_line(line))
             catalog_trgt.extend(process_catalog_trgt_line(line))
+
+    print("catalog size (strkit, longTR, TRGT):", len(catalog_strkit), len(catalog_longtr), len(catalog_trgt))
 
     catalog_strkit.sort(key=lambda x: (chr_order.index(x[0]), int(x[1])))
     catalog_longtr.sort(key=lambda x: (chr_order.index(x[0]), int(x[1])))
