@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-module load python/3.9 rust/1.70.0
+module load python/3.11 rust/1.70.0
 
 # BEGIN DATA
 if [[ ! -f "./data/adotto_TRregions_v1.2.bed" ]]; then
