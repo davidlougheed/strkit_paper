@@ -3,9 +3,20 @@
 module load python/3.11 rust/1.70.0
 
 # BEGIN DATA
-if [[ ! -f "./data/adotto_TRregions_v1.2.bed" ]]; then
-  gunzip -c ./data/adotto_TRregions_v1.2.bed.gz > ./data/adotto_TRregions_v1.2.bed
+
+cd data || exit
+
+if [[ ! -f "./adotto_TRregions_v1.2.bed" ]]; then
+  gunzip -c ./adotto_TRregions_v1.2.bed.gz > ./adotto_TRregions_v1.2.bed
 fi
+
+if [[ ! -f "./00-common_all.vcf.gz" ]]; then
+  wget https://ftp.ncbi.nih.gov/snp/organisms/human_9606/VCF/00-common_all.vcf.gz
+  wget https://ftp.ncbi.nih.gov/snp/organisms/human_9606/VCF/00-common_all.vcf.gz.tbi
+fi
+
+cd .. || exit
+
 # END DATA
 
 # BEGIN STRKIT
