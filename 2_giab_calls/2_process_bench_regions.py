@@ -37,7 +37,7 @@ def process_catalog_longtr_line(data: list[str]):
 
 def process_catalog_trgt_line(data: list[str]):
     return [
-        [anno["chrom"], anno["start"], anno["end"], f"ID=anno{idx},MOTIFS={anno['motif']},STRUC=({anno['motif']})n"]
+        [anno["chrom"], anno["start"], anno["end"], f"ID=anno{idx};MOTIFS={anno['motif']};STRUC=({anno['motif']})n"]
         for idx, anno in enumerate(_get_non_overlapping_annos(data))]
 
 
