@@ -17,4 +17,6 @@ strkit call \
   --json "./out/calls/${TECH}/${SAMPLE}.strkit.json" \
   --vcf "./out/calls/${TECH}/${SAMPLE}.strkit.vcf" \
   --seed "${SEED}" \
+  --sample-id "${SAMPLE}" \
+  --processes 1 \
   "${BAM}"

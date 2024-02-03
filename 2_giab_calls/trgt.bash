@@ -6,8 +6,11 @@
 #SBATCH --account=rrg-bourqueg-ad
 
 ../bin/trgt \
+  -v \
   --reads "${BAM}" \
   --genome "${REF}" \
   --repeats ./out/adotto_catalog_trgt.bed \
   --output-prefix "./out/calls/${TECH}/${SAMPLE}.trgt" \
-  --karyotype "${KARYOTYPE}"
+  --sample-name "${SAMPLE}" \
+  --karyotype "${KARYOTYPE}" \
+  --threads 1
