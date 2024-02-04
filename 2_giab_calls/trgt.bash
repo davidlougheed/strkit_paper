@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --mem=8G
+#SBATCH --mem=16G
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=1
+#SBATCH --cpus-per-task=10
 #SBATCH --time=3-00
 #SBATCH --account=rrg-bourqueg-ad
 
@@ -13,4 +13,4 @@
   --output-prefix "./out/calls/${TECH}/${SAMPLE}.trgt" \
   --sample-name "${SAMPLE}" \
   --karyotype "${KARYOTYPE}" \
-  --threads 1
+  --threads 10

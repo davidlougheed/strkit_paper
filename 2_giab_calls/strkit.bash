@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --mem=8G
+#SBATCH --mem=16G
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=1
+#SBATCH --cpus-per-task=10
 #SBATCH --time=3-00
 #SBATCH --account=rrg-bourqueg-ad
 
@@ -15,9 +15,9 @@ strkit call \
   --sex-chr "${KARYOTYPE}" \
   --hq \
   --incorporate-snvs "./data/00-common_all.vcf.gz" \
-  --json "./out/calls/${TECH}/${SAMPLE}.strkit.json" \
   --vcf "./out/calls/${TECH}/${SAMPLE}.strkit.vcf" \
+  --no-tsv \
   --seed "${SEED}" \
   --sample-id "${SAMPLE}" \
-  --processes 1 \
+  --processes 10 \
   "${BAM}"
