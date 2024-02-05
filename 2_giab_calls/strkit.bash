@@ -9,7 +9,7 @@ module load python/3.11 parasail
 source ../envs/env_strkit/bin/activate
 
 #  --realign \
-strkit call \
+/usr/bin/time -o "./out/calls/${TECH}/${SAMPLE}.strkit.time" strkit call \
   --ref "${REF}" \
   --loci ./out/adotto_catalog_strkit.bed \
   --sex-chr "${KARYOTYPE}" \

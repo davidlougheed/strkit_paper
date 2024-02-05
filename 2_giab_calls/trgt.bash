@@ -5,7 +5,7 @@
 #SBATCH --time=3-00
 #SBATCH --account=rrg-bourqueg-ad
 
-../bin/trgt \
+/usr/bin/time -o "./out/calls/${TECH}/${SAMPLE}.trgt.time" ../bin/trgt \
   -v \
   --reads "${BAM}" \
   --genome "${REF}" \
