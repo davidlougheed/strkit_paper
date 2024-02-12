@@ -24,7 +24,7 @@ if [[ ! -d "../envs/env_strkit" ]]; then
   python3 -m venv ../envs/env_strkit
 fi
 source ../envs/env_strkit/bin/activate || exit
-pip install -U strkit[rustdeps]==0.15.0a3
+pip install -U strkit[rustdeps]==0.15.0a5
 deactivate
 # END STRKIT
 
@@ -40,8 +40,9 @@ cd .. || exit
 # END LONGTR
 
 # BEGIN TRGT
-wget https://github.com/PacificBiosciences/trgt/releases/download/v0.7.0/trgt-v0.7.0-linux_x86_64.gz
-gunzip trgt-v0.7.0-linux_x86_64.gz
-mv ./trgt-v0.7.0-linux_x86_64 ../bin/trgt
+trgt_version="v0.8.0"
+wget "https://github.com/PacificBiosciences/trgt/releases/download/${trgt_version}/trgt-${trgt_version}-linux_x86_64.gz"
+gunzip "trgt-${trgt_version}-linux_x86_64.gz"
+mv "./trgt-${trgt_version}-linux_x86_64" ../bin/trgt
 chmod +x ../bin/trgt
 # END TRGT
