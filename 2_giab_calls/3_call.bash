@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-module load python/3.9
+module load python/3.11
 
 mkdir -p ./out/calls/hifi/
 mkdir -p ./out/calls/ont/
