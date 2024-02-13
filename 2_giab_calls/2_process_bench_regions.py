@@ -8,18 +8,29 @@ chr_order = (*map(lambda c: f"chr{c}", range(1, 23)), "chrX", "chrY")
 print(f"chr_order={chr_order}")
 
 MAX_MOTIF_SIZE = 10
+MIN_PURITY = 80
 
 
 def _get_non_overlapping_annos(seen_coords: set[tuple[str, int, int]], data: list[str]) -> list[dict]:
     anno_final: list[dict] = []
+    json_data = json.loads(data[-1])
 
-    for anno in sorted(json.loads(data[-1]), key=lambda k: len(k["motif"])):
+    by_span = sorted(json_data, key=lambda k: k["end"] - k["start"], reverse=True)
+
+    if by_span and (len(by_span[0]["motif"]) > MAX_MOTIF_SIZE):
+        return anno_final  # early return if our most spanning TR is above the STR motif size range
+
+    for anno in sorted(json_data, key=lambda k: k["end"] - k["start"], reverse=True):
         motif = anno["motif"]
+
         if len(motif) > MAX_MOTIF_SIZE:
+            continue
+        if anno["purity"] < MIN_PURITY:
             continue
         if len(set(motif)) == 1:
             # skip homopolymers
             continue
+
         coords = (anno["chrom"], anno["start"], anno["end"])
         overlapping: bool = False
         for sc in seen_coords:
