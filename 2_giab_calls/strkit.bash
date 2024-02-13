@@ -27,4 +27,5 @@ cp "./data/00-common_all.vcf.gz.tbi" "${snv_vcf_tmpdir}.tbi"
   --seed "${SEED}" \
   --sample-id "${SAMPLE}" \
   --processes 8 \
+  --log-level debug \
   "${bam_tmpdir}"
