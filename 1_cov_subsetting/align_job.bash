@@ -10,12 +10,12 @@ module load samtools
 echo "BAM=${BAM}"
 echo "REF=${REF}"
 echo "TECH=${TECH}"
-fastq_gz="${fastq}.gz"
-echo "fastq=${fastq}"
+fastq_gz="${BAM%.*}.fastq.gz"
+echo "fastq_gz=${fastq_gz}"
 
 if [[ ! -f "${fastq_gz}" ]]; then
   tmp="${SLURM_TMPDIR}/fastq.gz"
-  samtools fastq -@ 10 | pigz -p 10 -3 > "${tmp}"
+  samtools fastq -@ 10 "${BAM}" | pigz -p 10 -3 > "${tmp}"
   mv "${tmp}" "${fastq_gz}"
 fi
 
