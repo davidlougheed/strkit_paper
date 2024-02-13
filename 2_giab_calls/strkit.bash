@@ -1,14 +1,17 @@
 #!/bin/bash
-#SBATCH --mem=16G
+#SBATCH --mem=8G
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=10
+#SBATCH --cpus-per-task=8
 #SBATCH --time=3-00
 #SBATCH --account=rrg-bourqueg-ad
 
 module load python/3.11 parasail
 source ../envs/env_strkit/bin/activate
 
-#  --realign \
+bam_tmpdir="${SLURM_TMPDIR}/reads.bam"
+cp "${BAM}" "${bam_tmpdir}"
+cp "${BAM}.bai" "${bam_tmpdir}.bai"
+
 /usr/bin/time -o "./out/calls/${TECH}/${SAMPLE}.strkit.time" strkit call \
   --ref "${REF}" \
   --loci ./out/adotto_catalog_strkit.bed \
@@ -19,5 +22,5 @@ source ../envs/env_strkit/bin/activate
   --no-tsv \
   --seed "${SEED}" \
   --sample-id "${SAMPLE}" \
-  --processes 10 \
-  "${BAM}"
+  --processes 8 \
+  "${bam_tmpdir}"

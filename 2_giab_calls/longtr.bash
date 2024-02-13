@@ -5,10 +5,12 @@
 #SBATCH --time=3-00
 #SBATCH --account=rrg-bourqueg-ad
 
-module load python/3.9
+bam_tmpdir="${SLURM_TMPDIR}/reads.bam"
+cp "${BAM}" "${bam_tmpdir}"
+cp "${BAM}.bai" "${bam_tmpdir}.bai"
 
 ../bin/LongTR \
-  --bams "${BAM}" \
+  --bams "${bam_tmpdir}" \
   --bam-samps "${SAMPLE}" \
   --bam-libs "${SAMPLE}" \
   --fasta "${REF}" \
