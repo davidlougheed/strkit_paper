@@ -1,8 +1,8 @@
 #!/bin/bash
-#SBATCH --mem=8G
+#SBATCH --mem=5G
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
-#SBATCH --time=3-00
+#SBATCH --time=1-00
 #SBATCH --account=rrg-bourqueg-ad
 
 module load python/3.11 parasail
