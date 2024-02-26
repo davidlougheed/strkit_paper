@@ -15,9 +15,11 @@ REFERENCE="../1_cov_subsetting/data/hg38.analysisSet.fa"
 #  - TECH (hifi, ont)
 #  - TOOL (strkit, longtr, trgt)
 
-bench_dir="out/hg002_benchmark/${TECH}/${TOOL}/"
+tech_dir="out/hg002_benchmark/${TECH}"
+bench_dir="${tech_dir}/${TOOL}/"
 
-mkdir -p "${bench_dir}"
+mkdir -p "${tech_dir}"
+rm -rf "${bench_dir}"
 
 truvari bench \
   -b ./data/HG002_GRCh38_TandemRepeats_v1.0.vcf.gz \
