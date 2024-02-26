@@ -5,8 +5,12 @@ tools=( longtr strkit trgt )
 
 for tech in "${techs[@]}"; do
   for tool in "${tools[@]}"; do
-    for f in ../2_giab_calls/out/calls/${tech}/HG002.${tool}.norm.vcf; do
+    f="../2_giab_calls/out/calls/${tech}/HG002.${tool}.norm.vcf.gz"
+    if [[ -f "${f}" ]]; then
+      echo "Running truvari on ${f}"
       sbatch --export="VCF=${f},TECH=${tech},TOOL=${tool}" ./truvari_job.bash
-    done
+    else
+      echo "Skipping job; ${f} does not exist"
+    fi
   done
 done
