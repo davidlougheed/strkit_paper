@@ -1,2 +1,5 @@
 *.bam
 *.bam.bai
+*.fa
+*.fa.fai
+*.fa.gz
