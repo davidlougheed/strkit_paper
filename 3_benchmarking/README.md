@@ -1,14 +1,9 @@
-# `2_benchmarking`
+# `3_benchmarking`
 
 ## Steps
 
 ```bash
 ./1_setup.bash
-./2_process_bench_regions.py
+./2_truvari.bash
+./3_laytr.bash
 ```
-
-## Attribution
-
-[`adotto_TRregions_v1.2.bed.gz`](../2_hg002_calls/data/adotto_TRregions_v1.2.bed.gz) was accessed from https://zenodo.org/records/8387564 
-andis distributed under the terms of the Creative Commons Attribution 4.0 International license by the author, 
-Adam English.
