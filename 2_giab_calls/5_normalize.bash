@@ -11,6 +11,7 @@ truvari_norm () {
   # Normalizes a .vcf.gz with base path $1 to have bi-allelic entries only (so multi-allelic VCF lines get split up),
   # which is a requirement for input into Truvari.
   bcftools norm -f "${REF}" -c s -m - "${1}.vcf.gz" -O z -o "${1}.norm.vcf.gz"
+  tabix "${1}.norm.vcf.gz"
 }
 
 module load bcftools

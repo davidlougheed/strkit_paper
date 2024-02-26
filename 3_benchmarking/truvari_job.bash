@@ -22,7 +22,7 @@ mkdir -p "${bench_dir}"
 truvari bench \
   -b ./data/HG002_GRCh38_TandemRepeats_v1.0.vcf.gz \
   -c "${VCF}" \
-  --includebed ./data/HG002_GRCh38_TandemRepeats_v1.0.chr4.bed.gz \
+  --includebed ./data/HG002_GRCh38_TandemRepeats_v1.0.bed.gz \
   --sizemin 5 \
   --pick ac \
   -o "${bench_dir}"
