@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-module load python/3.11
+# laytr doesn't work with python 3.11 due to edlib erroring with:
+#  edlib.bycython.cpp:198:12: fatal error: longintrepr.h: No such file or directory
+module load python/3.9
 
 # BEGIN DATA
 
@@ -18,16 +20,16 @@ cd .. || exit
 
 # BEGIN TRUVARI
 python3 -m venv ../envs/env_truvari
-source env_truvari/bin/activate
-pip install -U Truvari==4.2.0
+source ../envs/env_truvari/bin/activate
+pip install -U Truvari==4.2.1
 deactivate
 # END TRUVARI
 
 # BEGIN LAYTR
 python3 -m venv ../envs/env_laytr
-source env_laytr/bin/activate
+source ../envs/env_laytr/bin/activate
 git clone https://github.com/ACEnglish/laytr.git
-pip install -U --ignore-existing ./laytr
+pip install -U ./laytr
 rm -rf laytr
 deactivate
 # END LAYTR
