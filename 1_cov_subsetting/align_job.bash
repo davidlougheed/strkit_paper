@@ -2,7 +2,7 @@
 #SBATCH --mem=70G
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=10
-#SBATCH --time=1-04
+#SBATCH --time=0-12
 #SBATCH --account=rrg-bourqueg-ad
 
 module load samtools
