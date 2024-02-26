@@ -1,2 +1,5 @@
 .idea/
 ~$*.xlsx
+slurm-*.out
+**/slurm-*.out
+**/*/slurm-*.out
