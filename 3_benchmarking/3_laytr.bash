@@ -1,18 +1,16 @@
-#!/bin/bash
-#SBATCH --mem=16G
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=1
-#SBATCH --time=3-00
-#SBATCH --account=rrg-bourqueg-ad
+#!/usr/bin/env bash
 
-module load python/3.9
-source env_laytr/bin/activate
+techs=( hifi ont )
+tools=( longtr strkit trgt )
 
-# TODO
-
-laytr giabTR --regionsummary bench_result/refine.regions.txt \
-	--includebed data/HG002_GRCh38_TandemRepeats_v1.0.bed.gz \
-	--som data/adotto_TRv1.1_4mers.som \
-	--somap data/adotto_TRv1.1_4mers.map \
-	--trcatalog data/adotto_TRregions_v1.2.bed.gz \
-	--output your_report.html  # TODO
+for tech in "${techs[@]}"; do
+  for tool in "${tools[@]}"; do
+    d="./out/hg002_benchmark/${tech}/${tool}"
+    if [[ -d "${d}" ]]; then
+      echo "Running laytr on ${d}"
+      sbatch --export="BENCH_DIR=${d}" ./laytr_job.bash
+    else
+      echo "Skipping job; ${d} does not exist"
+    fi
+  done
+done
