@@ -16,12 +16,15 @@ snv_vcf_tmpdir="${SLURM_TMPDIR}/snvs.vcf.gz"
 cp "./data/00-common_all.vcf.gz" "${snv_vcf_tmpdir}"
 cp "./data/00-common_all.vcf.gz.tbi" "${snv_vcf_tmpdir}.tbi"
 
+# for comparison to TRGT, which has no minimum, we set --min-reads and --min-allele-reads low
 /usr/bin/time -o "./out/calls/${TECH}/${SAMPLE}.strkit.time" strkit call \
   --ref "${REF}" \
   --loci ./out/adotto_catalog_strkit.bed \
   --sex-chr "${KARYOTYPE}" \
   --hq \
   --incorporate-snvs "${snv_vcf_tmpdir}" \
+  --min-reads 2 \
+  --min-allele-reads 1 \
   --vcf "./out/calls/${TECH}/${SAMPLE}.strkit.vcf" \
   --no-tsv \
   --seed "${SEED}" \
