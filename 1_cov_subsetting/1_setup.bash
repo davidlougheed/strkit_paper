@@ -6,11 +6,19 @@ module load samtools
 
 cd data || exit
 
+REF_DIR="ref"
+REF_FILE="hg38.analysisSet.fa"
+
 mkdir -p ref
-cd ref || exit
-wget https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/analysisSet/hg38.analysisSet.fa.gz
-gunzip -c hg38.analysisSet.fa.gz > hg38.analysisSet.fa
-samtools faidx hg38.analysisSet.fa
+cd "${REF_DIR}" || exit
+if [[ ! -f "${REF_FILE}" ]]; then
+  wget https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/analysisSet/hg38.analysisSet.fa.gz
+  gunzip -c hg38.analysisSet.fa.gz > "${REF_FILE}"
+  rm hg38.analysisSet.fa.gz
+fi
+if [[ ! -f "${REF_FILE}.fai" ]]; then
+  samtools faidx "${REF_FILE}"
+fi
 cd .. || exit
 
 mkdir -p hifi
