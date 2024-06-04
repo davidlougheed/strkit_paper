@@ -37,7 +37,7 @@ cd ../.. || exit
 rm -rf ./minimap2
 git clone https://github.com/lh3/minimap2.git
 cd minimap2 || exit
-git checkout v2.26
+git checkout v2.28
 make
 mv ./minimap2 ../../bin/
 cd .. || exit

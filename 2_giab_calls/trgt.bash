@@ -9,7 +9,7 @@ bam_tmpdir="${SLURM_TMPDIR}/reads.bam"
 cp "${BAM}" "${bam_tmpdir}"
 cp "${BAM}.bai" "${bam_tmpdir}.bai"
 
-/usr/bin/time -o "./out/calls/${TECH}/${SAMPLE}.trgt.time" ../bin/trgt \
+/usr/bin/time -o "./out/calls/${TECH}/${SAMPLE}.trgt.time" ../bin/trgt call \
   -v \
   --reads "${bam_tmpdir}" \
   --genome "${REF}" \

@@ -46,6 +46,7 @@ def exec_strkit(bam: str, sample: str, out_dir: Path, q: mp.Queue):
             *(("--snv", "/home/dlough2/datasets/dbsnp/00-common_all.vcf.gz") if snv else ()),
             "--seed", seed,
             "--json", f"{sample}.strkit.json",
+            "--no-tsv",
             bam,
         ], stdout=of)
 

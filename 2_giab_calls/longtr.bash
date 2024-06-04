@@ -16,5 +16,7 @@ cp "${BAM}.bai" "${bam_tmpdir}.bai"
   --fasta "${REF}" \
   --regions ./out/adotto_catalog_longtr.bed \
   --skip-assembly \
+  --max-reads 250 \
+  --min-reads 2 \
   --tr-vcf "./out/calls/${TECH}/${SAMPLE}.longtr.vcf.gz" \
   --haploid-chrs "${HAPLOID_CHRS}"

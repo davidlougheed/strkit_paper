@@ -21,7 +21,7 @@ cd .. || exit
 # BEGIN TRUVARI
 python3 -m venv ../envs/env_truvari
 source ../envs/env_truvari/bin/activate
-pip install -U Truvari==4.2.1
+pip install -U Truvari==4.2.2
 deactivate
 # END TRUVARI
 

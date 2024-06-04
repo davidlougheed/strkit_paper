@@ -7,7 +7,7 @@
 
 module load python/3.9 parasail
 
-#time python3 ./call_longtr.py
+time python3 ./call_longtr.py
 
 source ../envs/env_strkit/bin/activate
 time python3 ./call_strkit.py
