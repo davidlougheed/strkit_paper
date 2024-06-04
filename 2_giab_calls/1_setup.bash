@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-module load python/3.11 rust/1.70.0
+module load python/3.11 rust/1.76.0
 
 # BEGIN DATA
 
