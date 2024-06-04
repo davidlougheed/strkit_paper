@@ -24,12 +24,12 @@ if [[ ! -d "../envs/env_strkit" ]]; then
   python3 -m venv ../envs/env_strkit
 fi
 source ../envs/env_strkit/bin/activate || exit
-pip install -U strkit[rustdeps]==0.15.0a7
+pip install -U strkit==0.15.0a7
 deactivate
 # END STRKIT
 
 # BEGIN LONGTR
-module load googletest/1.13.0
+module load googletest/1.14.0
 rm -rf ./LongTR
 git clone https://github.com/gymrek-lab/LongTR.git
 cd LongTR || exit
