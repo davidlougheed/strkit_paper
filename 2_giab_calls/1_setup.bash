@@ -42,8 +42,10 @@ cd .. || exit
 
 # BEGIN TRGT
 trgt_version="v1.0.0"
-wget "https://github.com/PacificBiosciences/trgt/releases/download/${trgt_version}/trgt-${trgt_version}-x86_64-unknown-linux-gnu.gz"
-gunzip "trgt-${trgt_version}-x86_64-unknown-linux-gnu.gz"
-mv "./trgt-${trgt_version}-x86_64-unknown-linux-gnu/trgt" ../bin/trgt
+wget "https://github.com/PacificBiosciences/trgt/releases/download/${trgt_version}/trgt-${trgt_version}-x86_64-unknown-linux-gnu.tar.gz"
+tar -xzvf "trgt-${trgt_version}-x86_64-unknown-linux-gnu.tar.gz"
+trgt_dir="./trgt-${trgt_version}-x86_64-unknown-linux-gnu"
+mv "${trgt_dir}/trgt" ../bin/trgt
+rm -rf "${trgt_dir}"
 chmod +x ../bin/trgt
 # END TRGT
