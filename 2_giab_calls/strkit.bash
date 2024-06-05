@@ -5,7 +5,8 @@
 #SBATCH --time=1-00
 #SBATCH --account=rrg-bourqueg-ad
 
-module load python/3.11 parasail
+module load StdEnv/2020 intel/2020.1.217
+module load python/3.10 parasail
 source ../envs/env_strkit/bin/activate
 
 bam_tmpdir="${SLURM_TMPDIR}/reads.bam"
