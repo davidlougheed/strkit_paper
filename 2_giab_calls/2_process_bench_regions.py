@@ -20,7 +20,7 @@ def _get_non_overlapping_annos(seen_coords: set[tuple[str, int, int]], data: lis
     if by_span and (len(by_span[0]["motif"]) > MAX_MOTIF_SIZE):
         return anno_final  # early return if our most spanning TR is above the STR motif size range
 
-    for anno in sorted(json_data, key=lambda k: k["end"] - k["start"], reverse=True):
+    for anno in by_span:
         motif = anno["motif"]
 
         if len(motif) > MAX_MOTIF_SIZE:
@@ -31,14 +31,20 @@ def _get_non_overlapping_annos(seen_coords: set[tuple[str, int, int]], data: lis
             # skip homopolymers
             continue
 
-        coords = (anno["chrom"], anno["start"], anno["end"])
+        # In the JSON, they're 1-based closed coordinates. Change to 0-based half-open:
+        start = anno["start"] - 1
+        end = anno["end"]
+        coords = (anno["chrom"], start, end)
+
         overlapping: bool = False
         for sc in seen_coords:
-            if coords[1] <= sc[2] and coords[2] >= sc[1]:  # overlap
+            if start < sc[2] and end > sc[1]:  # overlap
                 overlapping = True
                 break
+
         if overlapping:
             continue
+
         seen_coords.add(coords)
         anno_final.append(anno)
 
