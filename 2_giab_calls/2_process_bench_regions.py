@@ -54,20 +54,20 @@ def _get_non_overlapping_annos(seen_coords: set[tuple[str, int, int]], data: lis
 
 def process_catalog_strkit_line(data: list[str]):
     seen_coords: set[tuple[str, int, int]] = set()
-    return [[anno["chrom"], anno["start"] - 1, anno["end"], anno["motif"]]
+    return [[anno["chrom"], anno["start"], anno["end"], anno["motif"]]
             for anno in _get_non_overlapping_annos(seen_coords, data)]
 
 
 def process_catalog_longtr_line(data: list[str]):
     seen_coords: set[tuple[str, int, int]] = set()
-    return [[anno["chrom"], anno["start"] - 1, anno["end"], len(anno["motif"]), round(anno["copies"])]
+    return [[anno["chrom"], anno["start"], anno["end"], len(anno["motif"]), round(anno["copies"])]
             for anno in _get_non_overlapping_annos(seen_coords, data)]
 
 
 def process_catalog_trgt_line(data: list[str]):
     seen_coords: set[tuple[str, int, int]] = set()
     return [
-        [anno["chrom"], anno["start"] - 1, anno["end"], f"ID=anno{idx};MOTIFS={anno['motif']};STRUC=({anno['motif']})n"]
+        [anno["chrom"], anno["start"], anno["end"], f"ID=anno{idx};MOTIFS={anno['motif']};STRUC=({anno['motif']})n"]
         for idx, anno in enumerate(_get_non_overlapping_annos(seen_coords, data))]
 
 
