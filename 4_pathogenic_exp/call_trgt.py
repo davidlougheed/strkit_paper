@@ -9,7 +9,7 @@ def main():
     for sample, karyotype in SAMPLE_KTS.items():
         print(sample, karyotype)
         subprocess.check_call([
-            "../bin/trgt", "call",
+            "../bin/trgt", "genotype",
             "--reads", bam(sample),
             "--genome", REF_GENOME,
             "--repeats", str(BASE_PATH / "data" / "catalog.trgt.bed"),
