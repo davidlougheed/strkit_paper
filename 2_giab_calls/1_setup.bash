@@ -24,7 +24,7 @@ if [[ ! -d "../envs/env_strkit" ]]; then
   python3 -m venv ../envs/env_strkit
 fi
 source ../envs/env_strkit/bin/activate || exit
-pip install -U strkit==0.15.0a10
+pip install -U strkit==0.15.0a11
 deactivate
 # END STRKIT
 
