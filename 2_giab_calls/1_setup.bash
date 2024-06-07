@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 module load StdEnv/2023
-module load python/3.10 rust/1.76.0 clang/17.0.6 scipy-stack/2023b
+module load python/3.11 rust/1.76.0 clang/17.0.6 scipy-stack/2023b
 
 # BEGIN DATA
 

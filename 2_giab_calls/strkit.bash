@@ -5,7 +5,8 @@
 #SBATCH --time=1-00
 #SBATCH --account=rrg-bourqueg-ad
 
-module load StdEnv/2023 python/3.10 scipy-stack/2023b
+module load StdEnv/2023
+module load python/3.11 scipy-stack/2023b
 source ../envs/env_strkit/bin/activate
 
 bam_tmpdir="${SLURM_TMPDIR}/reads.bam"
