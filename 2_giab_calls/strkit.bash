@@ -2,12 +2,16 @@
 #SBATCH --mem=12G
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
-#SBATCH --time=1-00
+#SBATCH --time=12:00
 #SBATCH --account=rrg-bourqueg-ad
 
 module load StdEnv/2023
 module load python/3.11 scipy-stack/2023b
 source ../envs/env_strkit/bin/activate
+
+ref_tmpdir="${SLURM_TMPDIR}/ref.fa"
+cp "${REF}" "${ref_tmpdir}"
+cp "${REF}.fai" "${ref_tmpdir}.fai"
 
 bam_tmpdir="${SLURM_TMPDIR}/reads.bam"
 cp "${BAM}" "${bam_tmpdir}"

@@ -2,7 +2,7 @@
 #SBATCH --mem=8G
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
-#SBATCH --time=1-00
+#SBATCH --time=3:00
 #SBATCH --account=rrg-bourqueg-ad
 
 bam_tmpdir="${SLURM_TMPDIR}/reads.bam"
