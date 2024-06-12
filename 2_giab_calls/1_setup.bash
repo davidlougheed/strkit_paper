@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 module load StdEnv/2023
-module load python/3.11 rust/1.76.0 clang/17.0.6 scipy-stack/2023b
+module load python/3.11 rust/1.76.0 clang/17.0.6 scipy-stack/2023b parasail/2.6.2
 
 # BEGIN DATA
 
@@ -25,7 +25,7 @@ if [[ ! -d "../envs/env_strkit" ]]; then
   python3 -m venv ../envs/env_strkit
 fi
 source ../envs/env_strkit/bin/activate || exit
-pip install -v -U strkit==0.15.0a11
+pip install -v -U strkit==0.15.0a22
 pip install wheel
 pip install 'parasail>=1.3.4'
 deactivate
