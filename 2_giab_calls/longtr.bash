@@ -9,7 +9,7 @@ bam_tmpdir="${SLURM_TMPDIR}/reads.bam"
 cp "${BAM}" "${bam_tmpdir}"
 cp "${BAM}.bai" "${bam_tmpdir}.bai"
 
-../bin/LongTR \
+/usr/bin/time -o "./out/calls/${TECH}/${SAMPLE}.longtr.time" ../bin/LongTR \
   --bams "${bam_tmpdir}" \
   --bam-samps "${SAMPLE}" \
   --bam-libs "${SAMPLE}" \
