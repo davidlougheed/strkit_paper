@@ -60,7 +60,8 @@ def process_catalog_strkit_line(data: list[str]):
 
 def process_catalog_longtr_line(data: list[str]):
     seen_coords: set[tuple[str, int, int]] = set()
-    return [[anno["chrom"], anno["start"], anno["end"], len(anno["motif"]), round(anno["copies"])]
+    # LongTR runs counter to the BED spec: https://github.com/gymrek-lab/LongTR/issues/5
+    return [[anno["chrom"], anno["start"] + 1, anno["end"], len(anno["motif"]), round(anno["copies"])]
             for anno in _get_non_overlapping_annos(seen_coords, data)]
 
 
