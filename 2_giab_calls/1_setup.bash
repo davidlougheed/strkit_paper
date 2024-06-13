@@ -25,11 +25,18 @@ if [[ ! -d "../envs/env_strkit" ]]; then
   python3 -m venv ../envs/env_strkit
 fi
 source ../envs/env_strkit/bin/activate || exit
-pip install -v -U strkit==0.15.0a22
-pip install wheel
-pip install 'parasail>=1.3.4'
+pip install -v -U strkit==0.15.0a23
 deactivate
 # END STRKIT
+
+# BEGIN STRAGLR
+if [[ ! -d "../envs/env_straglr" ]]; then
+  python3 -m venv ../envs/env_straglr
+fi
+source ../envs/env_straglr/bin/activate || exit
+pip install -v -U git+https://github.com/bcgsc/straglr.git@v1.5.0#egg=straglr
+deactivate
+# END STRAGLR
 
 # BEGIN LONGTR
 module load googletest/1.14.0
