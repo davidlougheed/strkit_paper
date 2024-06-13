@@ -18,5 +18,5 @@ cp "${BAM}.bai" "${bam_tmpdir}.bai"
   --skip-assembly \
   --max-reads 250 \
   --min-reads 2 \
-  --tr-vcf "./out/calls/${TECH}/${SAMPLE}.longtr.vcf" \
+  --tr-vcf "./out/calls/${TECH}/${SAMPLE}.longtr.vcf.gz" \
   --haploid-chrs "${HAPLOID_CHRS}"
