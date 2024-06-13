@@ -28,6 +28,10 @@ for f in ./out/calls/**/*.longtr.vcf.gz; do
   truvari_norm "${f}"
 done
 
+for f in ./out/calls/**/*.straglr.vcf.gz; do
+  truvari_norm "${f}"
+done
+
 for f in ./out/calls/**/*.strkit.vcf.gz; do
   truvari_norm "${f}"
 done
