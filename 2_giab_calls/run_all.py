@@ -3,15 +3,15 @@
 import subprocess
 import sys
 # from common import call_script_at_covs, COVS_BY_TECH, SEEDS_BY_TECH
-from common import REF, SAMPLES, KARYOTYPES_BY_SAMPLE
+from common import REF, TECHS, SAMPLES_BY_TECH, KARYOTYPES_BY_SAMPLE
 
 if __name__ == "__main__":
     script = sys.argv[-2]
     tech = sys.argv[-1]  # hifi or ont
 
-    haploid_chrs = SAMPLES
+    assert tech in TECHS
 
-    for sample in SAMPLES:
+    for sample in SAMPLES_BY_TECH[tech]:
         sex_kary = KARYOTYPES_BY_SAMPLE[sample]
         haploid_chrs = ",".join(tuple(sex_kary))
         subprocess.check_call(" ".join((
