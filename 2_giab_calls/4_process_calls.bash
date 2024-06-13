@@ -8,6 +8,11 @@
 module load samtools bcftools
 cd out/calls || exit
 
+for f in **/*.longtr.vcf; do
+  bgzip -f $f
+  tabix "${f}.gz"
+done
+
 for f in **/*.strkit.vcf; do
   bgzip -f $f
   tabix "${f}.gz"
