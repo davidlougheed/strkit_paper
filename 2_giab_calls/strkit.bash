@@ -9,10 +9,6 @@ module load StdEnv/2023
 module load python/3.11 scipy-stack/2023b parasail/2.6.2
 source ../envs/env_strkit/bin/activate
 
-ref_tmpdir="${SLURM_TMPDIR}/ref.fa"
-cp "${REF}" "${ref_tmpdir}"
-cp "${REF}.fai" "${ref_tmpdir}.fai"
-
 bam_tmpdir="${SLURM_TMPDIR}/reads.bam"
 cp "${BAM}" "${bam_tmpdir}"
 cp "${BAM}.bai" "${bam_tmpdir}.bai"
