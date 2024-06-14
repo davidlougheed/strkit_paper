@@ -37,5 +37,5 @@ for f in ./out/calls/**/*.strkit.vcf.gz; do
 done
 
 for f in ./out/calls/**/*.trgt.vcf.gz; do
-  truvari_norm "${base_path}"
+  truvari_norm "${f}"
 done
