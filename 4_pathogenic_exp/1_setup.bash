@@ -12,29 +12,17 @@ if [[ ! -f "./hs37d5.fa" ]]; then
   samtools faidx hs37d5.fa
 fi
 
-wget https://downloads.pacbcloud.com/public/dataset/RepeatExpansionDisorders_NoAmp/analysis/align/m64012_191221_044659.ccsset.bc1015--bc1015.bam
-wget https://downloads.pacbcloud.com/public/dataset/RepeatExpansionDisorders_NoAmp/analysis/align/m64012_191221_044659.ccsset.bc1015--bc1015.bam.bai
+samples=( bc1015 bc1016 bc1017 bc1018 bc1019 bc1020 bc1021 bc1022 )
 
-wget https://downloads.pacbcloud.com/public/dataset/RepeatExpansionDisorders_NoAmp/analysis/align/m64012_191221_044659.ccsset.bc1016--bc1016.bam
-wget https://downloads.pacbcloud.com/public/dataset/RepeatExpansionDisorders_NoAmp/analysis/align/m64012_191221_044659.ccsset.bc1016--bc1016.bam.bai
-
-wget https://downloads.pacbcloud.com/public/dataset/RepeatExpansionDisorders_NoAmp/analysis/align/m64012_191221_044659.ccsset.bc1017--bc1017.bam
-wget https://downloads.pacbcloud.com/public/dataset/RepeatExpansionDisorders_NoAmp/analysis/align/m64012_191221_044659.ccsset.bc1017--bc1017.bam.bai
-
-wget https://downloads.pacbcloud.com/public/dataset/RepeatExpansionDisorders_NoAmp/analysis/align/m64012_191221_044659.ccsset.bc1018--bc1018.bam
-wget https://downloads.pacbcloud.com/public/dataset/RepeatExpansionDisorders_NoAmp/analysis/align/m64012_191221_044659.ccsset.bc1018--bc1018.bam.bai
-
-wget https://downloads.pacbcloud.com/public/dataset/RepeatExpansionDisorders_NoAmp/analysis/align/m64012_191221_044659.ccsset.bc1019--bc1019.bam
-wget https://downloads.pacbcloud.com/public/dataset/RepeatExpansionDisorders_NoAmp/analysis/align/m64012_191221_044659.ccsset.bc1019--bc1019.bam.bai
-
-wget https://downloads.pacbcloud.com/public/dataset/RepeatExpansionDisorders_NoAmp/analysis/align/m64012_191221_044659.ccsset.bc1020--bc1020.bam
-wget https://downloads.pacbcloud.com/public/dataset/RepeatExpansionDisorders_NoAmp/analysis/align/m64012_191221_044659.ccsset.bc1020--bc1020.bam.bai
-
-wget https://downloads.pacbcloud.com/public/dataset/RepeatExpansionDisorders_NoAmp/analysis/align/m64012_191221_044659.ccsset.bc1021--bc1021.bam
-wget https://downloads.pacbcloud.com/public/dataset/RepeatExpansionDisorders_NoAmp/analysis/align/m64012_191221_044659.ccsset.bc1021--bc1021.bam.bai
-
-wget https://downloads.pacbcloud.com/public/dataset/RepeatExpansionDisorders_NoAmp/analysis/align/m64012_191221_044659.ccsset.bc1022--bc1022.bam
-wget https://downloads.pacbcloud.com/public/dataset/RepeatExpansionDisorders_NoAmp/analysis/align/m64012_191221_044659.ccsset.bc1022--bc1022.bam.bai
+for sample in "${samples[@]}"; do
+  f="m64012_191221_044659.ccsset.${sample}--${sample}.bam"
+  if [[ ! -f "${f}" ]]; then
+    wget "https://downloads.pacbcloud.com/public/dataset/RepeatExpansionDisorders_NoAmp/analysis/align/${f}"
+    wget "https://downloads.pacbcloud.com/public/dataset/RepeatExpansionDisorders_NoAmp/analysis/align/${f}.bai"
+  else
+    echo "already have ${f}"
+  fi
+done
 
 cd .. || exit
 
