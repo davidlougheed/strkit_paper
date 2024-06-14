@@ -5,7 +5,8 @@
 #SBATCH --time=0-8
 #SBATCH --account=rrg-bourqueg-ad
 
-module load python/3.9 parasail
+module load StdEnv/2023
+module load python/3.11 scipy-stack/2023b parasail/2.6.2
 
 time python3 ./call_longtr.py
 
