@@ -2,9 +2,10 @@
 #SBATCH --mem=8G
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
-#SBATCH --time=1-00
+#SBATCH --time=6:00:00
 #SBATCH --account=rrg-bourqueg-ad
 
+module load StdEnv/2020
 module load python/3.10
 source ../envs/env_truvari/bin/activate
 

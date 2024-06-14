@@ -5,6 +5,7 @@
 #SBATCH --time=1-00
 #SBATCH --account=rrg-bourqueg-ad
 
+module load StdEnv/2020
 module load python/3.10
 source ../envs/env_laytr/bin/activate
 

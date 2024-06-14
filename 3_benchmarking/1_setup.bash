@@ -2,6 +2,7 @@
 
 # laytr doesn't work with python 3.11 due to edlib erroring with:
 #  edlib.bycython.cpp:198:12: fatal error: longintrepr.h: No such file or directory
+module load StdEnv/2020
 module load python/3.10
 
 # BEGIN DATA
@@ -28,6 +29,7 @@ deactivate
 # BEGIN LAYTR
 python3 -m venv ../envs/env_laytr
 source ../envs/env_laytr/bin/activate
+pip install wheel
 git clone https://github.com/ACEnglish/laytr.git
 pip install -U ./laytr
 rm -rf laytr
