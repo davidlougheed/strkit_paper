@@ -17,6 +17,7 @@ def main():
             "--realign",
             "--respect-ref",
             "--targeted",
+            "--max-reads", "500",
             "-k", "peak",
             "--json", str(BASE_PATH / "out" / f"{sample}.strkit.json"),
             "--vcf", str(BASE_PATH / "out" / f"{sample}.strkit.vcf"),

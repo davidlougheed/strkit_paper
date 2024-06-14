@@ -11,6 +11,7 @@ def main():
         subprocess.check_call([
             "../bin/trgt", "-v", "genotype",
             "--reads", bam(sample),
+            "--max-depth", "500",
             "--genome", REF_GENOME,
             "--repeats", str(BASE_PATH / "data" / "catalog.trgt.bed"),
             "--output-prefix", str(BASE_PATH / "out" / f"{sample}.trgt"),
