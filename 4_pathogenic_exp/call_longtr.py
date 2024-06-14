@@ -7,7 +7,7 @@ from common import SAMPLE_KTS, BASE_PATH, REF_GENOME, bam
 
 def main():
     for sample, karyotype in SAMPLE_KTS.items():
-        print(sample, karyotype)
+        print("LongTR", sample, karyotype)
         subprocess.check_call([
             "../bin/LongTR",
             "--bams", bam(sample),
