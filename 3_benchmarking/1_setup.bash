@@ -2,7 +2,7 @@
 
 # laytr doesn't work with python 3.11 due to edlib erroring with:
 #  edlib.bycython.cpp:198:12: fatal error: longintrepr.h: No such file or directory
-module load python/3.9
+module load python/3.10
 
 # BEGIN DATA
 

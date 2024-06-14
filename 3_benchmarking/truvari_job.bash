@@ -5,7 +5,7 @@
 #SBATCH --time=1-00
 #SBATCH --account=rrg-bourqueg-ad
 
-module load python/3.9
+module load python/3.10
 source ../envs/env_truvari/bin/activate
 
 REFERENCE="../1_cov_subsetting/data/ref/hg38.analysisSet.fa"
