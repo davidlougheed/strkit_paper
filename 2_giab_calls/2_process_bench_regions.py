@@ -8,7 +8,7 @@ chr_order = (*map(lambda c: f"chr{c}", range(1, 23)), "chrX", "chrY")
 print(f"chr_order={chr_order}")
 
 MAX_MOTIF_SIZE = 10
-MIN_PURITY = 80
+MIN_PURITY = 90
 
 
 def _get_non_overlapping_annos(seen_coords: set[tuple[str, int, int]], data: list[str]) -> list[dict]:
