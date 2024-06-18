@@ -12,6 +12,6 @@ source ../envs/env_laytr/bin/activate
 laytr giabTR --regionsummary "${BENCH_DIR}/refine.regions.txt" \
 	--includebed data/HG002_GRCh38_TandemRepeats_v1.0.bed.gz \
 	--som data/adotto_TRv1.1_4mers.som \
-	--somap data/adotto_TRv1.1_4mers.map \
+	--sommap data/adotto_TRv1.1_4mers.map \
 	--trcatalog ../2_giab_calls/data/adotto_TRregions_v1.2.bed.gz \
 	--output "${BENCH_DIR}/laytr_report.html"
