@@ -11,11 +11,12 @@ def main():
         subprocess.check_call([
             "../bin/LongTR",
             "--bams", bam(sample),
+            "--lib-from-samp",
             "--fasta", REF_GENOME,
             "--regions", str(BASE_PATH / "data" / "catalog.longtr.bed"),
             "--skip-assembly",
             "--max-tr-len", "3000",
-            "--tr-vcf", str(BASE_PATH / "out" / f"{sample}.longtr.vcf"),
+            "--tr-vcf", str(BASE_PATH / "out" / f"{sample}.longtr.vcf.gz"),
             *(["--haploid-chrs", "X,Y"] if "Y" in karyotype else []),
         ])
 
