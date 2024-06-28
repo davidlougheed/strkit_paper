@@ -18,6 +18,7 @@ cp "${BAM}.bai" "${bam_tmpdir}.bai"
 /usr/bin/time -o "./out/calls/${TECH}/${SAMPLE}.straglr.time" straglr.py \
   "${bam_tmpdir}" \
   "${REF}" \
+  "./out/calls/${TECH}/${SAMPLE}.straglr" \
   --loci ./out/adotto_catalog_strkit.bed \
   --min_cluster_size 1 \
   --tmpdir "${SLURM_TMPDIR}" \
