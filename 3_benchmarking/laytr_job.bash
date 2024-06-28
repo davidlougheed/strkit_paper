@@ -2,7 +2,7 @@
 #SBATCH --mem=4G
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
-#SBATCH --time=1-00
+#SBATCH --time=20:00
 #SBATCH --account=rrg-bourqueg-ad
 
 module load StdEnv/2020
