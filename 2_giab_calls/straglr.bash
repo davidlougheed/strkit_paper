@@ -13,4 +13,12 @@ bam_tmpdir="${SLURM_TMPDIR}/reads.bam"
 cp "${BAM}" "${bam_tmpdir}"
 cp "${BAM}.bai" "${bam_tmpdir}.bai"
 
-/usr/bin/time -o "./out/calls/${TECH}/${SAMPLE}.straglr.time" straglr.py "${bam_tmpdir}" "${REF}" TODO --nprocs 8
+# Straglr can use the same catalog format as STRkit
+
+/usr/bin/time -o "./out/calls/${TECH}/${SAMPLE}.straglr.time" straglr.py \
+  "${bam_tmpdir}" \
+  "${REF}" \
+  --loci ./out/adotto_catalog_strkit.bed \
+  --min_cluster_size 1 \
+  --tmpdir "${SLURM_TMPDIR}" \
+  --nprocs 8
