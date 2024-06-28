@@ -38,6 +38,15 @@ pip install -v -U git+https://github.com/bcgsc/straglr.git@v1.5.0#egg=straglr
 deactivate
 # END STRAGLR
 
+# BEGIN STRDUST
+rm -rf ./STRdust
+git clone https://github.com/wdecoster/STRdust.git
+cd STRdust || exit
+cargo build --release
+cp ./target/release/STRdust ../../bin
+cd .. || exit
+# END STRDUST
+
 # BEGIN LONGTR
 module load googletest/1.14.0
 rm -rf ./LongTR

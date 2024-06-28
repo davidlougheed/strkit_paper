@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 techs=( hifi ont )
-tools=( longtr strkit trgt )
+tools=( longtr straglr strdust strkit trgt )
 
 for tech in "${techs[@]}"; do
   for tool in "${tools[@]}"; do

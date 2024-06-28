@@ -24,18 +24,10 @@ truvari_norm () {
 
 module load bcftools
 
-for f in ./out/calls/**/*.longtr.vcf.gz; do
-  truvari_norm "${f}"
-done
+tools = ( longtr straglr strdust strkit trgt )
 
-for f in ./out/calls/**/*.straglr.vcf.gz; do
-  truvari_norm "${f}"
-done
-
-for f in ./out/calls/**/*.strkit.vcf.gz; do
-  truvari_norm "${f}"
-done
-
-for f in ./out/calls/**/*.trgt.vcf.gz; do
-  truvari_norm "${f}"
+for tool in "${tools[@]}"; do
+  for f in ./out/calls/**/*.$tool.vcf.gz; do
+    truvari_norm "${f}"
+  done
 done
