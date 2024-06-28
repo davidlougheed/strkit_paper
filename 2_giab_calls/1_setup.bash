@@ -30,12 +30,23 @@ deactivate
 # END STRKIT
 
 # BEGIN STRAGLR
+#  - Straglr itself
 if [[ ! -d "../envs/env_straglr" ]]; then
   python3 -m venv ../envs/env_straglr
 fi
 source ../envs/env_straglr/bin/activate || exit
 pip install -v -U git+https://github.com/bcgsc/straglr.git@v1.5.0#egg=straglr
 deactivate
+#  - TRF
+rm -rf ./TRF
+git clone https://github.com/Benson-Genomics-Lab/TRF
+cd TRF || exit
+mkdir build
+cd build || exit
+../configure
+make
+cp src/trf ../../../bin
+cd ../.. || exit
 # END STRAGLR
 
 # BEGIN STRDUST

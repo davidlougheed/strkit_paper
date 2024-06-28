@@ -13,6 +13,8 @@ bam_tmpdir="${SLURM_TMPDIR}/reads.bam"
 cp "${BAM}" "${bam_tmpdir}"
 cp "${BAM}.bai" "${bam_tmpdir}.bai"
 
+export PATH="${PATH}:${PWD}/../bin"
+
 # Straglr can use the same catalog format as STRkit
 
 /usr/bin/time -o "./out/calls/${TECH}/${SAMPLE}.straglr.time" straglr.py \
