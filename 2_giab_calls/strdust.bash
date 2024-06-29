@@ -16,6 +16,6 @@ cp "${BAM}.bai" "${bam_tmpdir}.bai"
   -s 1 \
   -t 8 \
   --unphased \
-  --haploid "${HAPLOID_CHRS}" > "./out/calls/${TECH}/${SAMPLE}.strdust.vcf" \
+  --haploid "${HAPLOID_CHRS}" \
   "${REF}" \
-  "${bam_tmpdir}"
+  "${bam_tmpdir}" > "./out/calls/${TECH}/${SAMPLE}.strdust.vcf"
