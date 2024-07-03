@@ -1,8 +1,8 @@
 #!/bin/bash
-#SBATCH --mem=12G
+#SBATCH --mem=64G
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
-#SBATCH --time=3:00:00
+#SBATCH --time=12:00:00
 #SBATCH --account=rrg-bourqueg-ad
 
 bam_tmpdir="${SLURM_TMPDIR}/reads.bam"
