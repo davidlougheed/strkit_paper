@@ -11,13 +11,28 @@ module load python/3.11 rust/1.76.0 clang/17.0.6 scipy-stack/2023b parasail/2.6.
 source ../envs/env_strkit/bin/activate
 
 hifi_base="../2_giab_calls/out/calls/hifi"
+out_base="out/hg002_benchmark/hifi"
 
-strkit mi --caller strkit-vcf \
-  "${hifi_base}/HG002.strkit.vcf.gz" \
-  "${hifi_base}/HG004.strkit.vcf.gz" \
-  "${hifi_base}/HG003.strkit.vcf.gz" \
-  --hist \
-  --json out/hg002_benchmark/hifi/strkit/mi_report.json
+strkit_out="${out_base}/strkit/mi_report.json"
+trgt_out="${out_base}/strkit/mi_report.json"
+
+if [[ ! -f "${strkit_out}" ]]; then
+  strkit mi --caller strkit-vcf \
+    "${hifi_base}/HG002.strkit.vcf.gz" \
+    "${hifi_base}/HG004.strkit.vcf.gz" \
+    "${hifi_base}/HG003.strkit.vcf.gz" \
+    --hist \
+    --json "${strkit_out}"
+fi
+
+if [[ ! -f "${trgt_out}" ]]; then
+  strkit mi --caller trgt \
+    "${hifi_base}/HG002.trgt.vcf.gz" \
+    "${hifi_base}/HG004.trgt.vcf.gz" \
+    "${hifi_base}/HG003.trgt.vcf.gz" \
+    --hist \
+    --json "${trgt_out}"
+fi
 
 # TODO: strkit mi for other tools
 
