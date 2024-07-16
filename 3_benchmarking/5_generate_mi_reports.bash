@@ -14,7 +14,7 @@ hifi_base="../2_giab_calls/out/calls/hifi"
 out_base="out/hg002_benchmark/hifi"
 
 strkit_out="${out_base}/strkit/mi_report.json"
-trgt_out="${out_base}/strkit/mi_report.json"
+trgt_out="${out_base}/trgt/mi_report.json"
 
 if [[ ! -f "${strkit_out}" ]]; then
   strkit mi --caller strkit-vcf \
