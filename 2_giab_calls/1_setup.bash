@@ -71,7 +71,7 @@ cd .. || exit
 # END LONGTR
 
 # BEGIN TRGT
-trgt_version="v1.0.0"
+trgt_version="v1.1.0"
 wget "https://github.com/PacificBiosciences/trgt/releases/download/${trgt_version}/trgt-${trgt_version}-x86_64-unknown-linux-gnu.tar.gz"
 tar -xzvf "trgt-${trgt_version}-x86_64-unknown-linux-gnu.tar.gz"
 trgt_dir="./trgt-${trgt_version}-x86_64-unknown-linux-gnu"
