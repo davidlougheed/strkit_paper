@@ -21,6 +21,8 @@ def main():
 
         if trio_id in trio_files:
             trio_files[trio_id][rel] = line
+        else:
+            trio_files[trio_id] = {rel: line}
 
     print(json.dumps(trio_files))
 
