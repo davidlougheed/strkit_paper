@@ -19,6 +19,8 @@ def main():
         trio_id = s.group(1)
         rel = s.group(2)
 
+        print(f"{s}", file=sys.stderr)
+
         if trio_id in trio_files:
             trio_files[trio_id][rel] = line
         else:
