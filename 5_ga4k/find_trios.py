@@ -8,7 +8,7 @@ sample_pattern = re.compile(r"[a-z]{3}([0-9]{6})-0([0-9])")
 
 
 def main():
-    trio_files = {}
+    grouped_files = {}
 
     for line in sys.stdin:
         line = line.strip()
@@ -21,12 +21,16 @@ def main():
 
         print(f"{s.group(0)}", file=sys.stderr)
 
-        if trio_id in trio_files:
-            trio_files[trio_id][rel] = line
+        if trio_id in grouped_files:
+            grouped_files[trio_id][rel] = line
         else:
-            trio_files[trio_id] = {rel: line}
+            grouped_files[trio_id] = {rel: line}
 
-    print(json.dumps(trio_files))
+    # filter final output to just complete trios
+    final_trios = {k: v for k, v in grouped_files.items() if tuple(sorted(v.keys())) == ("1", "2", "3")}
+    print(f"found {len(final_trios)} trios", file=sys.stderr)
+
+    print(json.dumps(final_trios))
 
 
 if __name__ == "__main__":
