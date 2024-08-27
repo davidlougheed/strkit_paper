@@ -12,14 +12,14 @@ def main():
 
     for line in sys.stdin:
         line = line.strip()
-        s = sample_pattern.match(line)
+        s = sample_pattern.search(line)
         if not s:
             continue
 
         trio_id = s.group(1)
         rel = s.group(2)
 
-        print(f"{s}", file=sys.stderr)
+        print(f"{s.group(0)}", file=sys.stderr)
 
         if trio_id in trio_files:
             trio_files[trio_id][rel] = line
