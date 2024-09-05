@@ -4,7 +4,7 @@ import json
 import re
 import sys
 
-sample_pattern = re.compile(r"[a-z]{3}([0-9]{6})-0([0-9])")
+sample_pattern = re.compile(r"cmh([0-9]{6})-0([0-9])")
 
 
 def main():
