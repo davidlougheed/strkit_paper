@@ -34,5 +34,4 @@ export PYTHONOPTIMIZE=1
   --seed "${SEED}" \
   --sample-id "${SAMPLE}" \
   --processes 8 \
-  --log-level debug \
   "${bam_tmpdir}"
