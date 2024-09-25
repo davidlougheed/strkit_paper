@@ -28,6 +28,7 @@ export PYTHONOPTIMIZE=1
   --incorporate-snvs "${snv_vcf_tmpdir}" \
   --min-reads 2 \
   --min-allele-reads 1 \
+  --min-read-align-score 0.2 \
   --vcf "./out/calls/${TECH}/${SAMPLE}.strkit.vcf" \
   --no-tsv \
   --seed "${SEED}" \
