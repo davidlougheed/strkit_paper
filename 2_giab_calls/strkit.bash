@@ -17,6 +17,8 @@ snv_vcf_tmpdir="${SLURM_TMPDIR}/snvs.vcf.gz"
 cp "./data/00-common_all.vcf.gz" "${snv_vcf_tmpdir}"
 cp "./data/00-common_all.vcf.gz.tbi" "${snv_vcf_tmpdir}.tbi"
 
+export PYTHONOPTIMIZE=1
+
 # for comparison to TRGT, which has no minimum, we set --min-reads and --min-allele-reads low
 /usr/bin/time -o "./out/calls/${TECH}/${SAMPLE}.strkit.time" strkit call \
   --ref "${REF}" \

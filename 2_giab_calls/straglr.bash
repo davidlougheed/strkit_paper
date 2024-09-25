@@ -15,6 +15,8 @@ cp "${BAM}.bai" "${bam_tmpdir}.bai"
 
 export PATH="${PATH}:${PWD}/../bin"
 
+export PYTHONOPTIMIZE=1
+
 # Straglr can use the same catalog format as STRkit
 
 /usr/bin/time -o "./out/calls/${TECH}/${SAMPLE}.straglr.time" straglr.py \
