@@ -9,13 +9,13 @@ bam_tmpdir="${SLURM_TMPDIR}/reads.bam"
 cp "${BAM}" "${bam_tmpdir}"
 cp "${BAM}.bai" "${bam_tmpdir}.bai"
 
+#  --skip-assembly \
 /usr/bin/time -o "./out/calls/${TECH}/${SAMPLE}.longtr.time" ../bin/LongTR \
   --bams "${bam_tmpdir}" \
   --bam-samps "${SAMPLE}" \
   --bam-libs "${SAMPLE}" \
   --fasta "${REF}" \
   --regions ./out/adotto_catalog_longtr.bed \
-  --skip-assembly \
   --max-reads 250 \
   --min-reads 2 \
   --tr-vcf "./out/calls/${TECH}/${SAMPLE}.longtr.vcf.gz" \
