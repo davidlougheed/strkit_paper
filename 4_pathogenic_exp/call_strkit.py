@@ -10,6 +10,7 @@ def main():
         print("STRkit", sample, karyotype)
         subprocess.check_call([
             "strkit", "call",
+            "--log-level", "debug",
             "--ref", REF_GENOME,
             "--loci", str(BASE_PATH / "data" / "catalog.strkit.bed"),
             "--sex-chr", karyotype,
