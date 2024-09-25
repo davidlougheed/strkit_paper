@@ -25,7 +25,7 @@ if [[ ! -d "../envs/env_strkit" ]]; then
   python3 -m venv ../envs/env_strkit
 fi
 source ../envs/env_strkit/bin/activate || exit
-pip install -v -U strkit==0.16.0
+pip install -v -U strkit==0.18.0a1
 deactivate
 # END STRKIT
 
@@ -35,7 +35,7 @@ if [[ ! -d "../envs/env_straglr" ]]; then
   python3 -m venv ../envs/env_straglr
 fi
 source ../envs/env_straglr/bin/activate || exit
-pip install -v -U git+https://github.com/bcgsc/straglr.git@v1.5.0#egg=straglr
+pip install -v -U git+https://github.com/bcgsc/straglr.git@v1.5.1#egg=straglr
 deactivate
 #  - TRF
 rm -rf ./TRF
@@ -63,7 +63,7 @@ module load googletest/1.14.0
 rm -rf ./LongTR
 git clone https://github.com/gymrek-lab/LongTR.git
 cd LongTR || exit
-git checkout v1.0
+git checkout v1.1
 sed -i 's/-lspoa/-lspoa -ldeflate/g' Makefile  # need to edit Makefile to add -ldeflate
 make
 mv ./LongTR ../../bin
@@ -71,7 +71,7 @@ cd .. || exit
 # END LONGTR
 
 # BEGIN TRGT
-trgt_version="v1.1.0"
+trgt_version="v1.2.0"
 wget "https://github.com/PacificBiosciences/trgt/releases/download/${trgt_version}/trgt-${trgt_version}-x86_64-unknown-linux-gnu.tar.gz"
 tar -xzvf "trgt-${trgt_version}-x86_64-unknown-linux-gnu.tar.gz"
 trgt_dir="./trgt-${trgt_version}-x86_64-unknown-linux-gnu"
