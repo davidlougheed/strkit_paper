@@ -17,7 +17,6 @@ REFERENCE="../1_cov_subsetting/data/ref/hg38.analysisSet.fa"
 #  - TOOL (strkit, longtr, trgt)
 
 ls_bench_dir="${SLURM_TMPDIR}/bench/"
-mkdir -p "${ls_bench_dir}"
 
 truvari bench \
   -b ./data/HG002_GRCh38_TandemRepeats_v1.0.1.vcf.gz \
