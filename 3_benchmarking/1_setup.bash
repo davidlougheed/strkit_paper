@@ -9,11 +9,13 @@ module load python/3.10
 
 cd data || exit
 
-wget https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/AshkenazimTrio/HG002_NA24385_son/TandemRepeats_v1.0/GRCh38/HG002_GRCh38_TandemRepeats_v1.0.bed.gz
-wget https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/AshkenazimTrio/HG002_NA24385_son/TandemRepeats_v1.0/GRCh38/HG002_GRCh38_TandemRepeats_v1.0.1.vcf.gz
-wget https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/AshkenazimTrio/HG002_NA24385_son/TandemRepeats_v1.0/GRCh38/HG002_GRCh38_TandemRepeats_v1.0.1.vcf.gz.tbi
-wget https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/AshkenazimTrio/HG002_NA24385_son/TandemRepeats_v1.0/GRCh38/adotto_TRv1.1_4mers.map
-wget https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/AshkenazimTrio/HG002_NA24385_son/TandemRepeats_v1.0/GRCh38/adotto_TRv1.1_4mers.som
+giab_files=( "HG002_GRCh38_TandemRepeats_v1.0.bed.gz" "HG002_GRCh38_TandemRepeats_v1.0.1.vcf.gz" "HG002_GRCh38_TandemRepeats_v1.0.1.vcf.gz.tbi" "adotto_TRv1.1_4mers.map" "adotto_TRv1.1_4mers.som" )
+
+for giab_file in "${giab_files[@]}"; do
+  if [[ -n "${giab_file}" ]]; then
+    wget "https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/AshkenazimTrio/HG002_NA24385_son/TandemRepeats_v1.0/GRCh38/${giab_file}" -O "${giab_file}"
+  fi
+done
 
 cd .. || exit
 
