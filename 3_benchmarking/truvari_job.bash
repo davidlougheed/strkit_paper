@@ -18,6 +18,9 @@ REFERENCE="../1_cov_subsetting/data/ref/hg38.analysisSet.fa"
 
 ls_bench_dir="${SLURM_TMPDIR}/bench/"
 
+export TMPDIR="${SLURM_TMPDIR}/tmp"
+mkdir -p "${TMPDIR}"
+
 truvari bench \
   -b ./data/HG002_GRCh38_TandemRepeats_v1.0.1.vcf.gz \
   -c "${VCF}" \
