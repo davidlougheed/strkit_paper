@@ -16,11 +16,8 @@ REFERENCE="../1_cov_subsetting/data/ref/hg38.analysisSet.fa"
 #  - TECH (hifi, ont)
 #  - TOOL (strkit, longtr, trgt)
 
-tech_dir="out/hg002_benchmark/${TECH}"
-bench_dir="${tech_dir}/${TOOL}/"
-
-mkdir -p "${tech_dir}"
-rm -rf "${bench_dir}"
+ls_bench_dir="${SLURM_TMPDIR}/bench/"
+mkdir -p "${ls_bench_dir}"
 
 truvari bench \
   -b ./data/HG002_GRCh38_TandemRepeats_v1.0.1.vcf.gz \
@@ -28,7 +25,7 @@ truvari bench \
   --includebed ./data/HG002_GRCh38_TandemRepeats_v1.0.bed.gz \
   --sizemin 5 \
   --pick ac \
-  -o "${bench_dir}"
+  -o "${ls_bench_dir}"
 
 module load mafft  # required for refine
 
@@ -36,4 +33,10 @@ truvari refine \
   --use-original-vcfs \
   --reference "${REFERENCE}" \
   --regions "../2_giab_calls/out/adotto_catalog_${TOOL}.bed" \
-  "${bench_dir}"
+  "${ls_bench_dir}"
+
+tech_dir="out/hg002_benchmark/${TECH}"
+bench_dir="${tech_dir}/${TOOL}"
+mkdir -p "${tech_dir}"
+rm -rf "${bench_dir}"  # remove bench_dir if it exists and overwrite it with the new contents
+mv "${ls_bench_dir}" "${bench_dir}"
