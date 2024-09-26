@@ -18,6 +18,7 @@ REFERENCE="../1_cov_subsetting/data/ref/hg38.analysisSet.fa"
 
 ls_bench_dir="${SLURM_TMPDIR}/bench/"
 
+# set TMPDIR - try to address cursed Truvari 4.3.1 errors...
 export TMPDIR="${SLURM_TMPDIR}/tmp"
 mkdir -p "${TMPDIR}"
 
