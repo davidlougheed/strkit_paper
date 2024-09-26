@@ -12,15 +12,17 @@ for f in **/*.longtr.vcf.gz; do
   tabix "${f}"
 done
 
-for f in **/*.straglr.vcf; do
-  bgzip -f $f
-  tabix "${f}.gz"
-done
+# Re-enable if not failed
+#for f in **/*.straglr.vcf; do
+#  bgzip -f $f
+#  tabix "${f}.gz"
+#done
 
-for f in **/*.strdust.vcf; do
-  bgzip -f $f
-  tabix "${f}.gz"
-done
+# Re-enable if not failed
+#for f in **/*.strdust.vcf; do
+#  bgzip -f $f
+#  tabix "${f}.gz"
+#done
 
 for f in **/*.strkit.vcf; do
   bgzip -f $f

@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 techs=( hifi ont )
-tools=( longtr straglr strdust strkit trgt )
+# Re-enable if not failed
+#tools=( longtr straglr strdust strkit trgt )
+tools=( longtr strkit trgt )
 
 for tech in "${techs[@]}"; do
   for tool in "${tools[@]}"; do
