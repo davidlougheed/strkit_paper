@@ -28,7 +28,7 @@ truvari bench \
   --includebed ./data/HG002_GRCh38_TandemRepeats_v1.0.bed.gz \
   --sizemin 5 \
   --pick ac \
-  -o "${ls_bench_dir}"
+  -o "${ls_bench_dir}" || exit
 
 module load mafft  # required for refine
 
@@ -36,7 +36,7 @@ truvari refine \
   --use-original-vcfs \
   --reference "${REFERENCE}" \
   --regions "../2_giab_calls/out/adotto_catalog_${TOOL}.bed" \
-  "${ls_bench_dir}"
+  "${ls_bench_dir}" || exit
 
 tech_dir="out/hg002_benchmark/${TECH}"
 bench_dir="${tech_dir}/${TOOL}"
