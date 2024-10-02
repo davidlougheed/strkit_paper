@@ -22,7 +22,7 @@ cp "../2_giab_calls/data/00-common_all.vcf.gz.tbi" "${snv_vcf_tmpdir}.tbi"
 
 /usr/bin/time -o "./out/calls/${SAMPLE}.strkit.time" strkit call \
   --ref "${REF}" \
-  --loci ./out/adotto_catalog_strkit.bed \
+  --loci ../2_giab_calls/out/adotto_catalog_strkit.bed \
   --hq \
   --incorporate-snvs "${snv_vcf_tmpdir}" \
   --min-reads 2 \
