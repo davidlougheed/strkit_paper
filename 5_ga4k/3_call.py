@@ -20,7 +20,7 @@ def main():
                     f"--export="
                     f"SEED=1234,"
                     f"SAMPLE={SAMPLE_PREFIX}{trio_id}-{ind_key},"
-                    f"BAM={bam},",
+                    f"BAM={bam},"
                     f"REF={REF}"
                 ),
                 "./strkit_job.bash",
