@@ -2,7 +2,7 @@
 #SBATCH --mem=12G
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
-#SBATCH --time=12:00:00
+#SBATCH --time=6:00:00
 #SBATCH --account=rrg-bourqueg-ad
 
 module load StdEnv/2023
