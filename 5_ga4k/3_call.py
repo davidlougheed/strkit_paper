@@ -4,7 +4,7 @@ import json
 import subprocess
 
 
-REF = "../1_cov_subsetting/data/ref/hg38.analysisSet.fa"
+REF = "./data/ref/GRCh38_no_alt_analysis_set.fna"
 SAMPLE_PREFIX = "cmh"
 
 
