@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --mem=12G
+#SBATCH --mem=5G
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --time=6:00:00
@@ -20,6 +20,7 @@ strkit mi --caller strkit-vcf \
     --hist \
     --json "${OUT_JSON}" \
     --test wmw \
-    --mt-corr fdr_tsbky
+    --mt-corr fdr_tsbky \
+    --only-phased
 
 deactivate
