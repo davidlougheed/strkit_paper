@@ -9,21 +9,31 @@ def print_tool_genotypes(samples: tuple[str, ...], disease: str, var_idx: int, c
     print(f"{disease}")
     for sample in samples:
         for tool in TOOLS:
-            path = OUT_PATH / (f"bc10{sample}.{tool}.vcf" + (".gz" if tool != "strkit" else ""))
-            if not path.exists():
-                print(f"Missing {path}")
-                continue
+            if tool != "straglr":
+                path = OUT_PATH / (f"bc10{sample}.{tool}.vcf" + (".gz" if tool != "strkit" else ""))
+                if not path.exists():
+                    print(f"Missing {path}")
+                    continue
 
-            vf = pysam.VariantFile(str(path), "r")
-            variant = list(vf.fetch())[var_idx]
-            vf.close()
+                vf = pysam.VariantFile(str(path), "r")
+                variant = list(vf.fetch())[var_idx]
+                vf.close()
 
-            genotype: tuple[int, ...] = (0, 0)
-            if tool in ("strkit", "trgt"):
-                genotype = tuple(map(int, variant.samples[0]["MC"]))
-            elif tool == "longtr":
-                genotype = tuple(int(round((len(variant.alleles[g]) - 1) / 3)) for g in variant.samples[0]["GT"])
-            # else: TODO
+                genotype: tuple[int, ...] = (0, 0)
+                if tool in ("strkit", "trgt"):
+                    genotype = tuple(map(int, variant.samples[0]["MC"]))
+                elif tool == "longtr":
+                    genotype = tuple(int(round((len(variant.alleles[g]) - 1) / 3)) for g in variant.samples[0]["GT"])
+                # else: TODO
+
+            else:
+                path = OUT_PATH / f"bc10{sample}.{tool}.bed"
+                if not path.exists():
+                    print(f"Missing {path}")
+                    continue
+                with open(path, "r") as fh:
+                    variant = [line.strip().split("\t") for line in fh.readlines()[1:]][var_idx]
+                    genotype = (int(round(float(variant[5]))), int(round(float(variant[7]))))
 
             # apply offset
             genotype = (genotype[0] + count_offset, genotype[1] + count_offset)
