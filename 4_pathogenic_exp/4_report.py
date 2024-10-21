@@ -26,7 +26,7 @@ def print_tool_genotypes(samples: tuple[str, ...], disease: str, var_idx: int, c
             # else: TODO
 
             # apply offset
-            genotype = (genotype[0] - count_offset, genotype[1] - count_offset)
+            genotype = (genotype[0] + count_offset, genotype[1] + count_offset)
 
             print(f"{disease} bc10{sample} {tool}: {genotype}")
 
