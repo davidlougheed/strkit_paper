@@ -12,6 +12,7 @@ def main():
             "straglr.py",
             bam(sample),
             REF_GENOME,
+            f"./out/{sample}.straglr",
             "--loci", str(BASE_PATH / "data" / "catalog.strkit.bed"),
         ])
 
