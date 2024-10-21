@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-#SBATCH --mem=12G
+#SBATCH --mem=4G
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
-#SBATCH --time=10:00:00
+#SBATCH --time=8:00:00
 #SBATCH --account=rrg-bourqueg-ad
 
 module load StdEnv/2023
@@ -23,7 +23,7 @@ if [[ ! -f "${longtr_out}" ]]; then
     "${hifi_base}/HG004.longtr.vcf.gz" \
     "${hifi_base}/HG003.longtr.vcf.gz" \
     --hist \
-    --trf-bed "../2_giab_calls/out/adotto_catalog_longtr.bed" \
+    --trf-bed "../2_giab_calls/out/adotto_catalog_strkit.bed" \
     --json "${longtr_out}"
 fi
 
