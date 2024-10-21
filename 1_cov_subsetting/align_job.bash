@@ -27,6 +27,6 @@ if [[ "${tech}" == "ont" ]]; then
   preset="lr:hq"  # new preset for more-accurate latest gen ONT data
 fi
 
-../bin/minimap2 -t 10 -ax "map-${TECH}" "${REF}" "${fastq_gz}" | samtools sort --write-index -@ 10 - -o "${tmp_bam}"
+../bin/minimap2 -t 10 -ax "${preset}" "${REF}" "${fastq_gz}" | samtools sort --write-index -@ 10 - -o "${tmp_bam}"
 mv "${tmp_bam}" "${aligned_bam}"
 chgrp rrg-bourqueg-ad "${aligned_bam}"
