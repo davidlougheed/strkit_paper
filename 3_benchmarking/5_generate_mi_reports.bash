@@ -13,8 +13,18 @@ source ../envs/env_strkit/bin/activate
 hifi_base="../2_giab_calls/out/calls/hifi"
 out_base="out/hg002_benchmark/hifi"
 
+longtr_out="${out_base}/longtr/mi_report.json"
 strkit_out="${out_base}/strkit/mi_report.json"
 trgt_out="${out_base}/trgt/mi_report.json"
+
+if [[ ! -f "${longtr_out}" ]]; then
+  strkit mi --caller longtr \
+    "${hifi_base}/HG002.longtr.vcf.gz" \
+    "${hifi_base}/HG004.longtr.vcf.gz" \
+    "${hifi_base}/HG003.longtr.vcf.gz" \
+    --hist \
+    --json "${longtr_out}"
+fi
 
 if [[ ! -f "${strkit_out}" ]]; then
   strkit mi --caller strkit-vcf \
