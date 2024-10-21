@@ -20,12 +20,10 @@ def print_tool_genotypes(samples: tuple[str, ...], disease: str, var_idx: int, c
 
             genotype: tuple[int, ...] = (0, 0)
             if tool in ("strkit", "trgt"):
-                genotype = variant.samples[0]["MC"]
+                genotype = tuple(map(int, variant.samples[0]["MC"]))
             elif tool == "longtr":
                 genotype = tuple(int(round((len(variant.alleles[g]) - 1) / 3)) for g in variant.samples[0]["GT"])
             # else: TODO
-
-            print(genotype)
 
             # apply offset
             genotype = (genotype[0] - count_offset, genotype[1] - count_offset)
