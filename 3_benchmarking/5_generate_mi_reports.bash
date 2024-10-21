@@ -23,6 +23,7 @@ if [[ ! -f "${longtr_out}" ]]; then
     "${hifi_base}/HG004.longtr.vcf.gz" \
     "${hifi_base}/HG003.longtr.vcf.gz" \
     --hist \
+    --trf-bed "../2_giab_calls/out/adotto_catalog_longtr.bed" \
     --json "${longtr_out}"
 fi
 
