@@ -34,7 +34,7 @@ def print_tool_genotypes(samples: tuple[str, ...], disease: str, var_idx: int, c
                 with open(path, "r") as fh:
                     variant = [line.strip().split("\t") for line in fh.readlines()[1:]][var_idx]
                     a1 = int(round(float(variant[5])))
-                    genotype = (a1, int(round(float(variant[7]))) if variant[7] != "-" else a1)
+                    genotype = (a1, int(round(float(variant[8]))) if variant[8] != "-" else a1)
 
             # apply offset
             genotype = (genotype[0] + count_offset, genotype[1] + count_offset)
