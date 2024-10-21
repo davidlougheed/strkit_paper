@@ -53,6 +53,7 @@ cd ../.. || exit
 rm -rf ./STRdust
 git clone https://github.com/wdecoster/STRdust.git
 cd STRdust || exit
+git checkout 3f3ebf0
 cargo build --release
 cp ./target/release/STRdust ../../bin
 cd .. || exit
