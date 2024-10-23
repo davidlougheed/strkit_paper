@@ -8,7 +8,7 @@ from pathlib import Path
 bench_dir = Path("./out/hg002_benchmark")
 call_dir = Path("../2_giab_calls/out/calls")
 techs = ("hifi", "ont")
-callers = ("longtr", "strkit", "trgt")
+callers = ("longtr", "strkit", "strkit-no-snv", "trgt")
 
 
 def load_truscore_dist():

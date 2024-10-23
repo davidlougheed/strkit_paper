@@ -13,38 +13,27 @@ source ../envs/env_strkit/bin/activate
 hifi_base="../2_giab_calls/out/calls/hifi"
 out_base="out/hg002_benchmark/hifi"
 
+tools=( longtr strkit strkit-no-snv trgt )
+
 longtr_out="${out_base}/longtr/mi_report.json"
 strkit_out="${out_base}/strkit/mi_report.json"
 trgt_out="${out_base}/trgt/mi_report.json"
 
-if [[ ! -f "${longtr_out}" ]]; then
-  strkit mi --caller longtr \
-    "${hifi_base}/HG002.longtr.vcf.gz" \
-    "${hifi_base}/HG004.longtr.vcf.gz" \
-    "${hifi_base}/HG003.longtr.vcf.gz" \
-    --hist \
-    --trf-bed "../2_giab_calls/out/adotto_catalog_strkit.bed" \
-    --json "${longtr_out}"
-fi
-
-if [[ ! -f "${strkit_out}" ]]; then
-  strkit mi --caller strkit-vcf \
-    "${hifi_base}/HG002.strkit.vcf.gz" \
-    "${hifi_base}/HG004.strkit.vcf.gz" \
-    "${hifi_base}/HG003.strkit.vcf.gz" \
-    --hist \
-    --json "${strkit_out}"
-fi
-
-if [[ ! -f "${trgt_out}" ]]; then
-  strkit mi --caller trgt \
-    "${hifi_base}/HG002.trgt.vcf.gz" \
-    "${hifi_base}/HG004.trgt.vcf.gz" \
-    "${hifi_base}/HG003.trgt.vcf.gz" \
-    --hist \
-    --json "${trgt_out}"
-fi
-
-# TODO: strkit mi for other tools
+for tool in "${tools[@]}"; do
+  out="${out_base}/${tool}/mi_report.json"
+  if [[ ! -f "${out}" ]]; then
+    mi_caller="${tool}"
+    if [[ "${mi_caller}" == "strkit" || "${mi_caller}" == "strkit-no-snv" ]]; then
+      mi_caller="strkit-vcf"
+    fi
+    strkit mi --caller "${mi_caller}" \
+      "${hifi_base}/HG002.${tool}.vcf.gz" \
+      "${hifi_base}/HG004.${tool}.vcf.gz" \
+      "${hifi_base}/HG003.${tool}.vcf.gz" \
+      --hist \
+      --trf-bed "../2_giab_calls/out/adotto_catalog_strkit.bed" \
+      --json "${out}"
+  fi
+done
 
 deactivate

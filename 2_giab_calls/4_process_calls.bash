@@ -29,6 +29,11 @@ for f in **/*.strkit.vcf; do
   tabix "${f}.gz"
 done
 
+for f in **/*.strkit-no-snv.vcf; do
+  bgzip -f $f
+  tabix "${f}.gz"
+done
+
 for f in **/*.trgt.vcf.gz; do
   mv "${f}" "${f}_old"
   bcftools sort "${f}_old" -O z -o "${f}" || exit
