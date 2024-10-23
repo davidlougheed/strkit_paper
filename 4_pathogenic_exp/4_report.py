@@ -10,7 +10,7 @@ def print_tool_genotypes(samples: tuple[str, ...], disease: str, var_idx: int, c
     for sample in samples:
         for tool in TOOLS:
             if tool != "straglr":
-                path = OUT_PATH / (f"bc10{sample}.{tool}.vcf" + (".gz" if tool != "strkit" else ""))
+                path = OUT_PATH / (f"bc10{sample}.{tool}.vcf" + (".gz" if tool not in ("strkit", "strdust") else ""))
                 if not path.exists():
                     print(f"Missing {path}")
                     continue
