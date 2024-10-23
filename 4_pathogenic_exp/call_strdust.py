@@ -10,7 +10,7 @@ def main():
         print("STRdust", sample, karyotype)
         with open(BASE_PATH / "out" / f"{sample}.strdust.vcf", "w") as fh:
             subprocess.check_call([
-                "../bin/strdust",
+                "../bin/STRdust",
                 "-R", str(BASE_PATH / "data" / "catalog.strkit.bed"),
                 "--unphased",
                 *(("--haploid", "X,Y") if karyotype == "XY" else ()),
