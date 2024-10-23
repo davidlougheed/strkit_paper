@@ -24,7 +24,10 @@ def print_tool_genotypes(samples: tuple[str, ...], disease: str, var_idx: int, c
                     genotype = tuple(map(int, variant.samples[0]["MC"]))
                 elif tool == "longtr":
                     genotype = tuple(int(round((len(variant.alleles[g]) - 1) / 3)) for g in variant.samples[0]["GT"])
-                # else: TODO
+                elif tool == "strdust":
+                    # STRdust - need to get rid of the first base, plus seems to have an off-by-one error and include
+                    # the last base too.
+                    genotype = tuple(int(round((len(variant.alleles[g]) - 2) / 3)) for g in variant.samples[0]["GT"])
 
             else:
                 path = OUT_PATH / f"bc10{sample}.{tool}.bed"
