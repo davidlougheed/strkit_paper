@@ -25,6 +25,7 @@ def main():
             print(vp)
             for e in ps_c.items():
                 print(f"    {e[0]}: {e[1] / n_strs * 100:.2f}%")
+            print(f"    total snv: {(ps_c['snv'] + ps_c['snv+dist']) / n_strs * 100:.2f}%")
 
 
 if __name__ == "__main__":
