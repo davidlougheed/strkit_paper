@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --mem=64G
+#SBATCH --mem=180G
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
 #SBATCH --time=36:00:00
