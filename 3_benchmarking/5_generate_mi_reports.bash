@@ -32,6 +32,8 @@ for tool in "${tools[@]}"; do
       ext="bed"
     fi
 
+    echo "Working on ${out}"
+
     strkit mi --caller "${mi_caller}" \
       "${hifi_base}/HG002.${tool}.${ext}" \
       "${hifi_base}/HG004.${tool}.${ext}" \
