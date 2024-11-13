@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#SBATCH --mem=6G
+#SBATCH --mem=8G
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --time=8:00:00
