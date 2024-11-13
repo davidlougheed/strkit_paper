@@ -20,7 +20,9 @@ strkit_out="${out_base}/strkit/mi_report.json"
 trgt_out="${out_base}/trgt/mi_report.json"
 
 for tool in "${tools[@]}"; do
-  out="${out_base}/${tool}/mi_report.json"
+  tool_dir="${out_base}/${tool}"
+  mkdir -p "${tool_dir}"
+  out="${tool_dir}/mi_report.json"
   if [[ ! -f "${out}" ]]; then
     mi_caller="${tool}"
     if [[ "${mi_caller}" == "strkit" || "${mi_caller}" == "strkit-no-snv" ]]; then
