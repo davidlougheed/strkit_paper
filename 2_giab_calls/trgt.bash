@@ -16,6 +16,7 @@ cp "${BAM}.bai" "${bam_tmpdir}.bai"
   --genome "${REF}" \
   --repeats ./out/adotto_catalog_trgt.bed \
   --output-prefix "./out/calls/${TECH}/${SAMPLE}.trgt${PHASED:+.phased}" \
+  --disable-bam-output \
   --sample-name "${SAMPLE}" \
   --karyotype "${KARYOTYPE}" \
   --threads 8
