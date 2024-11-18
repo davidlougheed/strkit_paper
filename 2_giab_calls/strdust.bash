@@ -11,11 +11,17 @@ cp "${BAM}.bai" "${bam_tmpdir}.bai"
 
 # STRdust just expects regions in the BED file and ignores other columns
 
-/usr/bin/time -o "./out/calls/${TECH}/${SAMPLE}.strdust.time" ../bin/STRdust \
+if [[ "${PHASED}" == "1" ]]; then
+  pf=""
+else
+  pf="--unphased"
+fi
+
+/usr/bin/time -o "./out/calls/${TECH}/${SAMPLE}.strdust.${PHASED:+phased.}time" ../bin/STRdust \
   -R ./out/adotto_catalog_strkit.bed \
   -s 1 \
   -t 8 \
-  --unphased \
+  ${pf} \
   --haploid "${HAPLOID_CHRS}" \
   "${REF}" \
-  "${bam_tmpdir}" > "./out/calls/${TECH}/${SAMPLE}.strdust.vcf"
+  "${bam_tmpdir}" > "./out/calls/${TECH}/${SAMPLE}.strdust.${PHASED:+phased.}vcf"
