@@ -6,8 +6,10 @@ import sys
 from common import REF, TECHS, SAMPLES_BY_TECH, KARYOTYPES_BY_SAMPLE
 
 if __name__ == "__main__":
-    script = sys.argv[-2]
-    tech = sys.argv[-1]  # hifi or ont
+    script = sys.argv[-3]
+    tech = sys.argv[-2]  # hifi or ont
+    phased = sys.argv[-1]  # phased BAM: 1 or blank/0
+    phased = "1" if phased == "1" else ""  # normalize to 1 or blank
 
     assert tech in TECHS
 
@@ -25,7 +27,8 @@ if __name__ == "__main__":
                 f"SAMPLE={sample},"
                 f"BAM=../1_cov_subsetting/data/{tech}/{sample}.aligned.bam,"
                 f"HAPLOID_CHRS={haploid_chrs},"
-                f"KARYOTYPE={sex_kary}"
+                f"KARYOTYPE={sex_kary},",
+                f"PHASED={phased}"
             ),
             script,
         )), shell=True)

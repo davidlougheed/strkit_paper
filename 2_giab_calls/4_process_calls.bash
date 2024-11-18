@@ -8,7 +8,7 @@
 module load samtools bcftools
 cd out/calls || exit
 
-for f in **/*.longtr.vcf.gz; do
+for f in **/*.longtr.*vcf.gz; do
   tabix "${f}"
 done
 
@@ -24,7 +24,7 @@ done
 #  tabix "${f}.gz"
 #done
 
-for f in **/*.strkit.vcf; do
+for f in **/*.strkit.*vcf; do
   bgzip -f $f
   tabix "${f}.gz"
 done
@@ -34,7 +34,7 @@ for f in **/*.strkit-no-snv.vcf; do
   tabix "${f}.gz"
 done
 
-for f in **/*.trgt.vcf.gz; do
+for f in **/*.trgt.*vcf.gz; do
   mv "${f}" "${f}_old"
   bcftools sort "${f}_old" -O z -o "${f}" || exit
   rm "${f}_old"

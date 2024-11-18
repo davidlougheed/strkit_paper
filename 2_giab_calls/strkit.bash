@@ -19,13 +19,19 @@ cp "./data/00-common_all.vcf.gz.tbi" "${snv_vcf_tmpdir}.tbi"
 
 export PYTHONOPTIMIZE=1
 
+if [[ "${PHASED}" == "1" ]]; then
+  pf="--use-hp"
+else
+  pf="--incorporate-snvs ${snv_vcf_tmpdir}"
+fi
+
 # for comparison to TRGT, which has no minimum, we set --min-reads and --min-allele-reads low
 /usr/bin/time -o "./out/calls/${TECH}/${SAMPLE}.strkit.time" strkit call \
   --ref "${REF}" \
   --loci ./out/adotto_catalog_strkit.bed \
   --sex-chr "${KARYOTYPE}" \
   --hq \
-  --incorporate-snvs "${snv_vcf_tmpdir}" \
+  ${pf} \
   --min-reads 2 \
   --min-allele-reads 1 \
   --min-read-align-score 0.2 \
