@@ -27,7 +27,7 @@ if __name__ == "__main__":
                 f"SAMPLE={sample},"
                 f"BAM=../1_cov_subsetting/data/{tech}/{sample}.aligned.bam,"
                 f"HAPLOID_CHRS={haploid_chrs},"
-                f"KARYOTYPE={sex_kary},",
+                f"KARYOTYPE={sex_kary},"
                 f"PHASED={phased}"
             ),
             script,
