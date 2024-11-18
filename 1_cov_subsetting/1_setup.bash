@@ -40,12 +40,15 @@ fi
 # aligned, phased reads (HP tags)
 if [[ ! -f "HG002.phased.aligned.bam" ]]; then
   wget https://downloads.pacbcloud.com/public/revio/2022Q4/HG002-rep1/analysis/HG002.m84011_220902_175841_s1.GRCh38.bam -O "HG002.phased.aligned.bam"
+  samtools index "HG002.phased.aligned.bam"
 fi
 if [[ ! -f "HG003.phased.aligned.bam" ]]; then
   wget https://downloads.pacbcloud.com/public/revio/2022Q4/HG003-rep1/analysis/HG003.m84010_220919_235306_s2.GRCh38.bam -O "HG003.phased.aligned.bam"
+  samtools index "HG003.phased.aligned.bam"
 fi
 if [[ ! -f "HG004.phased.aligned.bam" ]]; then
   wget https://downloads.pacbcloud.com/public/revio/2022Q4/HG004-rep1/analysis/HG004.m84010_220919_232145_s1.GRCh38.bam -O "HG004.phased.aligned.bam"
+  samtools index "HG004.phased.aligned.bam"
 fi
 
 cd ../ont || exit
