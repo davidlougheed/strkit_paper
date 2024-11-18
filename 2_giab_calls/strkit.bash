@@ -35,7 +35,7 @@ fi
   --min-reads 2 \
   --min-allele-reads 1 \
   --min-read-align-score 0.2 \
-  --vcf "./out/calls/${TECH}/${SAMPLE}.strkit.vcf" \
+  --vcf "./out/calls/${TECH}/${SAMPLE}.strkit.${PHASED:+phased.}vcf" \
   --no-tsv \
   --seed "${SEED}" \
   --sample-id "${SAMPLE}" \

@@ -19,5 +19,5 @@ cp "${BAM}.bai" "${bam_tmpdir}.bai"
   --max-reads 250 \
   --min-reads 2 \
   --max-tr-len 10000 \
-  --tr-vcf "./out/calls/${TECH}/${SAMPLE}.${PHASED:+phased.}longtr.vcf.gz" \
+  --tr-vcf "./out/calls/${TECH}/${SAMPLE}.longtr.${PHASED:+phased.}vcf.gz" \
   --haploid-chrs "${HAPLOID_CHRS}" ${PHASED:+--phased-bam}
