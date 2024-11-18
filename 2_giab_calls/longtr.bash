@@ -10,7 +10,7 @@ cp "${BAM}" "${bam_tmpdir}"
 cp "${BAM}.bai" "${bam_tmpdir}.bai"
 
 #  --skip-assembly \
-/usr/bin/time -o "./out/calls/${TECH}/${SAMPLE}.longtr.time" ../bin/LongTR \
+/usr/bin/time -o "./out/calls/${TECH}/${SAMPLE}.longtr.${PHASED:+phased.}time" ../bin/LongTR \
   --bams "${bam_tmpdir}" \
   --bam-samps "${SAMPLE}" \
   --bam-libs "${SAMPLE}" \

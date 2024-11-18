@@ -26,7 +26,7 @@ else
 fi
 
 # for comparison to TRGT, which has no minimum, we set --min-reads and --min-allele-reads low
-/usr/bin/time -o "./out/calls/${TECH}/${SAMPLE}.strkit.time" strkit call \
+/usr/bin/time -o "./out/calls/${TECH}/${SAMPLE}.strkit.${PHASED:+phased.}time" strkit call \
   --ref "${REF}" \
   --loci ./out/adotto_catalog_strkit.bed \
   --sex-chr "${KARYOTYPE}" \
