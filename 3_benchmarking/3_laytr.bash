@@ -3,7 +3,8 @@
 techs=( hifi ont )
 # Re-enable if not failed
 #tools=( longtr straglr strdust strkit trgt )
-tools=( longtr strkit strkit-no-snv trgt )
+#tools=( longtr strkit strkit-no-snv trgt )
+tools=( longtr strkit trgt )
 
 for tech in "${techs[@]}"; do
   for tool in "${tools[@]}"; do
