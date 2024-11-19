@@ -22,5 +22,6 @@ python ./run_all.py ./strkit-no-snv.bash ont ""
 
 # HiFi - phased (no SNVs for STRkit)
 python ./run_all.py ./longtr.bash hifi "1"
+python ./run_all.py ./strdust.bash hifi "1"
 python ./run_all.py ./strkit.bash hifi "1"
 python ./run_all.py ./trgt.bash hifi "1"
