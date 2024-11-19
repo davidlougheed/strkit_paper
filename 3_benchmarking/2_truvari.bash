@@ -3,11 +3,12 @@
 techs=( hifi ont )
 # Re-enable if not failed
 #tools=( longtr straglr strdust strkit trgt )
-tools=( longtr strkit strkit-no-snv trgt )
+#tools=( longtr strkit strkit-no-snv trgt )
+tools=( longtr strkit trgt )
 
 for tech in "${techs[@]}"; do
   for tool in "${tools[@]}"; do
-    f="../2_giab_calls/out/calls/${tech}/HG002.${tool}.norm.vcf.gz"
+    f="../2_giab_calls/out/calls/${tech}/HG002.${tool}.phased.norm.vcf.gz"
     if [[ -f "${f}" ]]; then
       echo "Running truvari on ${f}"
       sbatch --export="VCF=${f},TECH=${tech},TOOL=${tool}" ./truvari_job.bash
