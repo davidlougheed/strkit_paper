@@ -11,25 +11,42 @@ MAX_MOTIF_SIZE = 10
 MIN_PURITY = 90
 
 
+def get_minimized_motif(motif: str, p: bool = False):
+    # turns e.g. TATA => TA
+    motif_len = len(motif)
+    for mini in range(2, motif_len // 2 + 1):
+        mini_motif = motif[:mini]
+        if motif.count(mini_motif) * mini == motif_len:
+            if p and mini_motif:
+                print(motif, mini_motif)
+            return mini_motif
+    return motif
+
+
 def _get_non_overlapping_annos(seen_coords: set[tuple[str, int, int]], data: list[str]) -> list[dict]:
     anno_final: list[dict] = []
     json_data = json.loads(data[-1])
 
     by_span = sorted(json_data, key=lambda k: k["end"] - k["start"], reverse=True)
 
-    if by_span and (len(by_span[0]["motif"]) > MAX_MOTIF_SIZE):
+    if by_span and (len(get_minimized_motif(by_span[0]["motif"])) > MAX_MOTIF_SIZE):
         return anno_final  # early return if our most spanning TR is above the STR motif size range
 
     for anno in by_span:
-        motif = anno["motif"]
+        motif = get_minimized_motif(anno["motif"])
 
         if len(motif) > MAX_MOTIF_SIZE:
             continue
+
         if anno["purity"] < MIN_PURITY:
             continue
+
         if len(set(motif)) == 1:
             # skip homopolymers
             continue
+
+        # Update anno motif
+        anno["motif"] = motif
 
         # In the JSON, they're 1-based closed coordinates. Change to 0-based half-open:
         anno["start"] -= 1
