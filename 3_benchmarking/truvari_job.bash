@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --mem=8G
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=2
+#SBATCH --cpus-per-task=4
 #SBATCH --time=10:00:00
 #SBATCH --account=rrg-bourqueg-ad
 
@@ -41,6 +41,7 @@ truvari refine \
   --use-original-vcfs \
   --reference "${REFERENCE}" \
   --regions "../2_giab_calls/out/adotto_catalog_${bed_tool}.bed" \
+  --threads 8 \
   "${ls_bench_dir}" || exit
 
 tech_dir="out/hg002_benchmark/${TECH}"
