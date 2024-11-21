@@ -45,7 +45,7 @@ truvari refine \
   "${ls_bench_dir}" || exit
 
 tech_dir="out/hg002_benchmark/${TECH}"
-bench_dir="${tech_dir}/${TOOL}"
+bench_dir="${tech_dir}/${TOOL}${PHASED:+_phased}"
 mkdir -p "${tech_dir}"
 rm -rf "${bench_dir}"  # remove bench_dir if it exists and overwrite it with the new contents
 chown -R dlough2:rrg-bourqueg-ad "${ls_bench_dir}"
