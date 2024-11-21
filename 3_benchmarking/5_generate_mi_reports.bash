@@ -15,14 +15,17 @@ out_base="out/hg002_benchmark/hifi"
 
 tools=( longtr strkit strkit-no-snv straglr trgt )
 
-longtr_out="${out_base}/longtr/mi_report.json"
-strkit_out="${out_base}/strkit/mi_report.json"
-trgt_out="${out_base}/trgt/mi_report.json"
+run_mi () {
+  tool="${1}"
+  phased="${2}"
 
-for tool in "${tools[@]}"; do
-  tool_dir="${out_base}/${tool}"
+  # ------------------------------------------------------------------------------------------
+
+  tool_dir="${out_base}/${tool}${phased:+_phased}"
+
   mkdir -p "${tool_dir}"
   out="${tool_dir}/mi_report.json"
+
   if [[ ! -f "${out}" ]]; then
     mi_caller="${tool}"
     if [[ "${mi_caller}" == "strkit" || "${mi_caller}" == "strkit-no-snv" ]]; then
@@ -41,8 +44,16 @@ for tool in "${tools[@]}"; do
       "${hifi_base}/HG004.${tool}.${ext}" \
       "${hifi_base}/HG003.${tool}.${ext}" \
       --hist \
-      --trf-bed "../2_giab_calls/out/adotto_catalog_strkit.bed" \
+      --motif-bed "../2_giab_calls/out/adotto_catalog_strkit.bed" \
       --json "${out}"
+  fi
+}
+
+for tool in "${tools[@]}"; do
+  run_mi "${tool}" ''
+
+  if [[ "${tool}" == "longtr" ]] || [[ "${tool}" == "strkit" ]] || [[ "${tool}" == "trgt" ]]; then
+    run_mi "${tool}" '1'
   fi
 done
 
