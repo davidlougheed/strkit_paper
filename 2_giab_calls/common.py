@@ -1,4 +1,4 @@
-REF = "../1_cov_subsetting/data/ref/hg38.analysisSet.fa"
+REF = "../1_alignment/data/ref/hg38.analysisSet.fa"
 
 TECH_HIFI = "hifi"
 TECH_ONT = "ont"
