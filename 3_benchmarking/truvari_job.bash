@@ -9,7 +9,7 @@ module load StdEnv/2020
 module load python/3.10
 source ../envs/env_truvari/bin/activate
 
-REFERENCE="../1_cov_subsetting/data/ref/hg38.analysisSet.fa"
+REFERENCE="../1_alignment/data/ref/hg38.analysisSet.fa"
 
 # External environment variables:
 #  - VCF

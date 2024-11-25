@@ -5,7 +5,7 @@
 #SBATCH --time=4:00:00
 #SBATCH --account=rrg-bourqueg-ad
 
-REF='../1_cov_subsetting/data/ref/hg38.analysisSet.fa'
+REF='../1_alignment/data/ref/hg38.analysisSet.fa'
 
 truvari_norm () {
   # Normalizes a .vcf.gz with path $1 to have bi-allelic entries only (so multi-allelic VCF lines get split up),
