@@ -25,7 +25,7 @@ if [[ ! -d "../envs/env_strkit" ]]; then
   python3 -m venv ../envs/env_strkit
 fi
 source ../envs/env_strkit/bin/activate || exit
-pip install -vv -U strkit==0.18.0a5
+pip install -vv -U strkit==0.19.0a1
 deactivate
 # END STRKIT
 
@@ -35,7 +35,7 @@ if [[ ! -d "../envs/env_straglr" ]]; then
   python3 -m venv ../envs/env_straglr
 fi
 source ../envs/env_straglr/bin/activate || exit
-pip install -v -U git+https://github.com/bcgsc/straglr.git@v1.5.2#egg=straglr
+pip install -v -U git+https://github.com/bcgsc/straglr.git@v1.5.3#egg=straglr
 deactivate
 #  - TRF
 rm -rf ./TRF
