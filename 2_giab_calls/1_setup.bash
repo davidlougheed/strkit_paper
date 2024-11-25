@@ -47,6 +47,7 @@ cd build || exit
 make
 cp src/trf ../../../bin
 cd ../.. || exit
+rm -rf ./TRF
 # END STRAGLR
 
 # BEGIN STRDUST
@@ -57,6 +58,7 @@ git checkout 3f3ebf0
 cargo build --release
 cp ./target/release/STRdust ../../bin
 cd .. || exit
+rm -rf ./STRdust
 # END STRDUST
 
 # BEGIN LONGTR
@@ -69,6 +71,7 @@ sed -i 's/-lspoa/-lspoa -ldeflate/g' Makefile  # need to edit Makefile to add -l
 make
 mv ./LongTR ../../bin
 cd .. || exit
+rm -rf ./LongTR
 # END LONGTR
 
 # BEGIN TRGT

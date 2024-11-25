@@ -1,0 +1,4 @@
+# ignore random debug files
+*.bam
+*.bam.bai
+./*.bed

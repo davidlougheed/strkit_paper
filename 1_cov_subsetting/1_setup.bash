@@ -78,5 +78,6 @@ git checkout v2.28
 make
 mv ./minimap2 ../../bin/
 cd .. || exit
+rm -rf ./minimap2  # make sure we clean up at the end (with a backup at the start)
 
 # END MINIMAP2

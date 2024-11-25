@@ -1,1 +1,3 @@
 *.bed
+*.vcf.gz
+*.vcf.gz.tbi
