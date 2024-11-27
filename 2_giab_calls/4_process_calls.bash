@@ -8,15 +8,27 @@
 module load samtools bcftools
 cd out/calls || exit
 
-for f in **/*.longtr.*vcf.gz; do
-  tabix "${f}"
+vcf_process () {
+  bgzip -f "${1}"
+  tabix -f "${1}.gz"
+}
+
+# LongTR ------------------------------------------------------------
+
+for f in **/*.longtr.vcf.gz; do
+  tabix -f "${f}"
+done
+for f in **/*.longtr.phased.vcf.gz; do
+  tabix -f "${f}"
 done
 
-# Re-enable if not failed
-#for f in **/*.straglr.vcf; do
-#  bgzip -f $f
-#  tabix "${f}.gz"
-#done
+# Straglr -----------------------------------------------------------
+
+for f in **/*.straglr.vcf; do
+  vcf_process "${f}"
+done
+
+# STRdust -----------------------------------------------------------
 
 # Re-enable if not failed
 #for f in **/*.strdust.vcf; do
@@ -24,21 +36,37 @@ done
 #  tabix "${f}.gz"
 #done
 
-for f in **/*.strkit.*vcf; do
-  bgzip -f $f
-  tabix "${f}.gz"
+# STRkit ------------------------------------------------------------
+
+for f in **/*.strkit.vcf; do
+  vcf_process "${f}"
+done
+
+for f in **/*.strkit.phased.vcf; do
+  vcf_process "${f}"
 done
 
 for f in **/*.strkit-no-snv.vcf; do
-  bgzip -f $f
-  tabix "${f}.gz"
+  vcf_process "${f}"
 done
 
-for f in **/*.trgt.*vcf.gz; do
-  mv "${f}" "${f}_old"
-  bcftools sort "${f}_old" -O z -o "${f}" || exit
-  rm "${f}_old"
-  tabix "${f}"
+# TRGT --------------------------------------------------------------
+
+trgt_process () {
+  mv "${1}" "${1}_old"
+  bcftools sort "${1}_old" -O z -o "${1}" || exit
+  rm "${1}_old"
+  tabix -f "${1}"
+}
+
+for f in **/*.trgt.vcf.gz; do
+  trgt_process "${f}"
 done
+
+for f in **/*.trgt.phased.vcf.gz; do
+  trgt_process "${f}"
+done
+
+# -------------------------------------------------------------------
 
 cd ../.. || exit
