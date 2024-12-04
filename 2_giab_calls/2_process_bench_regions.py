@@ -8,15 +8,16 @@ chr_order = (*map(lambda c: f"chr{c}", range(1, 23)), "chrX", "chrY")
 print(f"chr_order={chr_order}")
 
 MAX_MOTIF_SIZE = 10
-MIN_PURITY = 90
+# MIN_PURITY = 80
 
 
-def get_minimized_motif(motif: str, p: bool = False):
+def get_minimized_motif(motif: str, p: bool = False) -> str:
     # turns e.g. TATA => TA
     motif_len = len(motif)
     for mini in range(2, motif_len // 2 + 1):
         mini_motif = motif[:mini]
-        if motif.count(mini_motif) * mini == motif_len:
+        mcm = motif.count(mini_motif) * mini
+        if mcm == motif_len:
             if p and mini_motif:
                 print(motif, mini_motif)
             return mini_motif
@@ -26,6 +27,9 @@ def get_minimized_motif(motif: str, p: bool = False):
 def _get_non_overlapping_annos(seen_coords: set[tuple[str, int, int]], data: list[str]) -> list[dict]:
     anno_final: list[dict] = []
     json_data = json.loads(data[-1])
+
+    if len(json_data) > 1:
+        return []
 
     by_span = sorted(json_data, key=lambda k: k["end"] - k["start"], reverse=True)
 
@@ -38,8 +42,8 @@ def _get_non_overlapping_annos(seen_coords: set[tuple[str, int, int]], data: lis
         if len(motif) > MAX_MOTIF_SIZE:
             continue
 
-        if anno["purity"] < MIN_PURITY:
-            continue
+        # if anno["purity"] < MIN_PURITY:
+        #     continue
 
         if len(set(motif)) == 1:
             # skip homopolymers
