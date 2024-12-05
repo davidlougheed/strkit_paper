@@ -55,7 +55,9 @@ rm -rf ./STRdust
 git clone https://github.com/wdecoster/STRdust.git
 cd STRdust || exit
 git checkout 3f3ebf0
-cargo build --release
+sed -i 's/0.1.20/=0.1.20/g' Cargo.toml  # fix build issues with newer minimap2-rs
+cargo add 'minimap2-sys@=0.1.19' # fix build issues with newer minimap2-sys
+cargo build --release --verbose --jobs 12
 cp ./target/release/STRdust ../../bin
 cd .. || exit
 rm -rf ./STRdust
