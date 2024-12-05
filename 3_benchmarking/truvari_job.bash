@@ -23,7 +23,7 @@ export TMPDIR="${SLURM_TMPDIR}/tmp"
 mkdir -p "${TMPDIR}"
 
 truvari bench \
-  -b ./data/HG002_GRCh38_TandemRepeats_v1.0.1.vcf.gz \
+  -b ./data/HG002_GRCh38_TandemRepeats_v1.0.1.no_homopolymers.vcf.gz \
   -c "${VCF}" \
   --includebed ./data/HG002_GRCh38_TandemRepeats_v1.0.bed.gz \
   --sizemin 5 \

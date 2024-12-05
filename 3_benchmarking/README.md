@@ -4,6 +4,7 @@
 
 ```bash
 ./1_setup.bash
-./2_truvari.bash
-./3_laytr.bash
+./2_tr_subset.bash
+./3_truvari.bash
+./4_laytr.bash
 ```
