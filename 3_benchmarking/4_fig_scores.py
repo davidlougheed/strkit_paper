@@ -5,7 +5,6 @@ import json
 import pysam
 import re
 from io import StringIO
-from matplotlib.transforms import ScaledTranslation
 from pathlib import Path
 from urllib.parse import unquote as url_unquote
 
@@ -18,7 +17,8 @@ callers = ("longtr", "strkit", "strkit-no-snv", "trgt")
 measures = ("F1", "PPV", "TPR")
 
 
-def build_transl(f, dx, dy) -> ScaledTranslation:
+def build_transl(f, dx, dy):
+    from matplotlib.transforms import ScaledTranslation
     return ScaledTranslation(dx / f.dpi, dy / f.dpi, f.dpi_scale_trans)
 
 
@@ -246,8 +246,6 @@ def main():
             #
             # df2 = pd.DataFrame.from_records([{"caller": caller, **rec} for caller in rb["ont"] for rec in rb["ont"][caller]])
             # sns.relplot(data=df2, x="bin", y="y", kind="line", col="measure", hue="caller")
-
-
 
     plt.show()
 
