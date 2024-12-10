@@ -39,10 +39,12 @@ run_mi () {
 
     echo "Working on ${out}"
 
+    tool_opt_phased="${tool}${phased:+.phased}"
+
     strkit mi --caller "${mi_caller}" \
-      "${hifi_base}/HG002.${tool}.${ext}" \
-      "${hifi_base}/HG004.${tool}.${ext}" \
-      "${hifi_base}/HG003.${tool}.${ext}" \
+      "${hifi_base}/HG002.${tool_opt_phased}.${ext}" \
+      "${hifi_base}/HG004.${tool_opt_phased}.${ext}" \
+      "${hifi_base}/HG003.${tool_opt_phased}.${ext}" \
       --hist \
       --motif-bed "../2_giab_calls/out/adotto_catalog_strkit.bed" \
       --json "${out}"
