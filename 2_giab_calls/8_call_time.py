@@ -20,7 +20,7 @@ CALLERS_CORES = {
 def parse_time(time_file: str, cores: int) -> float:
     time_match = ELAPSED_PATTERN.search(time_file)
     if not time_match:
-        raise ValueError(f"Invalid time:\n{time_file}")
+        return -1.0  # invalid
     time_str = time_match[1]
     time_parts = time_str.split(":")
     if len(time_parts) == 2:
