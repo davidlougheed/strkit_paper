@@ -36,7 +36,7 @@ def parse_time(time_file: str, cores: int) -> float:
 def main():
     for tech in TECHS:
         for caller, cores in CALLERS_CORES.items():
-            for time_file in (OUT_DIR / tech).glob(f"HG00?.{caller}*.time"):
+            for time_file in sorted((OUT_DIR / tech).glob(f"HG00?.{caller}*.time")):
                 with open(time_file, "r") as fh:
                     elapsed_seconds = parse_time(fh.read(), cores)
                 print(f"{time_file}: {elapsed_seconds}s {elapsed_seconds / 60:.1f}mins")
