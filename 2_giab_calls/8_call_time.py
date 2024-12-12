@@ -39,7 +39,7 @@ def main():
             for time_file in (OUT_DIR / tech).glob(f"HG00?.{caller}*.time"):
                 with open(time_file, "r") as fh:
                     elapsed_seconds = parse_time(fh.read(), cores)
-                print(f"{time_file}: {elapsed_seconds}s {elapsed_seconds / 3600:.1f}h")
+                print(f"{time_file}: {elapsed_seconds}s {elapsed_seconds / 60:.1f}mins")
 
 
 if __name__ == "__main__":
