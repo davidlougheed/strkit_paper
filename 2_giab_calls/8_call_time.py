@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import re
 from pathlib import Path
 
@@ -16,7 +18,10 @@ CALLERS_CORES = {
 
 
 def parse_time(time_file: str, cores: int) -> float:
-    time_str = ELAPSED_PATTERN.search(time_file)[1]
+    time_match = ELAPSED_PATTERN.search(time_file)
+    if not time_match:
+        raise ValueError(f"Invalid time:\n{time_file}")
+    time_str = time_match[1]
     time_parts = time_str.split(":")
     if len(time_parts) == 2:
         time_seconds = int(time_parts[0]) * 60 + int(time_parts[1])
