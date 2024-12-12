@@ -3,7 +3,7 @@
 import re
 from pathlib import Path
 
-ELAPSED_PATTERN = re.compile(r"((?:\d{1,2}:)?\d{2}:\d{2})(?:\.\d{2})?elapsed")
+ELAPSED_PATTERN = re.compile(r"((?:\d{1,2}:)?\d{1,2}:\d{2})(?:\.\d{2})?elapsed")
 
 OUT_DIR = Path(__file__).parent / "out" / "calls"
 TECHS = ("hifi", "ont")
