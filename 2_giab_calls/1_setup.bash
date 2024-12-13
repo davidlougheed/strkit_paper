@@ -77,7 +77,7 @@ rm -rf ./LongTR
 # END LONGTR
 
 # BEGIN TRGT
-trgt_version="v1.3.0"
+trgt_version="v1.4.1"
 trgt_rxiv="trgt-${trgt_version}-x86_64-unknown-linux-gnu.tar.gz"
 wget "https://github.com/PacificBiosciences/trgt/releases/download/${trgt_version}/${trgt_rxiv}"
 tar -xzvf "trgt-${trgt_version}-x86_64-unknown-linux-gnu.tar.gz"
