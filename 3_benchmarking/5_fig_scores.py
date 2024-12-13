@@ -14,6 +14,18 @@ call_dir = Path("../2_giab_calls/out/calls")
 techs = ("hifi", "ont")
 callers = ("longtr", "strkit", "strkit-no-snv", "trgt")
 
+LABELS = {
+    # callers:
+    "longtr": "LongTR",
+    "strkit": "STRkit",
+    "strkit-no-snv": "STRkit (no SNVs)",
+    "trgt": "TRGT",
+    # measures:
+    "F1": "F1 score",
+    "PPV": "Precision (PPV)",
+    "TPR": "Recall (TPR)",
+}
+
 measures = ("F1", "PPV", "TPR")
 
 
@@ -200,7 +212,7 @@ def main():
             ax2 = ax1.twinx()
 
             ax1.set_xlabel("Region size bin (bp)")
-            ax1.set_ylabel(m)
+            ax1.set_ylabel(LABELS[m])
             ax1.grid(False)
             ax1.tick_params(axis="x", labelrotation=60, labelsize=9)
             ax1.set_zorder(ax2.get_zorder() + 1)
@@ -220,7 +232,7 @@ def main():
                 ax2.set_ylabel("# regions", rotation=-90, labelpad=18)
 
             line_df = pd.DataFrame.from_records([
-                {"caller": caller, **rec}
+                {"c": caller, "Caller": LABELS[caller], **rec}
                 for caller in rb[tech]
                 for rec in rb[tech][caller]
                 if rec["measure"] == m
@@ -237,7 +249,7 @@ def main():
 
             sns.barplot(x="bin", y="n", data=bar_df, color="#DFDFDF", ax=ax2, width=1)
             sns.lineplot(
-                x="bin", y="y", hue="caller", data=line_df, ax=ax1, errorbar=None, legend="auto" if mi == 1 else None,
+                x="bin", y="y", hue="Caller", data=line_df, ax=ax1, errorbar=None, legend="auto" if mi == 1 else None,
                 palette=p
             )
 
@@ -247,6 +259,7 @@ def main():
             # df2 = pd.DataFrame.from_records([{"caller": caller, **rec} for caller in rb["ont"] for rec in rb["ont"][caller]])
             # sns.relplot(data=df2, x="bin", y="y", kind="line", col="measure", hue="caller")
 
+    plt.savefig("./out/fig_scopes.png", dpi=300)
     plt.show()
 
 
