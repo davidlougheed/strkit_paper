@@ -31,7 +31,8 @@ done
 # STRdust -----------------------------------------------------------
 
 for f in **/*.strdust.vcf; do
-  vcf_process "${f}"
+  bcftools sort "${f}" -O z -o "${f}.gz" || exit
+  tabix -f "${f}.gz"
 done
 
 # STRkit ------------------------------------------------------------
