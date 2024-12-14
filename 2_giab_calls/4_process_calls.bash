@@ -30,11 +30,9 @@ done
 
 # STRdust -----------------------------------------------------------
 
-# Re-enable if not failed
-#for f in **/*.strdust.vcf; do
-#  bgzip -f $f
-#  tabix "${f}.gz"
-#done
+for f in **/*.strdust.vcf; do
+  vcf_process "${f}"
+done
 
 # STRkit ------------------------------------------------------------
 

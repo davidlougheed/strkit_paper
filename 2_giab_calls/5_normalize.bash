@@ -24,8 +24,7 @@ truvari_norm () {
 
 module load bcftools
 
-# Re-enable if not failed
-tools=( longtr strkit strkit-no-snv trgt )
+tools=( longtr strdust strkit strkit-no-snv trgt )
 
 for tool in "${tools[@]}"; do
   for f in ./out/calls/**/*.${tool}.vcf.gz; do
