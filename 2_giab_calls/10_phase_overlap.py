@@ -46,7 +46,7 @@ def main():
 
             hp_vars = [
                 v for v in vf_hp.fetch(contig, min_pos, max_pos)
-                if v.samples[0].get("PS") is not None and len(set(v.samples[0]["GT"])) > 1
+                if v.samples[0].get("PS") is not None and len(set(v.samples[0]["GT"])) > 1 and v.pos in posns
             ]
 
             if len(hp_vars) <= 1:
