@@ -41,7 +41,7 @@ def main():
             print("vvvvvvvvvvvv")
             print([(v.pos, v.samples[0]["GT"], v.samples[0]["PS"]) for v in vs])
             print("---")
-            print([(v.pos, v.samples[0]["GT"], v.samples[0]["PS"]) for v in vs])
+            print([(v.pos, v.samples[0]["GT"], v.samples[0]["PS"]) for v in hp_vars])
             print("^^^^^^^^^^^^")
 
             # TODO: compare to haplotype-phased.
