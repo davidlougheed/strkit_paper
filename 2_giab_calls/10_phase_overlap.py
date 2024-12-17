@@ -63,7 +63,7 @@ def main():
             if len(hp_vars) <= 1:
                 continue
 
-            s_vars = [v for v in vs if v.pos in hp_posns]
+            s_vars = [v for v in vs if v.pos in hp_posns or v.pos - 1 in hp_posns or v.pos + 1 in hp_posns]
 
             gts_snv = tuple(v.samples[0]["GT"] for v in s_vars)
             gts_hp = tuple(v.samples[0]["GT"] for v in hp_vars)
@@ -78,13 +78,13 @@ def main():
                 continue
 
             rels_snv = tuple(map(cns_to_rel, cns_snv))
-            rels_hp = tuple(map(cns_to_rel, cns_snv))
+            rels_hp = tuple(map(cns_to_rel, cns_hp))
 
             # TODO
             n_flips.update((1,))
 
             print("vvvvvvvvvvvv")
-            print([(v.pos, v.samples[0]["GT"], v.samples[0]["PS"], v.samples[0]["MC"], v.samples[0]["NSNV"]) for v in vs])
+            print([(v.pos, v.samples[0]["GT"], v.samples[0]["PS"], v.samples[0]["MC"], v.samples[0]["NSNV"]) for v in s_vars])
             print(rels_snv)
             print("---")
             print([(v.pos, v.samples[0]["GT"], v.samples[0]["PS"], v.samples[0]["MC"]) for v in hp_vars])
