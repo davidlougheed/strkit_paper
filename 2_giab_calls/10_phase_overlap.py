@@ -58,23 +58,24 @@ def main():
 
             cns_snv = tuple(v.samples[0]["MC"] for v in vs)  # TODO: use seq instead?
             cns_hp = tuple(v.samples[0]["MC"] for v in hp_vars)  # TODO: use seq instead?
+            cns_hp_rev = tuple(v.samples[0]["MC"] for v in hp_vars)  # TODO: use seq instead?
 
-            if gts_snv == gts_hp or gts_snv == gts_hp_rev or cns_snv == cns_hp:
+            if gts_snv == gts_hp or gts_snv == gts_hp_rev or cns_snv == cns_hp or cns_snv == cns_hp_rev:
                 n_flips.update((0,))
                 continue
 
             # TODO
             n_flips.update((1,))
 
-            print("vvvvvvvvvvvv")
-            print([(v.pos, v.samples[0]["GT"], v.samples[0]["PS"], v.samples[0]["MC"], v.samples[0]["NSNV"]) for v in vs])
-            print("---")
-            print([(v.pos, v.samples[0]["GT"], v.samples[0]["PS"], v.samples[0]["MC"]) for v in hp_vars])
-            print("^^^^^^^^^^^^")
+            # print("vvvvvvvvvvvv")
+            # print([(v.pos, v.samples[0]["GT"], v.samples[0]["PS"], v.samples[0]["MC"], v.samples[0]["NSNV"]) for v in vs])
+            # print("---")
+            # print([(v.pos, v.samples[0]["GT"], v.samples[0]["PS"], v.samples[0]["MC"]) for v in hp_vars])
+            # print("^^^^^^^^^^^^")
 
             # TODO: compare to haplotype-phased.
 
-        print(n_flips)
+        print(sample, n_flips)
 
 
 if __name__ == "__main__":
