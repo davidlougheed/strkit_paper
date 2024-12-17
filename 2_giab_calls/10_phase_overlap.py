@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from collections import Counter
 
 import pysam
 
@@ -30,6 +31,8 @@ def main():
             else:
                 phase_set_records[ps] = [v]
 
+        n_flips = Counter()
+
         for k, vs in phase_set_records.items():
             if len(vs) <= 1:
                 continue  # skip all entries with only one record, since we can't check for flips
@@ -43,6 +46,13 @@ def main():
                 v for v in vf_hp.fetch(contig, min_pos, max_pos)
                 if v.samples[0].get("PS") is not None and len(set(v.samples[0]["GT"])) > 1
             ]
+
+            gts_snv = tuple(v.samples[0]["GT"] for v in vs)
+            gts_hp = tuple(v.samples[0]["GT"] for v in hp_vars)
+
+            if gts_snv == gts_hp:
+                n_flips.update((0,))
+                continue
 
             print("vvvvvvvvvvvv")
             print([(v.pos, v.samples[0]["GT"], v.samples[0]["PS"]) for v in vs])
