@@ -22,6 +22,8 @@ def main():
             if len(set(gt)) == 1:  # not informative, skip non-het loci
                 continue
 
+            # todo: skip non-het copy number or allele length loci too
+
             ps = v.samples[0].get("PS")
             if ps is None:
                 continue
@@ -54,7 +56,10 @@ def main():
             gts_hp = tuple(v.samples[0]["GT"] for v in hp_vars)
             gts_hp_rev = tuple(map(lambda x: x[::-1], gts_hp))
 
-            if gts_snv == gts_hp or gts_snv == gts_hp_rev:
+            cns_snv = tuple(v.samples[0]["MC"] for v in vs)  # TODO: use seq instead?
+            cns_hp = tuple(v.samples[0]["MC"] for v in hp_vars)  # TODO: use seq instead?
+
+            if gts_snv == gts_hp or gts_snv == gts_hp_rev or cns_snv == cns_hp:
                 n_flips.update((0,))
                 continue
 
