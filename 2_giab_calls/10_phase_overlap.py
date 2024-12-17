@@ -6,6 +6,12 @@ import pysam
 SAMPLES = ("HG002", "HG003", "HG004")
 
 
+def cns_to_rel(cns: tuple[int] | tuple[int, int]) -> int:
+    if len(cns) == 1 or cns[0] == cns[1]:
+        return 0
+    return -1 if cns[0] < cns[1] else 1
+
+
 def main():
     for sample in SAMPLES:
         phase_set_records: dict[int, list[pysam.VariantRecord]] = {}
@@ -71,13 +77,18 @@ def main():
                 n_flips.update((0,))
                 continue
 
+            rels_snv = tuple(map(cns_to_rel, cns_snv))
+            rels_hp = tuple(map(cns_to_rel, cns_snv))
+
             # TODO
             n_flips.update((1,))
 
             print("vvvvvvvvvvvv")
             print([(v.pos, v.samples[0]["GT"], v.samples[0]["PS"], v.samples[0]["MC"], v.samples[0]["NSNV"]) for v in vs])
+            print(rels_snv)
             print("---")
             print([(v.pos, v.samples[0]["GT"], v.samples[0]["PS"], v.samples[0]["MC"]) for v in hp_vars])
+            print(rels_hp)
             print("^^^^^^^^^^^^")
 
             # TODO: compare to haplotype-phased.
