@@ -18,6 +18,9 @@ def main():
             if gt is None or None in gt or v.info.get("VT") != "str":
                 continue
 
+            if len(set(gt)) == 1:  # not informative, skip non-het loci
+                continue
+
             ps = v.samples[0].get("PS")
             if ps is None:
                 continue
