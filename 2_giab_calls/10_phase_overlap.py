@@ -79,8 +79,12 @@ def main():
 
             rels_snv = tuple(map(cns_to_rel, cns_snv))
             rels_hp = tuple(map(cns_to_rel, cns_hp))
+            rels_hp_inv = tuple(-1 * x for x in rels_hp)
 
-            # TODO
+            if rels_snv == rels_hp or rels_snv == rels_hp_inv:
+                n_flips.update((0,))
+                continue
+
             n_flips.update((1,))
 
             print("vvvvvvvvvvvv")
