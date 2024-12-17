@@ -97,7 +97,7 @@ def main():
 
             # TODO: compare to haplotype-phased.
 
-        print(sample, n_flips)
+        print(sample, n_flips, f"{n_flips[1] / n_flips.total() * 100:.2f}%")
 
 
 if __name__ == "__main__":
