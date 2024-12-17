@@ -59,7 +59,7 @@ def main():
                 continue
 
             print("vvvvvvvvvvvv")
-            print([(v.pos, v.samples[0]["GT"], v.samples[0]["PS"], v.samples[0]["NSNV"]) for v in vs])
+            print([(v.pos, v.samples[0]["GT"], v.samples[0]["PS"], v.samples[0]["MC"], v.samples[0]["NSNV"]) for v in vs])
             print("---")
             print([(v.pos, v.samples[0]["GT"], v.samples[0]["PS"]) for v in hp_vars])
             print("^^^^^^^^^^^^")
