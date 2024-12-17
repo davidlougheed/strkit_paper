@@ -39,7 +39,10 @@ def main():
             min_pos = min(posns)
             max_pos = max(posns)
 
-            hp_vars = [v for v in vf_hp.fetch(contig, min_pos, max_pos) if v.samples[0].get("PS") is not None]
+            hp_vars = [
+                v for v in vf_hp.fetch(contig, min_pos, max_pos)
+                if v.samples[0].get("PS") is not None and len(set(v.samples[0]["GT"])) > 1
+            ]
 
             print("vvvvvvvvvvvv")
             print([(v.pos, v.samples[0]["GT"], v.samples[0]["PS"]) for v in vs])
