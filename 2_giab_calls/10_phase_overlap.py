@@ -49,8 +49,9 @@ def main():
 
             gts_snv = tuple(v.samples[0]["GT"] for v in vs)
             gts_hp = tuple(v.samples[0]["GT"] for v in hp_vars)
+            gts_hp_rev = tuple(map(lambda x: x[::-1], gts_hp))
 
-            if gts_snv == gts_hp:
+            if gts_snv == gts_hp or gts_snv == gts_hp_rev:
                 n_flips.update((0,))
                 continue
 
