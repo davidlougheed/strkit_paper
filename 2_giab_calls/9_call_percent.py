@@ -25,6 +25,9 @@ def main():
         for caller in CALLERS:
             f = OUT_DIR / tech / f"HG002.{caller}.vcf.gz"
 
+            if not f.exists():
+                continue
+
             with pysam.VariantFile(str(f)) as vf:
                 n_called = sum(
                     1 for _ in filter(filter_default if caller != "strkit" else filter_strkit_snv, vf.fetch())
