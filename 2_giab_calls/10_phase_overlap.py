@@ -39,9 +39,9 @@ def main():
             hp_vars = [v for v in vf_hp.fetch(contig, min_pos, max_pos) if v.samples[0].get("PS") is not None]
 
             print("vvvvvvvvvvvv")
-            print(vs)
+            print([(v.pos, v.samples[0]["GT"], v.samples[0]["PS"]) for v in vs])
             print("---")
-            print(hp_vars)
+            print([(v.pos, v.samples[0]["GT"], v.samples[0]["PS"]) for v in vs])
             print("^^^^^^^^^^^^")
 
             # TODO: compare to haplotype-phased.
