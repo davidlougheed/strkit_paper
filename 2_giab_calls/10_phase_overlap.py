@@ -46,17 +46,24 @@ def main():
 
             hp_vars = [
                 v for v in vf_hp.fetch(contig, min_pos, max_pos)
-                if v.samples[0].get("PS") is not None and len(set(v.samples[0]["GT"])) > 1 and v.pos in posns
+                if (
+                   v.samples[0].get("PS") is not None
+                   and len(set(v.samples[0]["GT"])) > 1
+                   and (v.pos in posns or v.pos - 1 in posns or v.pos + 1 in posns)
+                )
             ]
+            hp_posns = {v.pos for v in hp_vars}
 
             if len(hp_vars) <= 1:
                 continue
 
-            gts_snv = tuple(v.samples[0]["GT"] for v in vs)
+            s_vars = [v for v in vs if v.pos in hp_posns]
+
+            gts_snv = tuple(v.samples[0]["GT"] for v in s_vars)
             gts_hp = tuple(v.samples[0]["GT"] for v in hp_vars)
             gts_hp_rev = tuple(map(lambda x: x[::-1], gts_hp))
 
-            cns_snv = tuple(v.samples[0]["MC"] for v in vs)  # TODO: use seq instead?
+            cns_snv = tuple(v.samples[0]["MC"] for v in s_vars)  # TODO: use seq instead?
             cns_hp = tuple(v.samples[0]["MC"] for v in hp_vars)  # TODO: use seq instead?
             cns_hp_rev = tuple(v.samples[0]["MC"] for v in hp_vars)  # TODO: use seq instead?
 
@@ -67,11 +74,11 @@ def main():
             # TODO
             n_flips.update((1,))
 
-            # print("vvvvvvvvvvvv")
-            # print([(v.pos, v.samples[0]["GT"], v.samples[0]["PS"], v.samples[0]["MC"], v.samples[0]["NSNV"]) for v in vs])
-            # print("---")
-            # print([(v.pos, v.samples[0]["GT"], v.samples[0]["PS"], v.samples[0]["MC"]) for v in hp_vars])
-            # print("^^^^^^^^^^^^")
+            print("vvvvvvvvvvvv")
+            print([(v.pos, v.samples[0]["GT"], v.samples[0]["PS"], v.samples[0]["MC"], v.samples[0]["NSNV"]) for v in vs])
+            print("---")
+            print([(v.pos, v.samples[0]["GT"], v.samples[0]["PS"], v.samples[0]["MC"]) for v in hp_vars])
+            print("^^^^^^^^^^^^")
 
             # TODO: compare to haplotype-phased.
 
