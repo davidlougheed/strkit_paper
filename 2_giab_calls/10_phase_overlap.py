@@ -63,6 +63,9 @@ def main():
                 n_flips.update((0,))
                 continue
 
+            # TODO
+            n_flips.update((1,))
+
             print("vvvvvvvvvvvv")
             print([(v.pos, v.samples[0]["GT"], v.samples[0]["PS"], v.samples[0]["MC"], v.samples[0]["NSNV"]) for v in vs])
             print("---")
@@ -70,6 +73,8 @@ def main():
             print("^^^^^^^^^^^^")
 
             # TODO: compare to haplotype-phased.
+
+        print(n_flips)
 
 
 if __name__ == "__main__":
