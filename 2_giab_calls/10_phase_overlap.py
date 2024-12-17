@@ -47,6 +47,9 @@ def main():
                 if v.samples[0].get("PS") is not None and len(set(v.samples[0]["GT"])) > 1
             ]
 
+            if len(hp_vars) <= 1:
+                continue
+
             gts_snv = tuple(v.samples[0]["GT"] for v in vs)
             gts_hp = tuple(v.samples[0]["GT"] for v in hp_vars)
             gts_hp_rev = tuple(map(lambda x: x[::-1], gts_hp))
