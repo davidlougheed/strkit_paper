@@ -65,7 +65,7 @@ def main():
 
             cns_snv = tuple(v.samples[0]["MC"] for v in s_vars)  # TODO: use seq instead?
             cns_hp = tuple(v.samples[0]["MC"] for v in hp_vars)  # TODO: use seq instead?
-            cns_hp_rev = tuple(v.samples[0]["MC"] for v in hp_vars)  # TODO: use seq instead?
+            cns_hp_rev = tuple(map(lambda x: x[::-1], cns_hp))  # TODO: use seq instead?
 
             if gts_snv == gts_hp or gts_snv == gts_hp_rev or cns_snv == cns_hp or cns_snv == cns_hp_rev:
                 n_flips.update((0,))
