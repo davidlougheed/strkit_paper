@@ -17,6 +17,7 @@ callers = ("longtr", "strdust", "strkit", "strkit-no-snv", "trgt")
 LABELS = {
     # callers:
     "longtr": "LongTR",
+    "strdust": "STRdust",
     "strkit": "STRkit",
     "strkit-no-snv": "STRkit (no SNVs)",
     "trgt": "TRGT",
@@ -240,6 +241,7 @@ def main():
 
             palette = [
                 "#d95f02",
+                "#984ea3",
                 "#238b45",
                 "#66c2a4",
                 "#e7298a",
@@ -259,7 +261,7 @@ def main():
             # df2 = pd.DataFrame.from_records([{"caller": caller, **rec} for caller in rb["ont"] for rec in rb["ont"][caller]])
             # sns.relplot(data=df2, x="bin", y="y", kind="line", col="measure", hue="caller")
 
-    plt.savefig("./out/fig_scopes.png", dpi=300)
+    plt.savefig("./out/fig_scores.png", dpi=300)
     plt.show()
 
 
