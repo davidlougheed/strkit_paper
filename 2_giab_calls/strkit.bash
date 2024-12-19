@@ -34,7 +34,8 @@ fi
   ${pf} \
   --min-reads 2 \
   --min-allele-reads 1 \
-  --min-read-align-score 0.2 \
+  --min-read-align-score 0.0 \
+  --max-rcn-iters 100 \
   --vcf "./out/calls/${TECH}/${SAMPLE}.strkit.${PHASED:+phased.}vcf" \
   --no-tsv \
   --seed "${SEED}" \
