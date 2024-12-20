@@ -8,6 +8,7 @@ from pathlib import Path
 hifi_bench_dir = Path("./out/hg002_benchmark/hifi")
 callers = (
     "longtr",
+    "strdust",
     "strkit",
     "strkit-no-snv",
     "straglr",
@@ -16,6 +17,7 @@ callers = (
 
 LABELS = {
     "longtr": "LongTR",
+    "strdust": "STRdust",
     "strkit": "STRkit",
     "strkit-no-snv": "STRkit (no SNVs)",
     "straglr": "Straglr",
@@ -53,21 +55,6 @@ def main():
 
         print(out_str)
 
-    bin_labels = [
-        "[0, 10)",
-        "[10, 20)",
-        "[20, 30)",
-        "[30, 40)",
-        "[40, 50)",
-        "[50, 100)",
-        "[100, 200)",
-        "[200, 300)",
-        "[300, 400)",
-        "[400, 600)",
-        "[800, 1k)",
-        "[1k, 2.5k)",
-        ">=5k",
-    ]
     records = []
     count_records = []
 
@@ -182,11 +169,12 @@ def main():
     fig = plt.figure(figsize=(12, 5))
     fig.subplots_adjust(left=0.05, right=0.93, top=0.96)
     p = sns.color_palette([
-        "#d95f02",
-        "#238b45",
-        "#66c2a4",
+        "#d95f02",  # LongTR
+        "#984ea3",  # STRdust
+        "#238b45",  # STRkit
+        "#66c2a4",  # STRkit (no SNVs)
         # "#386cb0",
-        "#e7298a",
+        "#e7298a",  # TRGT
     ])
 
     callers_hue_order = tuple(c for c in callers if c != "straglr")

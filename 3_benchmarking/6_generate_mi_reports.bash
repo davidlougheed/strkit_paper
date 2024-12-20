@@ -13,7 +13,7 @@ source ../envs/env_strkit/bin/activate
 hifi_base="../2_giab_calls/out/calls/hifi"
 out_base="out/hg002_benchmark/hifi"
 
-tools=( longtr strkit strkit-no-snv straglr trgt )
+tools=( longtr strdust strkit strkit-no-snv straglr trgt )
 
 run_mi () {
   tool="${1}"
