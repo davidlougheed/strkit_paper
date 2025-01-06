@@ -150,12 +150,14 @@ def main():
         for k, v in bins.items():
             if v["count"] == 0:
                 continue
-            count_records.append({"c": caller, "Caller": LABELS[caller], "bin": k, "y": v["count"]})
-            # records.append({"caller": caller, "bin": k, "measure": "mi", "y": v["mi"]})
-            # records.append({"caller": caller, "bin": k, "measure": "mi_pm1", "y": v["mi_pm1"]})
+            count_records.append({"c": "_" + caller, "Caller": LABELS[caller], "bin": k, "y": v["count"]})
+            # records.append({"c": caller, "Caller": LABELS[caller],  "bin": k, "measure": "mi", "y": v["mi"]})
+            # records.append({"c": caller, "Caller": LABELS[caller],  "bin": k, "measure": "mi_pm1", "y": v["mi_pm1"]})
             records.append({"c": caller, "Caller": LABELS[caller], "bin": k, "measure": "mi_seq", "y": v["mi_seq"]})
-            # records.append({"caller": caller, "bin": k, "measure": "mi_sl", "y": v["mi_sl"]})
-            # records.append({"caller": caller, "bin": k, "measure": "mi_sl_pm1", "y": v["mi_sl_pm1"]})
+            # records.append({"c": caller, "Caller": LABELS[caller],  "bin": k, "measure": "mi_sl", "y": v["mi_sl"]})
+            # records.append({
+            #     "c": caller, "Caller": LABELS[caller], "bin": k, "measure": "mi_sl_pm1", "y": v["mi_sl_pm1"]
+            # })
 
             # if v["mi_95"]:
             #     records.append({"caller": caller, "bin": k, "measure": "mi_95", "y": v["mi_95"]})
@@ -166,8 +168,9 @@ def main():
     df = pd.DataFrame.from_records(records)
     df_count = pd.DataFrame.from_records(count_records)
 
-    fig = plt.figure(figsize=(12, 5))
-    fig.subplots_adjust(left=0.05, right=0.93, top=0.96)
+    fig = plt.figure(figsize=(12, 6))
+    # fig.subplots_adjust(left=0.05, right=0.93, top=0.96)
+    fig.subplots_adjust(left=0.05, right=0.93, top=0.96, bottom=0.22)
     p = sns.color_palette([
         "#d95f02",  # LongTR
         "#984ea3",  # STRdust
@@ -177,13 +180,13 @@ def main():
         "#e7298a",  # TRGT
     ])
 
-    callers_hue_order = tuple(c for c in callers if c != "straglr")
+    callers_hue_order = tuple("_" + c for c in callers if c != "straglr")
 
     ax = fig.add_subplot(111)
     ax2 = ax.twinx()
     ax2.set_ylim(0, 500000)
 
-    ax.set_ylabel("Sequence MI (fraction)")
+    ax.set_ylabel("Sequence Mendelian inheritance rate (fraction)")
     ax.set_xlabel("Locus size in reference genome (base pairs)")
     ax2.set_ylabel("# trio-called loci")
 
@@ -198,7 +201,20 @@ def main():
         bp.bar_label(c, fontsize=9, rotation=90, padding=3, color="#AAAAAA")
 
     sns.move_legend(ax, "upper right")
-    ax2.get_legend().remove()
+    legend = fig.legend(
+        title="$\\bf{Caller}$",
+        loc="outside lower center",
+        mode="expand",
+        ncols=5,
+        frameon=False,
+        fontsize=13,
+        title_fontproperties={"size": 13, "weight": "bold"},
+    )
+    ax.get_legend().remove()
+    # ax2.get_legend().remove()
+
+    for line in legend.get_lines():
+        line.set_linewidth(3)
 
     plt.savefig("./out/fig_sequence_mi.png", dpi=300)
 
