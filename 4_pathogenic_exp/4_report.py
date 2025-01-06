@@ -7,6 +7,7 @@ TOOLS = ["strkit", "longtr", "straglr", "strdust", "trgt"]
 
 def print_tool_genotypes(samples: tuple[str, ...], disease: str, var_idx: int, count_offset: int):
     print(f"{disease}")
+    motif = "CAG" if disease == "HTT" else "CCG"
     for sample in samples:
         for tool in TOOLS:
             if tool != "straglr":
@@ -23,7 +24,8 @@ def print_tool_genotypes(samples: tuple[str, ...], disease: str, var_idx: int, c
                 if tool in ("strkit", "trgt"):
                     genotype = tuple(map(int, variant.samples[0]["MC"]))
                 elif tool == "longtr":
-                    genotype = tuple(int(round((len(variant.alleles[g]) - 1) / 3)) for g in variant.samples[0]["GT"])
+                    # Minus one for terminal CAACAG
+                    genotype = tuple((variant.alleles[g].count(motif) - 1) for g in variant.samples[0]["GT"])
                 elif tool == "strdust":
                     # STRdust - need to get rid of the first base, plus seems to have an off-by-one error and include
                     # the last base too.
