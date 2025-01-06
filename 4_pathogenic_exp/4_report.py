@@ -7,7 +7,7 @@ TOOLS = ["strkit", "longtr", "straglr", "strdust", "trgt"]
 
 def print_tool_genotypes(samples: tuple[str, ...], disease: str, var_idx: int, count_offset: int):
     print(f"{disease}")
-    motif = "CAG" if disease == "HTT" else "CCG"
+    motif = "CAG" if disease == "HTT" else "GGC"
     for sample in samples:
         for tool in TOOLS:
             if tool != "straglr":
