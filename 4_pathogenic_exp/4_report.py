@@ -23,17 +23,13 @@ def print_tool_genotypes(samples: tuple[str, ...], disease: str, var_idx: int, c
                 genotype: tuple[int, ...] = (0, 0)
                 if tool in ("strkit", "trgt"):
                     genotype = tuple(map(int, variant.samples[0]["MC"]))
-                elif tool == "longtr":
+                elif tool in ("longtr", "strdust"):
                     # HTT:  +1 for the CAA, which then gets subtracted off via offset (-2)
                     # FMR1: +4 for the interrupting four triplets which get subtracted off via offset (-4)
                     genotype = tuple(
                         (variant.alleles[g].count(motif) + (1 if disease == "HTT" else 4))
                         for g in variant.samples[0]["GT"]
                     )
-                elif tool == "strdust":
-                    # STRdust - need to get rid of the first base, plus seems to have an off-by-one error and include
-                    # the last base too.
-                    genotype = tuple(int(round((len(variant.alleles[g]) - 2) / 3)) for g in variant.samples[0]["GT"])
 
             else:
                 path = OUT_PATH / f"bc10{sample}.{tool}.bed"
