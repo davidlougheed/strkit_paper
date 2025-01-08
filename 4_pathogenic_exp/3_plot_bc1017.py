@@ -39,7 +39,7 @@ def main():
         .add(so.Line(color="#666666"), data=DataFrame({"y": [0, 80]}).assign(x=107), x="x", y="y")
     )
 
-    plot = add_text(plot, 107, 80, "Main peak (De Luca et al.)")
+    plot = add_text(plot, 107, 80, "Main expansion peak (De Luca et al.)")
 
     plot = plot.add(so.Line(color="#666666"), data=DataFrame({"y": [0, 95]}).assign(x=134), x="x", y="y")
     plot = add_text(plot, 134, 95, "First mosaic peak (De Luca et al.)")
