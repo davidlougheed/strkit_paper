@@ -31,6 +31,8 @@ strkit call \
   --incorporate-snvs "${snv_vcf_tmpdir}" \
   --min-reads 2 \
   --min-allele-reads 1 \
+  --min-read-align-score 0.0 \
+  --max-rcn-iters 100 \
   --vcf "${out_vcf_tmp}" \
   --no-tsv \
   --seed "${SEED}" \

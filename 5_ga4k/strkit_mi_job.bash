@@ -18,9 +18,7 @@ strkit mi --caller strkit-vcf \
     "./out/calls/${FATHER}.strkit.vcf.gz" \
     "./out/calls/${MOTHER}.strkit.vcf.gz" \
     --hist \
-    --json "${OUT_JSON}" \
-    --test wmw \
-    --mt-corr fdr_tsbky \
-    --only-phased
+    --mismatch-out-mi seq \
+    --json "${OUT_JSON}"
 
 deactivate
