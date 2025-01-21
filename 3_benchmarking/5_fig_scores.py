@@ -109,8 +109,44 @@ def load_region_breakdown():
             with open(report, "r") as fh:
                 report_html = fh.read()
 
+            total_alleles: int = 0
+            total_alleles_sub_200: int = 0
+
             # [2:] to skip SNP and 1-5 bins, which shouldn't even be there...
             report_csv = list(csv.DictReader(StringIO(url_unquote(sizebin_csv_pattern.findall(report_html)[0]))))[2:]
+
+            acc = []
+            for entry in report_csv:
+                entry_bin = entry[""]
+
+                # hacky: get int repr of bin end
+                entry_bin_end = 0 if entry_bin == "SNP" else int(
+                    entry_bin.split(",")[-1]
+                    .replace(")", "")
+                    .replace("1k", "1000")
+                    .replace("2.5k", "2500")
+                    .replace("5k", "5000")
+                    .replace(">=", "100000")
+                )
+
+                ta = int(entry["base P"]) + int(entry["base N"])
+                total_alleles += ta
+                if entry_bin_end <= 200:
+                    total_alleles_sub_200 += ta
+
+                for m in measures:
+                    acc.append(
+                        {
+                            "bin": entry_bin,
+                            "y": float(entry[m]),
+                            "measure": m,
+                        }
+                    )
+
+            print(f"{tech}\t{caller}\tTotal alleles: {total_alleles}; sub 200: {total_alleles_sub_200}; %: "
+                  f"{total_alleles_sub_200 / total_alleles * 100:.1f}")
+
+            region_breakdown_by_tech_and_caller[tech][caller] = acc
 
             region_breakdown_by_tech_and_caller[tech][caller] = [
                 {
@@ -212,7 +248,7 @@ def main():
             ax1 = subfig.add_subplot(1, 3, mi)
             ax2 = ax1.twinx()
 
-            ax1.set_xlabel("Region size bin (bp)")
+            ax1.set_xlabel("Absolute change in allele size vs. GRCh38 (∆bp)")
             ax1.set_ylabel(LABELS[m])
             ax1.grid(False)
             ax1.tick_params(axis="x", labelrotation=60, labelsize=9)
