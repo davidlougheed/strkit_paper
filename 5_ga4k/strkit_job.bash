@@ -42,7 +42,7 @@ strkit call \
   "${bam_tmpdir}" || exit
 
 bgzip -f "${out_vcf_tmp}"
-tabix "${out_vcf_tmp}.gz"
+tabix -f "${out_vcf_tmp}.gz"
 chown dlough2:rrg-bourqueg-ad "${out_vcf_tmp}.gz" "${out_vcf_tmp}.gz.tbi"
 
 mv "${out_vcf_tmp}.gz" "${out_vcf_gz}"

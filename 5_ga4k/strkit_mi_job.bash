@@ -2,7 +2,7 @@
 #SBATCH --mem=5G
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
-#SBATCH --time=6:00:00
+#SBATCH --time=3:00:00
 #SBATCH --account=rrg-bourqueg-ad
 
 mkdir -p ./out/mi
