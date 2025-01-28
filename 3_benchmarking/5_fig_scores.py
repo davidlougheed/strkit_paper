@@ -110,6 +110,7 @@ def load_region_breakdown():
                 report_html = fh.read()
 
             total_alleles: int = 0
+            total_alleles_sub_50: int = 0
             total_alleles_sub_200: int = 0
 
             # [2:] to skip SNP and 1-5 bins, which shouldn't even be there...
@@ -131,6 +132,8 @@ def load_region_breakdown():
 
                 ta = int(entry["base P"]) + int(entry["base N"])
                 total_alleles += ta
+                if entry_bin_end <= 50:
+                    total_alleles_sub_50 += ta
                 if entry_bin_end <= 200:
                     total_alleles_sub_200 += ta
 
@@ -143,8 +146,10 @@ def load_region_breakdown():
                         }
                     )
 
-            print(f"{tech}\t{caller}\tTotal alleles: {total_alleles}; sub 200: {total_alleles_sub_200}; %: "
-                  f"{total_alleles_sub_200 / total_alleles * 100:.1f}")
+            print(
+                f"{tech}\t{caller}\tTotal alleles: {total_alleles}; "
+                f"sub 50: {total_alleles_sub_50} ({total_alleles_sub_50 / total_alleles * 100:.1f}%); "
+                f"sub 200: {total_alleles_sub_200} ({total_alleles_sub_200 / total_alleles * 100:.1f}%)")
 
             region_breakdown_by_tech_and_caller[tech][caller] = acc
 
@@ -248,7 +253,7 @@ def main():
             ax1 = subfig.add_subplot(1, 3, mi)
             ax2 = ax1.twinx()
 
-            ax1.set_xlabel("Absolute change in allele size vs. GRCh38 (∆bp)")
+            ax1.set_xlabel("Absolute change in allele size vs. HG38 (∆bp)")
             ax1.set_ylabel(LABELS[m])
             ax1.grid(False)
             ax1.tick_params(axis="x", labelrotation=60, labelsize=9)
