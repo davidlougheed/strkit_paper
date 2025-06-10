@@ -12,11 +12,12 @@ from urllib.parse import unquote as url_unquote
 bench_dir = Path("./out/hg002_benchmark")
 call_dir = Path("../2_giab_calls/out/calls")
 techs = ("hifi", "ont")
-callers = ("longtr", "strdust", "strkit", "strkit-no-snv", "trgt")
+callers = ("longtr", "strdust", "strkit", "strkit-no-snv", "straglr", "trgt")
 
 LABELS = {
     # callers:
     "longtr": "LongTR",
+    "straglr": "Straglr",
     "strdust": "STRdust",
     "strkit": "STRkit",
     "strkit-no-snv": "STRkit (no SNVs)",

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 techs=( hifi ont )
-tools=( longtr strdust strkit strkit-no-snv trgt )
+tools=( longtr strdust strkit strkit-no-snv straglr trgt )
 
 laytr_job () {
   tech="${1}"
