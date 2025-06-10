@@ -41,6 +41,7 @@ truvari refine \
   --use-original-vcfs \
   --reference "${REFERENCE}" \
   --regions "../2_giab_calls/out/adotto_catalog_${bed_tool}.bed" \
+  --subset \
   --threads 8 \
   "${ls_bench_dir}" || exit
 
