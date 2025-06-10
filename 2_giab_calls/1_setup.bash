@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 module load StdEnv/2023
-module load python/3.11 rust/1.76.0 clang/17.0.6 scipy-stack/2023b parasail/2.6.2
+module load python/3.11 rust/1.85.0 clang/17.0.6 scipy-stack/2023b parasail/2.6.2
 
 # BEGIN DATA
 
@@ -25,7 +25,7 @@ if [[ ! -d "../envs/env_strkit" ]]; then
   python3 -m venv ../envs/env_strkit
 fi
 source ../envs/env_strkit/bin/activate || exit
-pip install -vv -U strkit==0.20.0
+pip install -vv -U strkit==0.22.0
 deactivate
 # END STRKIT
 
@@ -54,7 +54,7 @@ rm -rf ./TRF
 rm -rf ./STRdust
 git clone https://github.com/wdecoster/STRdust.git
 cd STRdust || exit
-git checkout 3f3ebf0
+git checkout 19c6ecd
 sed -i 's/0.1.20/=0.1.20/g' Cargo.toml  # fix build issues with newer minimap2-rs
 cargo add 'minimap2-sys@=0.1.19' # fix build issues with newer minimap2-sys
 cargo build --release --verbose --jobs 12
@@ -68,7 +68,7 @@ module load googletest/1.14.0
 rm -rf ./LongTR
 git clone https://github.com/gymrek-lab/LongTR.git
 cd LongTR || exit
-git checkout v1.1
+git checkout d44f5d4
 sed -i 's/-lspoa/-lspoa -ldeflate/g' Makefile  # need to edit Makefile to add -ldeflate
 make
 mv ./LongTR ../../bin
@@ -77,7 +77,7 @@ rm -rf ./LongTR
 # END LONGTR
 
 # BEGIN TRGT
-trgt_version="v1.4.1"
+trgt_version="v3.0.0"
 trgt_rxiv="trgt-${trgt_version}-x86_64-unknown-linux-gnu.tar.gz"
 wget "https://github.com/PacificBiosciences/trgt/releases/download/${trgt_version}/${trgt_rxiv}"
 tar -xzvf "trgt-${trgt_version}-x86_64-unknown-linux-gnu.tar.gz"
