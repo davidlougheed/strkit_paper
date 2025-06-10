@@ -10,18 +10,22 @@ module load python/3.11 rust/1.85.0 clang/17.0.6 scipy-stack/2023b parasail/2.6.
 
 source ../envs/env_strkit/bin/activate
 
-hifi_base="../2_giab_calls/out/calls/hifi"
-out_base="out/hg002_benchmark/hifi"
+# we have trio data for hifi and ont-simplex technologies
+techs=( hifi ont-simplex )
+
+calls_base="../2_giab_calls/out/calls"
+out_base="out/hg002_benchmark"
 
 tools=( longtr strdust strkit strkit-no-snv straglr trgt )
 
 run_mi () {
-  tool="${1}"
-  phased="${2}"
+  tech="${1}"
+  tool="${2}"
+  phased="${3}"
 
   # ------------------------------------------------------------------------------------------
 
-  tool_dir="${out_base}/${tool}${phased:+_phased}"
+  tool_dir="${out_base}/${tech}/${tool}${phased:+_phased}"
 
   mkdir -p "${tool_dir}"
   out="${tool_dir}/mi_report.json"
@@ -42,21 +46,25 @@ run_mi () {
     tool_opt_phased="${tool}${phased:+.phased}"
 
     strkit mi --caller "${mi_caller}" \
-      "${hifi_base}/HG002.${tool_opt_phased}.${ext}" \
-      "${hifi_base}/HG004.${tool_opt_phased}.${ext}" \
-      "${hifi_base}/HG003.${tool_opt_phased}.${ext}" \
+      "${calls_base}/${tech}/HG002.${tool_opt_phased}.${ext}" \
+      "${calls_base}/${tech}/HG004.${tool_opt_phased}.${ext}" \
+      "${calls_base}/${tech}/HG003.${tool_opt_phased}.${ext}" \
       --hist \
       --motif-bed "../2_giab_calls/out/adotto_catalog_strkit.bed" \
       --json "${out}"
   fi
 }
 
-for tool in "${tools[@]}"; do
-  run_mi "${tool}" ''
+for tech in "${techs[@]}"; do
+  for tool in "${tools[@]}"; do
+    run_mi "${tech}" "${tool}" ''
 
-  if [[ "${tool}" == "longtr" ]] || [[ "${tool}" == "strkit" ]] || [[ "${tool}" == "trgt" ]]; then
-    run_mi "${tool}" '1'
-  fi
+    if [[ "${tech}" == "hifi" ]]; then
+      if [[ "${tool}" == "longtr" ]] || [[ "${tool}" == "strkit" ]] || [[ "${tool}" == "trgt" ]]; then
+        run_mi "${tech}" "${tool}" '1'
+      fi
+    fi
+  done
 done
 
 deactivate
