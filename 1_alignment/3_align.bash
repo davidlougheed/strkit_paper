@@ -15,3 +15,10 @@ for bf in ./data/ont/HG00?.bam; do
     sbatch --export="BAM=${bf},REF=${REF},TECH=ont" ./align_job.bash
   fi
 done
+
+for bf in ./data/ont-simplex/HG00?.bam; do
+  if [[ ! -f "${bf%.*}.aligned.bam" ]]; then
+    echo "Submitting alignment job for ${bf}"
+    sbatch --export="BAM=${bf},REF=${REF},TECH=ont" ./align_job.bash
+  fi
+done

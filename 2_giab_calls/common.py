@@ -1,12 +1,14 @@
 REF = "../1_alignment/data/ref/hg38.analysisSet.fa"
 
 TECH_HIFI = "hifi"
+TECH_ONT_SIMPLEX = "ont-simplex"
 TECH_ONT = "ont"
-TECHS = (TECH_HIFI, TECH_ONT)
+TECHS = (TECH_HIFI, TECH_ONT_SIMPLEX, TECH_ONT)
 
 SAMPLES = ("HG002", "HG003", "HG004")
 SAMPLES_BY_TECH = {
     TECH_HIFI: SAMPLES,
+    TECH_ONT_SIMPLEX: SAMPLES,
     TECH_ONT: ("HG002",),
 }
 
