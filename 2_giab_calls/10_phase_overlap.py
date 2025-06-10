@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-from collections import Counter
 
 import pysam
+from collections import Counter
 
-SAMPLES = ("HG002", "HG003", "HG004")
+from common import TECH_HIFI, SAMPLES
 
 
 def cns_to_rel(cns: tuple[int] | tuple[int, int]) -> int:
@@ -15,10 +15,9 @@ def cns_to_rel(cns: tuple[int] | tuple[int, int]) -> int:
 def main():
     for sample in SAMPLES:
         phase_set_records: dict[int, list[pysam.VariantRecord]] = {}
-        pass
 
-        vf_snv = pysam.VariantFile(f"./out/calls/hifi/{sample}.strkit.vcf.gz")
-        vf_hp = pysam.VariantFile(f"./out/calls/hifi/{sample}.strkit.phased.vcf.gz")
+        vf_snv = pysam.VariantFile(f"./out/calls/{TECH_HIFI}/{sample}.strkit.vcf.gz")
+        vf_hp = pysam.VariantFile(f"./out/calls/{TECH_HIFI}/{sample}.strkit.phased.vcf.gz")
 
         for v in vf_snv.fetch():
             gt = v.samples[0].get("GT")

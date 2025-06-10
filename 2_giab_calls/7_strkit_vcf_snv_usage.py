@@ -1,15 +1,12 @@
 from collections import Counter
-from pathlib import Path
 from pysam import VariantFile
 
-
-OUT_DIR = Path(__file__).parent / "out" / "calls"
-TECHS = ("hifi", "ont")
+from common import CALLS_OUT_DIR, TECHS
 
 
 def main():
     for tech in TECHS:
-        for vp in (OUT_DIR / tech).glob(f"*.strkit.vcf.gz"):
+        for vp in (CALLS_OUT_DIR / tech).glob(f"*.strkit.vcf.gz"):
             # type_c = Counter()
             ps_c = Counter()
             vf = VariantFile(str(vp))

@@ -1,3 +1,8 @@
+from pathlib import Path
+
+CALLERS = ("longtr", "straglr", "strdust", "strkit", "strkit-no-snv", "trgt")
+CALLS_OUT_DIR = Path(__file__).parent / "out" / "calls"
+
 REF = "../1_alignment/data/ref/hg38.analysisSet.fa"
 
 TECH_HIFI = "hifi"

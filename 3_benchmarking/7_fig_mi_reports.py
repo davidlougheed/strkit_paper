@@ -4,31 +4,16 @@ import seaborn as sns
 from matplotlib import pyplot as plt
 from pathlib import Path
 
+from common import CALLERS, LABELS
+
 
 hifi_bench_dir = Path("./out/hg002_benchmark/hifi")
-callers = (
-    "longtr",
-    "strdust",
-    "strkit",
-    "strkit-no-snv",
-    "straglr",
-    "trgt",
-)
-
-LABELS = {
-    "longtr": "LongTR",
-    "strdust": "STRdust",
-    "strkit": "STRkit",
-    "strkit-no-snv": "STRkit (no SNVs)",
-    "straglr": "Straglr",
-    "trgt": "TRGT",
-}
 
 
 def load_mi_reports():
     reports = {}
 
-    for caller in callers:
+    for caller in CALLERS:
         report_path = hifi_bench_dir / caller / "mi_report.json"
         if not report_path.exists():
             print(f"{report_path} does not exist, skipping...")

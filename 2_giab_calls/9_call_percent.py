@@ -1,12 +1,8 @@
 #!/usr/bin/env python3
 
 import pysam
-from pathlib import Path
 
-
-OUT_DIR = Path(__file__).parent / "out" / "calls"
-CALLERS = ("longtr", "straglr", "strdust", "strkit", "strkit-no-snv", "trgt")
-TECHS = ("hifi", "ont")
+from common import CALLERS, CALLS_OUT_DIR, TECHS
 
 TOTAL_VARIANTS = 914676  # wc -l out/adotto_catalog_strkit.bed
 
@@ -23,7 +19,7 @@ def filter_strkit_snv(v: pysam.VariantRecord) -> bool:
 def main():
     for tech in TECHS:
         for caller in CALLERS:
-            f = OUT_DIR / tech / f"HG002.{caller}.vcf.gz"
+            f = CALLS_OUT_DIR / tech / f"HG002.{caller}.vcf.gz"
 
             if not f.exists():
                 continue

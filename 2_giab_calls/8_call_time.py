@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 
 import re
-from pathlib import Path
+
+from common import TECHS, CALLS_OUT_DIR
 
 ELAPSED_PATTERN = re.compile(r"((?:\d{1,2}:)?\d{1,2}:\d{2})(?:\.\d{2})?elapsed")
 
-OUT_DIR = Path(__file__).parent / "out" / "calls"
-TECHS = ("hifi", "ont")
 CALLERS_CORES = {
     "longtr": 1,
     "straglr": 8,
@@ -36,7 +35,7 @@ def parse_time(time_file: str, cores: int) -> float:
 def main():
     for tech in TECHS:
         for caller, cores in CALLERS_CORES.items():
-            for time_file in sorted((OUT_DIR / tech).glob(f"HG00?.{caller}.time")):
+            for time_file in sorted((CALLS_OUT_DIR / tech).glob(f"HG00?.{caller}.time")):
                 with open(time_file, "r") as fh:
                     elapsed_seconds = parse_time(fh.read(), cores)
                 print(f"{time_file}: {elapsed_seconds}s {elapsed_seconds / 60:.1f}mins")

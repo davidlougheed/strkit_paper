@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-techs=( hifi ont )
+techs=( hifi ont-simplex ont )
 tools=( longtr strdust strkit strkit-no-snv straglr trgt )
 
 laytr_job () {

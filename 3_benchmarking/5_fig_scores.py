@@ -8,25 +8,11 @@ from io import StringIO
 from pathlib import Path
 from urllib.parse import unquote as url_unquote
 
+from common import CALLERS, LABELS, TECHS
+
 
 bench_dir = Path("./out/hg002_benchmark")
 call_dir = Path("../2_giab_calls/out/calls")
-techs = ("hifi", "ont")
-callers = ("longtr", "strdust", "strkit", "strkit-no-snv", "straglr", "trgt")
-
-LABELS = {
-    # callers:
-    "longtr": "LongTR",
-    "straglr": "Straglr",
-    "strdust": "STRdust",
-    "strkit": "STRkit",
-    "strkit-no-snv": "STRkit (no SNVs)",
-    "trgt": "TRGT",
-    # measures:
-    "F1": "F1 score",
-    "PPV": "Precision (PPV)",
-    "TPR": "Recall (TPR)",
-}
 
 measures = ("F1", "PPV", "TPR")
 
@@ -39,9 +25,9 @@ def build_transl(f, dx, dy):
 def load_truscore_dist():
     truscores_by_tech_and_caller = {}
 
-    for tech in techs:
+    for tech in TECHS:
         truscores_by_tech_and_caller[tech] = truscores_by_tech_and_caller.get(tech) or dict()
-        for caller in callers:
+        for caller in CALLERS:
             vs = (
                 bench_dir / tech / caller / "phab_bench" / "tp-comp.vcf.gz",
                 bench_dir / tech / caller / "phab_bench" / "fn.vcf.gz",
@@ -74,9 +60,9 @@ def load_truscore_dist():
 def load_gt_stats():
     gt_stats_by_tech_and_caller = {}
 
-    for tech in techs:
+    for tech in TECHS:
         gt_stats_by_tech_and_caller[tech] = gt_stats_by_tech_and_caller.get(tech) or dict()
-        for caller in callers:
+        for caller in CALLERS:
             p = bench_dir / tech / caller / "phab_bench" / "summary.json"
             if not p.exists():
                 print(f"{p} does not exist")
@@ -97,10 +83,10 @@ def load_region_breakdown():
     region_breakdown_by_tech_and_caller = {}
     n_dist_by_tech_and_caller = {}
 
-    for tech in techs:
+    for tech in TECHS:
         region_breakdown_by_tech_and_caller[tech] = {}
         n_dist_by_tech_and_caller[tech] = {}
-        for caller in callers:
+        for caller in CALLERS:
             report = bench_dir / tech / caller / "laytr_report.html"
 
             if not report.exists():
@@ -202,8 +188,8 @@ def main():
     gt_stats = load_gt_stats()
     seq_stats = load_truscore_dist()
 
-    for tech in techs:
-        for caller in callers:
+    for tech in TECHS:
+        for caller in CALLERS:
             x = gt_stats[tech].get(caller)
             if not x:
                 continue
@@ -220,10 +206,13 @@ def main():
             false_hom_alt = (het_m_1["(1, 1)"] + het_m_2["(1, 1)"]) / total_p
             false_hom_ref = x["FN"] / x["base cnt"]
 
-            print(f"{tech}\t{caller}\tfalse het: {false_het:.3f}; false hom alt: {false_hom_alt:.3f}; FNR: {false_hom_ref}")
+            print(
+                f"{tech}\t{caller}\tfalse het: {false_het:.3f}; false hom alt: {false_hom_alt:.3f}; "
+                f"FNR: {false_hom_ref}"
+            )
 
-    for tech in techs:
-        for caller in callers:
+    for tech in TECHS:
+        for caller in CALLERS:
             s = seq_stats[tech].get(caller)
             if not s:
                 continue
@@ -248,7 +237,7 @@ def main():
 
     subfigs = fig.subfigures(nrows=2, ncols=1)
 
-    for ti, (tech, subfig) in enumerate(zip(techs, subfigs), 1):
+    for ti, (tech, subfig) in enumerate(zip(TECHS, subfigs), 1):
         subfig.suptitle("PacBio HiFi" if tech == "hifi" else "ONT R10 Duplex")
         for mi, m in enumerate(measures, 1):
             ax1 = subfig.add_subplot(1, 3, mi)
