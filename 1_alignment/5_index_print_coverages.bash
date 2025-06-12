@@ -24,3 +24,9 @@ for bf in ./data/ont-simplex/*.aligned.bam; do
   samtools index "$bf"
   samtools depth -a "$bf" | awk '{sum+=$3} END { print "Average = ",sum/NR}'
 done
+
+for bf in ./data/ont-simplex/*.subset.bam; do
+  echo "Working on $bf"
+  samtools index "$bf"
+  samtools depth -a "$bf" | awk '{sum+=$3} END { print "Average = ",sum/NR}'
+done

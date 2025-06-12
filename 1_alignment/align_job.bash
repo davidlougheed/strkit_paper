@@ -5,6 +5,8 @@
 #SBATCH --time=0-12
 #SBATCH --account=rrg-bourqueg-ad
 
+PROC=10
+
 module load samtools
 
 echo "BAM=${BAM}"
@@ -15,7 +17,8 @@ echo "fastq_gz=${fastq_gz}"
 
 if [[ ! -f "${fastq_gz}" ]]; then
   tmp="${SLURM_TMPDIR}/fastq.gz"
-  samtools fastq -@ 10 "${BAM}" | pigz -p 10 -3 > "${tmp}"
+  samtools fastq -@ "${PROC}" "${BAM}" | pigz -p "${PROC}" -3 > "${tmp}"
+  chgrp rrg-bourqueg-ad "${tmp}"
   mv "${tmp}" "${fastq_gz}"
 fi
 
@@ -27,6 +30,7 @@ if [[ "${tech}" == "ont" ]]; then
   preset="lr:hq"  # new preset for more-accurate latest gen ONT data
 fi
 
-../bin/minimap2 -t 10 -ax "${preset}" "${REF}" "${fastq_gz}" | samtools sort --write-index -@ 10 - -o "${tmp_bam}"
+../bin/minimap2 -t "${PROC}" -ax "${preset}" "${REF}" "${fastq_gz}" \
+  | samtools sort --write-index -@ "${PROC}" - -o "${tmp_bam}"
 mv "${tmp_bam}" "${aligned_bam}"
 chgrp rrg-bourqueg-ad "${aligned_bam}"
