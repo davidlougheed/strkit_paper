@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 module load StdEnv/2023
-module load python/3.11 rust/1.85.0 clang/17.0.6 scipy-stack/2023b parasail/2.6.2
+module load python/3.11 rust/1.85.0 clang/18.1.8 scipy-stack/2025a parasail/2.6.2
 
 # BEGIN DATA
 
