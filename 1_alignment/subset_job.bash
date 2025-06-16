@@ -10,4 +10,8 @@ module load samtools
 echo "BAM=${BAM}"
 echo "FRAC=${FRAC}"
 
-samtools view -s "${FRAC}" -b -o "${BAM%.*}.subsam.bam" "${BAM}"
+if "${FRAC}" == "1"; then
+  ln -s "${BAM}" "${BAM%.*}.subsam.bam"
+else
+  samtools view -s "${FRAC}" -b -o "${BAM%.*}.subsam.bam" "${BAM}"
+fi
