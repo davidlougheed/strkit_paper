@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --mem=16G
-#SBATCH --ntasks=2
-#SBATCH --cpus-per-task=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=2
 #SBATCH --time=0-12
 #SBATCH --account=rrg-bourqueg-ad
 
@@ -13,5 +13,5 @@ echo "FRAC=${FRAC}"
 if "${FRAC}" == "1"; then
   ln -s "${BAM}" "${BAM%.*}.subsam.bam"
 else
-  samtools view -s "${FRAC}" -b -o "${BAM%.*}.subsam.bam" "${BAM}"
+  samtools view -@ 2 -s "${FRAC}" -b -o "${BAM%.*}.subsam.bam" "${BAM}"
 fi
