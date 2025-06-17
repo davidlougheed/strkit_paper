@@ -1,10 +1,25 @@
 #!/usr/bin/env python3
 
 import json
+import matplotlib as mpl
 import seaborn as sns
 import seaborn.objects as so
 from pandas import DataFrame
 from seaborn import axes_style
+
+
+font_size = 10
+font_rc = {
+    "font.family": "Arial",
+    "font.size": font_size,
+    "axes.titlesize": font_size,
+    "axes.labelsize": font_size,
+    "xtick.labelsize": font_size,
+    "ytick.labelsize": font_size,
+    "legend.title_fontsize": font_size,
+    "legend.fontsize": font_size,
+}
+mpl.rcParams.update(font_rc)
 
 
 def add_text(plot, x: int, y: int, text: str):
@@ -26,12 +41,12 @@ def main():
 
     plot = (
         so.Plot(exp_cns, x="cn")
-        .layout(size=(8, 5))
+        .layout(size=(6.5, 4))
         .theme({
             **axes_style("white"),
             "axes.spines.top": False,
             "axes.spines.right": False,
-            "font.family": "Helvetica",
+            **font_rc,
             "patch.linewidth": 0,
         })
         .scale(color=sns.color_palette("muted", 2))
@@ -52,6 +67,7 @@ def main():
     ptr = plot.plot()
     # noinspection PyProtectedMember
     ptr._figure.legends[0].set_bbox_to_anchor((0.8, 0.9))
+    # plot.show()
     ptr.save("./out/bc1017_htt_peaks.png", dpi=300)
 
 

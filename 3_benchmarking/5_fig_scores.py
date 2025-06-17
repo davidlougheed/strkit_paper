@@ -227,8 +227,8 @@ def main():
     import pandas as pd
     import matplotlib.pyplot as plt
     import seaborn as sns
-    sns.set_theme(style="ticks", rc={"axes.spines.top": False, "font.family": "Helvetica"})
-    # sns.set(font="Helvetica")
+    sns.set_theme(style="ticks", rc={"axes.spines.top": False, "font.family": "Arial"})
+    # sns.set(font="Arial")
 
     fig = plt.figure(figsize=(15, 10))
     fig.subplots_adjust(left=0.05, right=0.95, bottom=0.215, top=0.95, wspace=0.25, hspace=0.38)
