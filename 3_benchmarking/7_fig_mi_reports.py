@@ -1,6 +1,9 @@
+#!/usr/bin/env python3
+
 import json
 import pandas as pd
 import seaborn as sns
+import matplotlib as mpl
 from matplotlib import pyplot as plt
 from pathlib import Path
 
@@ -11,24 +14,39 @@ mi_techs = ("hifi", "ont-simplex")
 bench_base_dir = Path("./out/hg002_benchmark")
 
 
+font_size = 10
+font_rc = {
+    "font.family": "Arial",
+    "font.size": font_size,
+    "axes.titlesize": font_size,
+    "axes.labelsize": font_size,
+    "xtick.labelsize": font_size,
+    "ytick.labelsize": font_size,
+    "legend.title_fontsize": font_size,
+    "legend.fontsize": font_size,
+}
+mpl.rcParams.update(font_rc)
+
+
 def load_mi_reports():
     reports = {}
 
     for tech in mi_techs:
-        reports[tech] = {}
         for caller in CALLERS:
             report_path = bench_base_dir / tech / caller / "mi_report.json"
             if not report_path.exists():
                 print(f"{report_path} does not exist, skipping...")
                 continue
             with open(report_path, "r") as fh:
-                reports[caller] = json.load(fh)
+                if tech not in reports:
+                    reports[tech] = {}
+                reports[tech][caller] = json.load(fh)
 
     return reports
 
 
 def main():
-    sns.set_theme(style="white", font="Helvetica", rc={"axes.spines.top": False})
+    sns.set_theme(style="white", font="Arial", rc={"axes.spines.top": False, **font_rc})
 
     reports = load_mi_reports()
 
@@ -159,9 +177,10 @@ def main():
         df = pd.DataFrame.from_records(records)
         df_count = pd.DataFrame.from_records(count_records)
 
-        fig = plt.figure(figsize=(12, 6))
-        # fig.subplots_adjust(left=0.05, right=0.93, top=0.96)
-        fig.subplots_adjust(left=0.05, right=0.93, top=0.96, bottom=0.22)
+        # landscape fig
+        fig = plt.figure(figsize=(9, 5))
+
+        fig.subplots_adjust(left=0.06, right=0.914, top=0.985, bottom=0.29)
         p = sns.color_palette([
             "#d95f02",  # LongTR
             "#984ea3",  # STRdust
@@ -174,11 +193,13 @@ def main():
         callers_hue_order = tuple("_" + c for c in CALLERS if c != "straglr")
 
         ax = fig.add_subplot(111)
+
         ax2 = ax.twinx()
         ax2.set_ylim(0, 500000)
 
         ax.set_ylabel("Sequence Mendelian inheritance rate (fraction)")
         ax.set_xlabel("Locus size in reference genome (base pairs)")
+
         ax2.set_ylabel("# trio-called loci")
 
         # ax2.semilogy(10)
@@ -189,7 +210,7 @@ def main():
         )
 
         for c in bp.containers:
-            bp.bar_label(c, fontsize=9, rotation=90, padding=3, color="#AAAAAA")
+            bp.bar_label(c, fontsize=7, rotation=90, padding=3, color="#999999")
 
         sns.move_legend(ax, "upper right")
         legend = fig.legend(
@@ -198,10 +219,10 @@ def main():
             mode="expand",
             ncols=5,
             frameon=False,
-            fontsize=13,
-            title_fontproperties={"size": 13, "weight": "bold"},
         )
         ax.get_legend().remove()
+
+        plt.setp(ax.get_xticklabels(), rotation=45, ha="right")
         # ax2.get_legend().remove()
 
         for line in legend.get_lines():
