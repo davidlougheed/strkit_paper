@@ -55,8 +55,6 @@ rm -rf ./STRdust
 git clone https://github.com/wdecoster/STRdust.git
 cd STRdust || exit
 git checkout 19c6ecd
-sed -i 's/0.1.20/=0.1.20/g' Cargo.toml  # fix build issues with newer minimap2-rs
-cargo add 'minimap2-sys@=0.1.19' # fix build issues with newer minimap2-sys
 cargo build --release --verbose --jobs 12
 cp ./target/release/STRdust ../../bin
 cd .. || exit
@@ -64,12 +62,11 @@ rm -rf ./STRdust
 # END STRDUST
 
 # BEGIN LONGTR
-module load googletest/1.14.0
+module load googletest/1.14.0 htslib/1.19
 rm -rf ./LongTR
 git clone https://github.com/gymrek-lab/LongTR.git
 cd LongTR || exit
 git checkout d44f5d4
-sed -i 's/-lspoa/-lspoa -ldeflate/g' Makefile  # need to edit Makefile to add -ldeflate
 make
 mv ./LongTR ../../bin
 cd .. || exit
