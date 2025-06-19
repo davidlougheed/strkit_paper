@@ -15,7 +15,7 @@ if __name__ == "__main__":
     for sample in SAMPLES_BY_TECH[tech]:
         sex_kary = KARYOTYPES_BY_SAMPLE[sample]
         haploid_chrs = ",".join(tuple(sex_kary))
-        print(f"tech={tech} phased='{phased}' sample={sample}:")
+        print(f"tech={tech} script={script} phased='{phased}' sample={sample}:")
         bam_part = "aligned" + (".subsam" if tech == "ont-simplex" else "")
         subprocess.check_call(" ".join((
             "sbatch",
