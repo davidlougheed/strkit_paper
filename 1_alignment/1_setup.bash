@@ -68,13 +68,13 @@ cd ../ont-simplex || exit # ----------------------------------------------------
 
 ont_simplex_base_url="https://42basepairs.com/download/s3/ont-open-data/giab_2025.01/basecalling/sup"
 
-if [[ ! -f "HG002.simplex.bam" ]]; then
+if [[ ! -f "HG002.bam" ]]; then
   wget "${ont_simplex_base_url}/HG002/PAW70337/calls.sorted.bam" -O HG002.bam
 fi
-if [[ ! -f "HG003.simplex.bam" ]]; then
+if [[ ! -f "HG003.bam" ]]; then
   wget "${ont_simplex_base_url}/HG003/PAY87794/calls.sorted.bam" -O HG003.bam
 fi
-if [[ ! -f "HG004.simplex.bam" ]]; then
+if [[ ! -f "HG004.bam" ]]; then
   wget "${ont_simplex_base_url}/HG004/PAY87778/calls.sorted.bam" -O HG004.bam
 fi
 
@@ -101,7 +101,7 @@ cd ../.. || exit # -------------------------------------------------------------
 rm -rf ./minimap2
 git clone https://github.com/lh3/minimap2.git
 cd minimap2 || exit
-git checkout v2.30
+git checkout v2.28
 make
 mv ./minimap2 ../../bin/
 cd .. || exit
