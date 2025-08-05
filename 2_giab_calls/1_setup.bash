@@ -62,7 +62,7 @@ rm -rf ./STRdust
 # END STRDUST
 
 # BEGIN LONGTR
-module load googletest/1.14.0 htslib/1.19
+module load googletest/1.14.0 htslib/1.22.1
 rm -rf ./LongTR
 git clone https://github.com/gymrek-lab/LongTR.git
 cd LongTR || exit
@@ -74,7 +74,7 @@ rm -rf ./LongTR
 # END LONGTR
 
 # BEGIN TRGT
-trgt_version="v3.0.0"
+trgt_version="v4.0.0"
 trgt_rxiv="trgt-${trgt_version}-x86_64-unknown-linux-gnu.tar.gz"
 wget "https://github.com/PacificBiosciences/trgt/releases/download/${trgt_version}/${trgt_rxiv}"
 tar -xzvf "trgt-${trgt_version}-x86_64-unknown-linux-gnu.tar.gz"
