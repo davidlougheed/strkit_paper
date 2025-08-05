@@ -47,6 +47,7 @@ cd build || exit
 make
 cp src/trf ../../../bin
 cd ../.. || exit
+chmod +x ../bin/trf
 rm -rf ./TRF
 # END STRAGLR
 
@@ -57,6 +58,7 @@ cd STRdust || exit
 git checkout 19c6ecd
 cargo build --release --verbose --jobs 12
 cp ./target/release/STRdust ../../bin
+chmod +x ../../bin/STRdust
 cd .. || exit
 rm -rf ./STRdust
 # END STRDUST
@@ -68,6 +70,7 @@ git clone https://github.com/gymrek-lab/LongTR.git
 cd LongTR || exit
 git checkout d44f5d4
 make
+chmod +x ./LongTR
 mv ./LongTR ../../bin
 cd .. || exit
 rm -rf ./LongTR
