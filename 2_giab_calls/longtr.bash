@@ -5,7 +5,7 @@
 #SBATCH --time=12:00:00
 #SBATCH --account=rrg-bourqueg-ad
 
-module load htslib/1.19
+module load htslib/1.22.1
 
 bam_tmpdir="${SLURM_TMPDIR}/reads.bam"
 cp "${BAM}" "${bam_tmpdir}"
