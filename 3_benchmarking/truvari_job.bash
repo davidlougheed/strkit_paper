@@ -5,8 +5,8 @@
 #SBATCH --time=4:00:00
 #SBATCH --account=rrg-bourqueg-ad
 
-module load StdEnv/2020
-module load python/3.10
+module load StdEnv/2023
+module load python/3.11
 source ../envs/env_truvari/bin/activate
 
 REFERENCE="../1_alignment/data/ref/hg38.analysisSet.fa"

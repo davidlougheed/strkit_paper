@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
-# laytr doesn't work with python 3.11 due to edlib erroring with:
-#  edlib.bycython.cpp:198:12: fatal error: longintrepr.h: No such file or directory
-module load StdEnv/2020
-module load python/3.10
+module load StdEnv/2023
+module load python/3.11
 
 # BEGIN DATA
 

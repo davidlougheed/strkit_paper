@@ -5,8 +5,8 @@
 #SBATCH --time=20:00
 #SBATCH --account=rrg-bourqueg-ad
 
-module load StdEnv/2020
-module load python/3.10
+module load StdEnv/2023
+module load python/3.11
 source ../envs/env_laytr/bin/activate
 
 laytr giabTR --regionsummary "${BENCH_DIR}/refine.regions.txt" \
