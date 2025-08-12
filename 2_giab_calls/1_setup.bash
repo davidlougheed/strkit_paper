@@ -26,6 +26,8 @@ if [[ ! -d "../envs/env_strkit" ]]; then
 fi
 source ../envs/env_strkit/bin/activate || exit
 pip install -vv -U strkit==0.22.0
+# alliance pysam installs are broken on narval
+pip install --no-cache-dir --no-binary :all: --ignore-installed pysam
 deactivate
 # END STRKIT
 
@@ -36,6 +38,8 @@ if [[ ! -d "../envs/env_straglr" ]]; then
 fi
 source ../envs/env_straglr/bin/activate || exit
 pip install -v -U git+https://github.com/bcgsc/straglr.git@v1.5.3#egg=straglr
+# alliance pysam installs are broken on narval
+pip install --no-cache-dir --no-binary :all: --ignore-installed pysam
 deactivate
 #  - TRF
 rm -rf ./TRF
