@@ -30,8 +30,8 @@ cd .. || exit
 python3 -m venv ../envs/env_truvari
 source ../envs/env_truvari/bin/activate
 pip install -U Truvari==5.3.0
-# alliance pywfa install is broken
-pip install --no-cache-dir --no-binary :all: --ignore-installed pywfa==0.5.1
+# alliance pywfa and pysam installs are broken on narval
+pip install --no-cache-dir --no-binary :all: --ignore-installed pywfa==0.5.1 pysam
 deactivate
 # END TRUVARI
 
@@ -41,8 +41,8 @@ source ../envs/env_laytr/bin/activate
 pip install wheel
 git clone https://github.com/ACEnglish/laytr.git
 pip install -U ./laytr
-# alliance pywfa install is broken
-pip install --no-cache-dir --no-binary :all: --ignore-installed pywfa==0.5.1
+# alliance pywfa and pysam installs are broken on narval
+pip install --no-cache-dir --no-binary :all: --ignore-installed pywfa==0.5.1 pysam
 rm -rf laytr
 deactivate
 # END LAYTR
