@@ -53,8 +53,8 @@ def main():
 
             bench = benchmark_snvs.get((v.contig, v.pos))
             if not bench:
-                print("bench not found", v)
-                false_hets += 1
+                # print("bench not found", v)
+                # false_hets += 1
                 continue
 
             gt_alleles = get_sample_0_alleles(v)
