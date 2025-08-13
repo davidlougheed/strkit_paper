@@ -72,7 +72,8 @@ module load googletest/1.14.0 htslib/1.22.1
 rm -rf ./LongTR
 git clone https://github.com/gymrek-lab/LongTR.git
 cd LongTR || exit
-git checkout d44f5d4
+git checkout v1.2
+sed -i 's/-lspoa/-lspoa -ldeflate/g' Makefile  # need to edit Makefile to add -ldeflate
 make
 chmod +x ./LongTR
 mv ./LongTR ../../bin
