@@ -61,6 +61,7 @@ def main():
 
             if len(set(bench)) == 1 and len(set(gt_alleles)) == 2:
                 false_hets += 1
+                print(v)
 
         # 4. Quantify: # correct, # false hets, # flips
         #     - we only call hets
