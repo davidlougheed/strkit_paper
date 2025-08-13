@@ -31,6 +31,8 @@ def main():
     benchmark_snvs = load_benchmark_snvs()
 
     for tech in ("hifi", "ont-simplex"):
+        print(f"{tech=}")
+
         # 1. Load STRkit SNVs
         vf_snv = pysam.VariantFile(f"../2_giab_calls/out/calls/{tech}/HG002.strkit.vcf.gz")
 
@@ -41,7 +43,7 @@ def main():
         false_hets: int = 0
         correct: int = 0
 
-        for v in vf_snv.fetch():
+        for v in tqdm(vf_snv.fetch(), desc="STRkit SNVs"):
             gt = v.samples[0].get("GT")
 
             if gt is None or None in gt or v.info.get("VT") != "snv":
@@ -51,6 +53,7 @@ def main():
 
             bench = benchmark_snvs.get((v.contig, v.pos))
             if not bench:
+                print("bench not found", v)
                 false_hets += 1
                 continue
 
@@ -64,8 +67,8 @@ def main():
         # 5.
 
         # TODO
-        print(f"{total=}")
-        print(f"{false_hets=}")
+        print(f"    {total=}")
+        print(f"    {false_hets=}")
 
 
 if __name__ == "__main__":
