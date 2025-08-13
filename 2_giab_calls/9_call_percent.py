@@ -29,7 +29,13 @@ def main():
                     1 for _ in filter(filter_default if caller != "strkit" else filter_strkit_snv, vf.fetch())
                 )
 
-            print(f"{tech.rjust(4)} {caller.rjust(15)} {str(n_called).ljust(6)} {n_called / TOTAL_VARIANTS * 100:.2f}%")
+            percent_called = n_called / TOTAL_VARIANTS * 100
+            percent_not_called = 100 - percent_called
+
+            print(
+                f"{tech.rjust(4)} {caller.rjust(15)} {str(n_called).ljust(6)} {percent_called:.2f}%, "
+                f"not called: {percent_not_called:.2f}%"
+            )
 
 
 if __name__ == "__main__":
