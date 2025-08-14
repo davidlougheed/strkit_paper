@@ -73,24 +73,24 @@ def _get_non_overlapping_annos(seen_coords: set[tuple[str, int, int]], data: lis
     return anno_final
 
 
-def process_catalog_strkit_line(data: list[str]):
+def process_catalog_strkit_line(_idx: int, data: list[str]):
     seen_coords: set[tuple[str, int, int]] = set()
     return [[anno["chrom"], anno["start"], anno["end"], anno["motif"]]
             for anno in _get_non_overlapping_annos(seen_coords, data)]
 
 
-def process_catalog_longtr_line(data: list[str]):
+def process_catalog_longtr_line(idx: int, data: list[str]):
     seen_coords: set[tuple[str, int, int]] = set()
     # LongTR runs counter to the BED spec: https://github.com/gymrek-lab/LongTR/issues/5
-    return [[anno["chrom"], anno["start"] + 1, anno["end"], anno["motif"], f"LOC{i}"]
-            for i, anno in enumerate(_get_non_overlapping_annos(seen_coords, data), 1)]
+    return [[anno["chrom"], anno["start"] + 1, anno["end"], anno["motif"], f"LOC{idx+1}"]
+            for anno in _get_non_overlapping_annos(seen_coords, data)]
 
 
-def process_catalog_trgt_line(data: list[str]):
+def process_catalog_trgt_line(idx: int, data: list[str]):
     seen_coords: set[tuple[str, int, int]] = set()
     return [
-        [anno["chrom"], anno["start"], anno["end"], f"ID=anno{idx};MOTIFS={anno['motif']};STRUC=({anno['motif']})n"]
-        for idx, anno in enumerate(_get_non_overlapping_annos(seen_coords, data))]
+        [anno["chrom"], anno["start"], anno["end"], f"ID=anno{idx+1};MOTIFS={anno['motif']};STRUC=({anno['motif']})n"]
+        for anno in _get_non_overlapping_annos(seen_coords, data)]
 
 
 def main():
@@ -100,10 +100,10 @@ def main():
 
     with open("./data/adotto_TRregions_v1.2.bed", "r") as fh:
         reader = csv.reader(fh, delimiter="\t")
-        for line in reader:
-            catalog_strkit.extend(process_catalog_strkit_line(line))
-            catalog_longtr.extend(process_catalog_longtr_line(line))
-            catalog_trgt.extend(process_catalog_trgt_line(line))
+        for idx, line in enumerate(reader):
+            catalog_strkit.extend(process_catalog_strkit_line(idx, line))
+            catalog_longtr.extend(process_catalog_longtr_line(idx, line))
+            catalog_trgt.extend(process_catalog_trgt_line(idx, line))
 
     print("catalog size (strkit, longTR, TRGT):", len(catalog_strkit), len(catalog_longtr), len(catalog_trgt))
 
