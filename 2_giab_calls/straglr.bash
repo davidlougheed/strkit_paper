@@ -22,8 +22,11 @@ export PYTHONOPTIMIZE=1
 /usr/bin/time -o "./out/calls/${TECH}/${SAMPLE}.straglr.time" straglr.py \
   "${bam_tmpdir}" \
   "${REF}" \
-  "./out/calls/${TECH}/${SAMPLE}.straglr" \
+  "${SLURM_TMPDIR}/${SAMPLE}.straglr" \
   --loci ./out/adotto_catalog_strkit.bed \
   --min_cluster_size 1 \
   --tmpdir "${SLURM_TMPDIR}" \
   --nprocs 8
+
+chown dlough2:rrg-bourqueg-ad ${SLURM_TMPDIR}/${SAMPLE}.straglr.*
+mv ${SLURM_TMPDIR}/${SAMPLE}.straglr.* ./out/calls/${TECH}/
