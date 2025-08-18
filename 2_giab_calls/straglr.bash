@@ -24,7 +24,7 @@ export PYTHONOPTIMIZE=1
   "${REF}" \
   "${SLURM_TMPDIR}/${SAMPLE}.straglr" \
   --loci ./out/adotto_catalog_strkit.bed \
-  --min_cluster_size 1 \
+  --sex "${SEX}" \
   --tmpdir "${SLURM_TMPDIR}" \
   --nprocs 8
 

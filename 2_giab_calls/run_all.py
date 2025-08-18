@@ -28,6 +28,8 @@ if __name__ == "__main__":
                 f"BAM=../1_alignment/data/{tech}/{sample}.{'phased.' if phased else ''}{bam_part}.bam,"
                 f"HAPLOID_CHRS={haploid_chrs},"
                 f"KARYOTYPE={sex_kary},"
+                # for Straglr; all of these samples have normal sex karyotypes:
+                f"SEX={'f' if sex_kary == 'XX' else 'm'},"
                 f"PHASED={phased}"
             ),
             script,
