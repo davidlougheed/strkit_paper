@@ -16,7 +16,7 @@ truvari_norm () {
 
   echo "Working on ${1}; base_path=${base_path}"
 
-  bcftools norm -f "${REF}" -c s -m - "${base_path}.vcf.gz" | bcftools sort -O z -o "${base_path}.norm.vcf.gz"
+  bcftools norm --force -f "${REF}" -c s -m - "${base_path}.vcf.gz" | bcftools sort -O z -o "${base_path}.norm.vcf.gz"
   tabix -f "${base_path}.norm.vcf.gz"
 
   echo "Done ${1}"
