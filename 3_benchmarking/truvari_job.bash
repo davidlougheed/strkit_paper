@@ -9,6 +9,8 @@ module load StdEnv/2023
 module load python/3.11
 source ../envs/env_truvari/bin/activate
 
+pip freeze
+
 REFERENCE="../1_alignment/data/ref/hg38.analysisSet.fa"
 
 # External environment variables:
