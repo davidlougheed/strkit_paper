@@ -41,6 +41,7 @@ fi
 
 truvari refine \
   --use-original-vcfs \
+  --coords O \
   --reference "${REFERENCE}" \
   --regions "../2_giab_calls/out/adotto_catalog_${bed_tool}.bed" \
   --subset \
