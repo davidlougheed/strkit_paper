@@ -25,7 +25,7 @@ if [[ ! -d "../envs/env_strkit" ]]; then
   python3 -m venv ../envs/env_strkit
 fi
 source ../envs/env_strkit/bin/activate || exit
-pip install -vv -U strkit==0.22.0
+pip install -vv -U strkit==0.23.0a2
 # alliance pysam installs are broken on narval
 pip install --no-cache-dir --no-binary :all: --ignore-installed pysam
 deactivate
