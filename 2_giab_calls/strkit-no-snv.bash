@@ -16,7 +16,7 @@ cp "${BAM}.bai" "${bam_tmpdir}.bai"
 export PYTHONOPTIMIZE=1
 
 # for comparison to TRGT, which has no minimum, we set --min-reads and --min-allele-reads low
-/usr/bin/time -o "./out/calls/${TECH}/${SAMPLE}.strkit-no-snv.time" strkit call \
+time -o "./out/calls/${TECH}/${SAMPLE}.strkit-no-snv.time" strkit call \
   --ref "${REF}" \
   --loci ./out/adotto_catalog_strkit.bed \
   --sex-chr "${KARYOTYPE}" \

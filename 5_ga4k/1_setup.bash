@@ -19,6 +19,8 @@ cd ../.. || exit
 
 # Copy catalogs from step 2 for use inside jobs
 cp ../2_giab_calls/out/adotto_catalog_* ./out/
+ln -s ../2_giab_calls/data/00-common_all.vcf.gz ./out/00-common_all.vcf.gz
+ln -s ../2_giab_calls/data/00-common_all.vcf.gz.tbi ./out/00-common_all.vcf.gz.tbi
 
 # Set up out directory
 mkdir -p out/calls/hifi
