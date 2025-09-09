@@ -14,17 +14,19 @@ def main():
 
     for trio_id, bams in trio_data.items():
         for ind_key, bam in bams.items():
-            subprocess.check_call(" ".join((
-                "sbatch",
-                (
-                    f"--export="
-                    f"SEED=1234,"
-                    f"SAMPLE={SAMPLE_PREFIX}{trio_id}-{ind_key},"
-                    f"BAM={bam},"
-                    f"REF={REF}"
-                ),
-                "./strkit_job.bash",
-            )), shell=True)
+            for script in ("longtr", "strdust", "strkit", "strkit-no-snv", "straglr", "trgt"):
+                subprocess.check_call(" ".join((
+                    "sbatch",
+                    (
+                        f"--export="
+                        f"SEED=1234,"
+                        f"REF={REF},"
+                        f"TECH=hifi,"
+                        f"SAMPLE={SAMPLE_PREFIX}{trio_id}-{ind_key},"
+                        f"BAM={bam}"
+                    ),
+                    f"../2_giab_calls/{script}.bash",
+                )), shell=True)
 
 
 if __name__ == "__main__":

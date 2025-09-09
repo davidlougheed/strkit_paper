@@ -1,3 +1,7 @@
-# UNUSED
+# Mendelian inheritance analysis: other trios
 
-These scripts are not used in the publication, and are kept for personal reference.
+## Notes
+
+ - These scripts are to be run on Rorqual, not Narval like the others.
+ - Before running the setup script, make sure to run setup and generate benchmark regions in the `../2_giab_calls`
+   folder.

@@ -14,5 +14,8 @@ if [[ ! -f "${REF_FILE}" ]]; then
 fi
 cd ../.. || exit
 
+# Copy catalogs from step 2 for use inside jobs
+cp ../2_giab_calls/out/adotto_catalog_* ./out/
+
 # Set up out directory
-mkdir -p out/calls
+mkdir -p out/calls/hifi
