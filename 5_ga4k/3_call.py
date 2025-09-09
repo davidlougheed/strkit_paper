@@ -12,9 +12,9 @@ def main():
     with open("./data/trios.json", "r") as fh:
         trio_data: dict[str, dict[str, str]] = json.load(fh)
 
-    for trio_id, bams in trio_data.items():
-        for ind_key, bam in bams.items():
-            for script in ("longtr", "strdust", "strkit", "strkit-no-snv", "straglr", "trgt"):
+    for script in ("longtr", "strdust", "strkit", "strkit-no-snv", "straglr", "trgt"):
+        for trio_id, bams in trio_data.items():
+            for ind_key, bam in bams.items():
                 subprocess.check_call(" ".join((
                     "sbatch",
                     (
