@@ -19,7 +19,8 @@ export PYTHONOPTIMIZE=1
 
 # Straglr can use the same catalog format as STRkit
 
-time -o "./out/calls/${TECH}/${SAMPLE}.straglr.time" straglr.py \
+/cvmfs/soft.computecanada.ca/gentoo/2023/x86-64-v3/usr/bin/time \
+  -o "./out/calls/${TECH}/${SAMPLE}.straglr.time" straglr.py \
   "${bam_tmpdir}" \
   "${REF}" \
   "${SLURM_TMPDIR}/${SAMPLE}.straglr" \

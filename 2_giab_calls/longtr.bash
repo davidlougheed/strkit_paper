@@ -12,7 +12,9 @@ cp "${BAM}" "${bam_tmpdir}"
 cp "${BAM}.bai" "${bam_tmpdir}.bai"
 
 #  --skip-assembly \
-time -o "./out/calls/${TECH}/${SAMPLE}.longtr.${PHASED:+phased.}time" ../bin/LongTR \
+/cvmfs/soft.computecanada.ca/gentoo/2023/x86-64-v3/usr/bin/time \
+  -o "./out/calls/${TECH}/${SAMPLE}.longtr.${PHASED:+phased.}time" \
+  ../bin/LongTR \
   --bams "${bam_tmpdir}" \
   --bam-samps "${SAMPLE}" \
   --bam-libs "${SAMPLE}" \

@@ -16,7 +16,8 @@ if [[ "${PHASED}" == "1" ]]; then
 else
   pf="--unphased"
 fi
-time -o "./out/calls/${TECH}/${SAMPLE}.strdust.${PHASED:+phased.}time" ../bin/STRdust \
+/cvmfs/soft.computecanada.ca/gentoo/2023/x86-64-v3/usr/bin/time \
+  -o "./out/calls/${TECH}/${SAMPLE}.strdust.${PHASED:+phased.}time" ../bin/STRdust \
   -R ./out/adotto_catalog_strkit.bed \
   -s 1 \
   -t 8 \

@@ -11,7 +11,8 @@ cp "${BAM}.bai" "${bam_tmpdir}.bai"
 
 # don't need to check $PHASED - TRGT automatically picks up HP tags
 
-time -o "./out/calls/${TECH}/${SAMPLE}.trgt.${PHASED:+phased.}time" ../bin/trgt -v genotype \
+/cvmfs/soft.computecanada.ca/gentoo/2023/x86-64-v3/usr/bin/time \
+  -o "./out/calls/${TECH}/${SAMPLE}.trgt.${PHASED:+phased.}time" ../bin/trgt -v genotype \
   --reads "${bam_tmpdir}" \
   --genome "${REF}" \
   --repeats ./out/adotto_catalog_trgt.bed \
