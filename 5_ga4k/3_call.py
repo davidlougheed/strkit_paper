@@ -25,6 +25,8 @@ def main():
                         f"SAMPLE={SAMPLE_PREFIX}{trio_id}-{ind_key},"
                         f"HAPLOID_CHRS=X,X,"  # dummy karyotype values - we'll just analyze autosomes
                         f"KARYOTYPE=XX,"  # "
+                        f"SEX=f,"  # "
+                        f"PHASED=,"
                         f"BAM={bam}"
                     ),
                     f"../2_giab_calls/{script}.bash",
