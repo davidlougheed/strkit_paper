@@ -15,9 +15,9 @@ export PYTHONOPTIMIZE=1
 
 strkit mi \
     --caller "${MI_CALLER}" \
-    "./out/calls/${CHILD}.${CALLER}.vcf.gz" \
-    "./out/calls/${FATHER}.${CALLER}.vcf.gz" \
-    "./out/calls/${MOTHER}.${CALLER}.vcf.gz" \
+    "./out/calls/${TECH}/${CHILD}.${CALLER}.vcf.gz" \
+    "./out/calls/${TECH}/${FATHER}.${CALLER}.vcf.gz" \
+    "./out/calls/${TECH}/${MOTHER}.${CALLER}.vcf.gz" \
     --hist \
     --motif-bed "./out/adotto_catalog_strkit.bed" \
     --json "${OUT_JSON}"

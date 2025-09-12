@@ -29,6 +29,7 @@ def main():
                     f"MOTHER={SAMPLE_PREFIX}{trio_id}-3,"
                     f"CALLER={caller},"
                     f"MI_CALLER={mi_caller},"
+                    f"TECH=hifi,"
                     f"OUT_JSON=./out/mi/{SAMPLE_PREFIX}{trio_id}.{caller}.json"
                 ),
                 "./strkit_mi_job.bash",
