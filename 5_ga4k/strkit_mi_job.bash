@@ -19,7 +19,7 @@ strkit mi \
     "./out/calls/${FATHER}.${CALLER}.vcf.gz" \
     "./out/calls/${MOTHER}.${CALLER}.vcf.gz" \
     --hist \
-    --mismatch-out-mi seq \
+    --motif-bed "./out/adotto_catalog_strkit.bed" \
     --json "${OUT_JSON}"
 
 deactivate
