@@ -8,7 +8,7 @@
 mkdir -p ./out/mi
 
 module load StdEnv/2023
-module load python/3.11 scipy-stack/2023b parasail/2.6.2
+module load python/3.11 scipy-stack/2025a parasail/2.6.2
 source ../envs/env_strkit/bin/activate
 
 export PYTHONOPTIMIZE=1
