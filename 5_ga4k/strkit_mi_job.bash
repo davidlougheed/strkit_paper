@@ -13,10 +13,11 @@ source ../envs/env_strkit/bin/activate
 
 export PYTHONOPTIMIZE=1
 
-strkit mi --caller strkit-vcf \
-    "./out/calls/${CHILD}.strkit.vcf.gz" \
-    "./out/calls/${FATHER}.strkit.vcf.gz" \
-    "./out/calls/${MOTHER}.strkit.vcf.gz" \
+strkit mi \
+    --caller "${MI_CALLER}" \
+    "./out/calls/${CHILD}.${CALLER}.vcf.gz" \
+    "./out/calls/${FATHER}.${CALLER}.vcf.gz" \
+    "./out/calls/${MOTHER}.${CALLER}.vcf.gz" \
     --hist \
     --mismatch-out-mi seq \
     --json "${OUT_JSON}"
