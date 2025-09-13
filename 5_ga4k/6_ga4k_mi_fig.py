@@ -65,7 +65,7 @@ def main():
         df.plot
         .boxplot()
         .encode(
-            x="Caller",
+            x=alt.X("Caller").title(None),
             y=alt.Y("MI %", scale=alt.Scale(domain=[0.55, 1.0])),
             column="MI metric",
             color=alt.Color("Caller").scale(range=PALETTE).legend(None)
