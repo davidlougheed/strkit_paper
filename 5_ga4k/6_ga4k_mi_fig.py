@@ -22,6 +22,15 @@ LABELS = {
     "TPR": "Recall (TPR)",
 }
 
+PALETTE = [
+    "#d95f02",  # LongTR
+    "#984ea3",  # STRdust
+    "#238b45",  # STRkit
+    "#66c2a4",  # STRkit (no SNVs)
+    "#386cb0",  # Straglr
+    "#e7298a",  # TRGT
+]
+
 
 def main():
     with open("./data/trios.json", "r") as fh:
@@ -55,6 +64,7 @@ def main():
     plot = df.plot.boxplot().encode(
         x="Caller",
         y=alt.Y("MI %", scale=alt.Scale(domain=[0.55, 1.0])),
+        color=alt.Color("Caller").scale(domain=CALLERS, range=PALETTE),
         column="MI metric",
     ).resolve_scale(x="shared")
     plot.save("./out/ga4k_mi_fig.png", ppi=350)
