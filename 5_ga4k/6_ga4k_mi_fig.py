@@ -63,7 +63,7 @@ def main():
 
     plot = (
         df.plot
-        .boxplot(color=alt.Color("Caller", legend=None).scale(domain=CALLERS, range=PALETTE))
+        .boxplot(color=alt.Color("Caller", legend=None).scale(domain=CALLERS, range=[alt.value(p) for p in PALETTE]))
         .encode(
             x="Caller",
             y=alt.Y("MI %", scale=alt.Scale(domain=[0.55, 1.0])),
