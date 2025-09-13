@@ -4,6 +4,8 @@ import os.path
 import polars as pl
 import sys
 
+from tqdm import tqdm
+
 CALLERS = ("longtr", "strdust", "strkit", "strkit-no-snv", "straglr", "trgt")
 
 LABELS = {
@@ -27,7 +29,7 @@ def main():
 
     df_list = []
 
-    for caller in CALLERS:
+    for caller in tqdm(CALLERS, desc="caller"):
         for trio_id in trio_data:
             path = f"./out/mi/cmh{trio_id}.{caller}.json"
             if not os.path.exists(path):
