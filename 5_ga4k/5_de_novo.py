@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import json
+import os.path
 import subprocess
 
 
@@ -19,6 +20,10 @@ def main():
     for caller in ("longtr", "strdust", "strkit", "strkit-no-snv", "straglr", "trgt"):
         for trio_id, bams in trio_data.items():
             mi_caller = CALLER_TO_MI_CALLER.get(caller, caller)
+            out_path = f"./out/mi/{SAMPLE_PREFIX}{trio_id}.{caller}.json"
+            if os.path.exists(out_path):
+                print(f"SKIPPING [EXISTS] {out_path}")
+                continue
             subprocess.check_call(" ".join((
                 "sbatch",
                 (
@@ -29,8 +34,9 @@ def main():
                     f"MOTHER={SAMPLE_PREFIX}{trio_id}-3,"
                     f"CALLER={caller},"
                     f"MI_CALLER={mi_caller},"
+                    f"EXT={'vcf.gz' if mi_caller != 'straglr' else 'tsv'}"
                     f"TECH=hifi,"
-                    f"OUT_JSON=./out/mi/{SAMPLE_PREFIX}{trio_id}.{caller}.json"
+                    f"OUT_JSON={out_path}"
                 ),
                 "./strkit_mi_job.bash",
             )), shell=True)
