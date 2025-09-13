@@ -39,11 +39,15 @@ def main():
                 data = json.load(fh)
                 cl = LABELS.get(caller, caller)
                 df_list.extend([
-                    {"MI metric": "copy number", "MI %": data["mi"]["val"], "Caller": cl},
-                    {"MI metric": "copy number (±1)", "MI %": data["mi_pm1"]["val"], "Caller": cl},
-                    {"MI metric": "sequence", "MI %": data["mi_seq"]["val"], "Caller": cl},
-                    {"MI metric": "seq. len.", "MI %": data["mi_sl"]["val"], "Caller": cl},
-                    {"MI metric": "seq. len. ±1bp", "MI %": data["mi_sl_pm1"]["val"], "Caller": cl},
+                    *([
+                        {"MI metric": "copy number", "MI %": data["mi"]["val"], "Caller": cl},
+                        {"MI metric": "copy number (±1)", "MI %": data["mi_pm1"]["val"], "Caller": cl},
+                    ] if caller in ("straglr", "strkit", "strkit-no-snv", "trgt") else []),
+                    *([
+                        {"MI metric": "sequence", "MI %": data["mi_seq"]["val"], "Caller": cl},
+                        {"MI metric": "seq. len.", "MI %": data["mi_sl"]["val"], "Caller": cl},
+                        {"MI metric": "seq. len. ±1bp", "MI %": data["mi_sl_pm1"]["val"], "Caller": cl},
+                    ] if caller != "straglr" else []),
                 ])
 
     df = pl.from_dicts(df_list)
@@ -53,6 +57,7 @@ def main():
         y=alt.Y("MI %", scale=alt.Scale(domain=[0.55, 1.0])),
         column="MI metric",
     )
+    plot.resolve_scale(x="shared")
     plot.save("./out/ga4k_mi_fig.png", ppi=350)
 
 
