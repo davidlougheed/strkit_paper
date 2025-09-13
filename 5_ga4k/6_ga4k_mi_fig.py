@@ -1,5 +1,7 @@
 import json
+import os.path
 import polars as pl
+import sys
 
 CALLERS = ("longtr", "strdust", "strkit", "strkit-no-snv", "straglr", "trgt")
 
@@ -26,6 +28,10 @@ def main():
 
     for caller in CALLERS:
         for trio_id in trio_data:
+            path = f"./out/mi/cmh{trio_id}.{caller}.json"
+            if not os.path.exists(path):
+                print(f"ERROR: path does not exist: {path}", file=sys.stderr)
+                continue
             with open(f"./out/mi/cmh{trio_id}.{caller}.json", "r") as fh:
                 data = json.load(fh)
                 cl = LABELS.get(caller, caller)
