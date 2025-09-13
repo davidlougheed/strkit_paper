@@ -61,10 +61,9 @@ def main():
 
     df = pl.from_dicts(df_list)
 
-    plot = df.plot.boxplot().encode(
+    plot = df.plot.boxplot(color=alt.Color("Caller").scale(domain=CALLERS, range=PALETTE)).encode(
         x="Caller",
         y=alt.Y("MI %", scale=alt.Scale(domain=[0.55, 1.0])),
-        color=alt.Color("Caller").scale(domain=CALLERS, range=PALETTE),
         column="MI metric",
     ).resolve_scale(x="shared")
     plot.save("./out/ga4k_mi_fig.png", ppi=350)
