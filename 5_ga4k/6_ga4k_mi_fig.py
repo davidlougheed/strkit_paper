@@ -49,7 +49,7 @@ def main():
     plot = df.plot.boxplot().encode(
         x="Caller",
         y=alt.Y("MI %", scale=alt.Scale(domain=[0.55, 1.0])),
-        col="MI metric",
+        column="MI metric",
     )
     plot.save("./out/ga4k_mi_fig.png", ppi=350)
 
