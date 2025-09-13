@@ -45,7 +45,7 @@ def main():
 
     df = pl.from_dicts(df_list)
 
-    plot = df.plot.mark_boxplot().encode(x="Caller", y="MI %", row="MI metric")
+    plot = df.plot.boxplot().encode(x="Caller", y="MI %", row="MI metric")
     plot.save("./out/ga4k_mi_fig.png", ppi=350)
 
 
