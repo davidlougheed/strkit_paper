@@ -7,7 +7,6 @@ import sys
 from tqdm import tqdm
 
 CALLERS = ("longtr", "strdust", "strkit", "strkit-no-snv", "straglr", "trgt")
-CALLERS_NO_STRAGLR = ("longtr", "strdust", "strkit", "strkit-no-snv", "trgt")
 
 LABELS = {
     # callers:
@@ -69,7 +68,7 @@ def main():
             x="Caller",
             y=alt.Y("MI %", scale=alt.Scale(domain=[0.55, 1.0])),
             column="MI metric",
-            color=alt.Color("Caller").scale(domain=CALLERS_NO_STRAGLR, range=PALETTE).legend(None)
+            color=alt.Color("Caller").scale(range=PALETTE).legend(None)
         )
         .resolve_scale(x="shared")
     )
