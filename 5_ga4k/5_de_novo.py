@@ -34,7 +34,7 @@ def main():
                     f"MOTHER={SAMPLE_PREFIX}{trio_id}-3,"
                     f"CALLER={caller},"
                     f"MI_CALLER={mi_caller},"
-                    f"EXT={'vcf.gz' if mi_caller != 'straglr' else 'tsv'}"
+                    f"EXT={'vcf.gz' if mi_caller != 'straglr' else 'tsv'},"
                     f"TECH=hifi,"
                     f"OUT_JSON={out_path}"
                 ),
