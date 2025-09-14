@@ -27,7 +27,7 @@ PALETTE = [
     "#984ea3",  # STRdust
     "#238b45",  # STRkit
     "#66c2a4",  # STRkit (no SNVs)
-    # "#386cb0",  # Straglr
+    "#386cb0",  # Straglr
     "#e7298a",  # TRGT
 ]
 
