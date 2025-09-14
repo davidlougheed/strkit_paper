@@ -1,5 +1,5 @@
 import altair as alt
-import json
+import orjson
 import os.path
 import polars as pl
 import sys
@@ -33,8 +33,8 @@ PALETTE = [
 
 
 def main():
-    with open("./data/trios.json", "r") as fh:
-        trio_data: dict[str, dict[str, str]] = json.load(fh)
+    with open("./data/trios.json", "rb") as fh:
+        trio_data: dict[str, dict[str, str]] = orjson.loads(fh.read())
 
     df_list = []
 
@@ -44,8 +44,8 @@ def main():
             if not os.path.exists(path):
                 print(f"ERROR: path does not exist: {path}", file=sys.stderr)
                 continue
-            with open(f"./out/mi/cmh{trio_id}.{caller}.json", "r") as fh:
-                data = json.load(fh)
+            with open(f"./out/mi/cmh{trio_id}.{caller}.json", "rb") as fh:
+                data = orjson.loads(fh.read())
                 cl = LABELS.get(caller, caller)
                 df_list.extend([
                     *([
