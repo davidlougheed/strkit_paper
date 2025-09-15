@@ -106,6 +106,9 @@ def main():
         # TODO
         print(f"    {total=}")
         print(f"    {false_hets=}")
+        print(f"    {flips=}")
+        print(f"    {correct=}")
+        print(f"    {false_hets+flips+correct=}")
 
 
 if __name__ == "__main__":
