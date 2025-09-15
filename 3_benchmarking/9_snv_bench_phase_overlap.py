@@ -15,7 +15,7 @@ def get_sample_0_alleles(variant: pysam.VariantRecord) -> tuple[str, str] | None
 def load_benchmark_snvs() -> dict[tuple[str, int], tuple[str, ...]]:
     snvs: dict[tuple[str, int], tuple[str, ...]] = {}
 
-    with pysam.VariantFile(f"./data/HG002_GRCh38_1_22_v4.2.1_benchmark.vcf.gz") as vf:
+    with pysam.VariantFile(f"./data/HG002_GRCh38_1_22_v4.2.1_benchmark_hifiasm_v11_phasetransfer.vcf.gz") as vf:
         for variant in tqdm(vf.fetch(), desc="loading benchmark SNVs"):
             alleles = variant.alleles
             if any(len(a) > 1 for a in alleles):
@@ -39,9 +39,14 @@ def main():
         # 2. Iterate through STRkit SNVs and collect benchmark SNVs which match plus build STRkit SNV blocks which share
         #    a phase set, so we can look for phase flips / incorrect calls properly
 
-        total: int = 0
+        total: int = 0  # Total common between STRkit and benchmark
         false_hets: int = 0
+        flips: int = 0
         correct: int = 0
+
+        current_ps: int = -1
+        current_ps_snvs = []
+        current_ps_bench_snvs = []
 
         for v in tqdm(vf_snv.fetch(), desc="STRkit SNVs"):
             gt = v.samples[0].get("GT")
@@ -49,7 +54,34 @@ def main():
             if gt is None or None in gt or v.info.get("VT") != "snv":
                 continue
 
-            total += 1
+            ps = v.samples[0].get("PS")
+
+            if ps is None:  # SNVs without phase sets (shouldn't happen, but just in case)
+                continue
+
+            if ps != current_ps:
+                if current_ps != -1:
+                    fl1 = 0
+                    fl2 = 0
+
+                    for snv, bench_snv in zip(current_ps_snvs, current_ps_bench_snvs):
+                        if len(set(bench_snv)) == 1 and len(set(snv)) == 2:
+                            false_hets += 1
+                        elif bench_snv == snv[::-1]:
+                            fl1 += 1
+                        elif bench_snv == snv:
+                            fl2 += 1
+
+                    if fl1 <= fl2:  # phase sets match without a flip
+                        flips += fl1
+                        correct += fl2
+                    else:
+                        flips += fl2
+                        correct += fl1
+
+                current_ps = ps
+                current_ps_snvs.clear()
+                current_ps_bench_snvs.clear()
 
             bench = benchmark_snvs.get((v.contig, v.pos))
             if not bench:
@@ -57,11 +89,15 @@ def main():
                 # false_hets += 1
                 continue
 
+            total += 1
+
             gt_alleles = get_sample_0_alleles(v)
+
+            current_ps_snvs.append(gt_alleles)
+            current_ps_bench_snvs.append(bench)
 
             if len(set(bench)) == 1 and len(set(gt_alleles)) == 2:
                 false_hets += 1
-                print(v, "bench", bench)
 
         # 4. Quantify: # correct, # false hets, # flips
         #     - we only call hets
