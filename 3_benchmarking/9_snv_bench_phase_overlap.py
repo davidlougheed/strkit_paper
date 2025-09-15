@@ -39,10 +39,12 @@ def main():
         # 2. Iterate through STRkit SNVs and collect benchmark SNVs which match plus build STRkit SNV blocks which share
         #    a phase set, so we can look for phase flips / incorrect calls properly
 
-        total: int = 0  # Total common between STRkit and benchmark
+        total: int = 0  # Total shared SNVs part of a phase set with >1 SNV from STRkit
         false_hets: int = 0
-        flips: int = 0
         correct: int = 0
+        total_ps: int = 0  # Total shared SNVs part of a phase set with >1 SNV from STRkit
+        flips: int = 0
+        correct_ps: int = 0
 
         current_ps: int = -1
         current_ps_snvs = []
@@ -60,27 +62,35 @@ def main():
                 continue
 
             if ps != current_ps:
-                if (ct := len(current_ps_snvs)) > 1 and current_ps != -1:
-                    total += ct
+                ct = len(current_ps_snvs)
+                total += ct
 
-                    # Quantify: # correct, # false hets, # flips  ---  we only call hets
-                    fl1 = 0
-                    fl2 = 0
-
+                if current_ps != -1:
                     for snv, bench_snv in zip(current_ps_snvs, current_ps_bench_snvs):
                         if len(set(bench_snv)) == 1 and len(set(snv)) == 2:
                             false_hets += 1
-                        elif bench_snv == snv[::-1]:
-                            fl1 += 1
-                        elif bench_snv == snv:
-                            fl2 += 1
+                        else:
+                            correct += 1
 
-                    if fl1 <= fl2:  # phase sets match without a flip
-                        flips += fl1
-                        correct += fl2
-                    else:
-                        flips += fl2
-                        correct += fl1
+                    if ct > 1 and current_ps != -1:
+                        total_ps += ct
+
+                        # Quantify: # correct, # false hets, # flips  ---  we only call hets
+                        fl1 = 0
+                        fl2 = 0
+
+                        for snv, bench_snv in zip(current_ps_snvs, current_ps_bench_snvs):
+                            if bench_snv == snv[::-1]:
+                                fl1 += 1
+                            elif bench_snv == snv:
+                                fl2 += 1
+
+                        if fl1 <= fl2:  # phase sets match without a flip
+                            flips += fl1
+                            correct_ps += fl2
+                        else:
+                            flips += fl2
+                            correct_ps += fl1
 
                 current_ps = ps
                 current_ps_snvs.clear()
@@ -100,9 +110,10 @@ def main():
         # Final tally
         print(f"    {total=}")
         print(f"    {false_hets=} ({false_hets/total*100:.4f}%)")
-        print(f"    {flips=} ({flips/total*100:.4f}%)")
         print(f"    {correct=} ({correct/total*100:.4f}%)")
-        print(f"    {false_hets+flips+correct=}")
+        print(f"    {total_ps=}")
+        print(f"    {flips=} ({flips/total_ps*100:.4f}%)")
+        print(f"    {correct_ps=} ({correct_ps/total_ps*100:.4f}%)")
 
 
 if __name__ == "__main__":
