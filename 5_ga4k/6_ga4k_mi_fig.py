@@ -64,10 +64,10 @@ def main():
     df = pl.from_dicts(df_list)
 
     for metric in ("copy number", "copy number (±1)", "sequence", "seq. len.", "seq. len. ±1bp"):
-        mis_strkit = df.filter((pl.col("MI metric") == metric) & (pl.col("Caller") == "strkit"))["MI %"].to_list()
+        mis_strkit = df.filter((pl.col("MI metric") == metric) & (pl.col("Caller") == "STRkit"))["MI %"].to_list()
         mis_strkit_no_snv = df.filter(
-            (pl.col("MI metric") == metric) & (pl.col("Caller") == "strkit-no-snv"))["MI %"].to_list()
-        mis_trgt = df.filter((pl.col("MI metric") == metric) & (pl.col("Caller") == "trgt"))["MI %"].to_list()
+            (pl.col("MI metric") == metric) & (pl.col("Caller") == "STRkit (no SNVs)"))["MI %"].to_list()
+        mis_trgt = df.filter((pl.col("MI metric") == metric) & (pl.col("Caller") == "TRGT"))["MI %"].to_list()
 
         print(f"{mis_strkit=}")
         print(f"{mis_strkit_no_snv=}")
