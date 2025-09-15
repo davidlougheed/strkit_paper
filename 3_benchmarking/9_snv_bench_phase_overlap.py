@@ -60,7 +60,10 @@ def main():
                 continue
 
             if ps != current_ps:
-                if current_ps != -1:
+                if len(current_ps_snvs) > 1 and current_ps != -1:
+                    total += len(current_ps_snvs)
+
+                    # Quantify: # correct, # false hets, # flips  ---  we only call hets
                     fl1 = 0
                     fl2 = 0
 
@@ -89,21 +92,12 @@ def main():
                 # false_hets += 1
                 continue
 
-            total += 1
-
             gt_alleles = get_sample_0_alleles(v)
 
             current_ps_snvs.append(gt_alleles)
             current_ps_bench_snvs.append(bench)
 
-            if len(set(bench)) == 1 and len(set(gt_alleles)) == 2:
-                false_hets += 1
-
-        # 4. Quantify: # correct, # false hets, # flips
-        #     - we only call hets
-        # 5.
-
-        # TODO
+        # Final tally
         print(f"    {total=}")
         print(f"    {false_hets=} ({false_hets/total*100:.2f}%)")
         print(f"    {flips=} ({flips/total*100:.2f}%)")
