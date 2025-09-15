@@ -37,7 +37,7 @@ if [[ ! -d "../envs/env_straglr" ]]; then
   python3 -m venv ../envs/env_straglr
 fi
 source ../envs/env_straglr/bin/activate || exit
-pip install -v -U git+https://github.com/bcgsc/straglr.git@v1.5.3#egg=straglr
+pip install -v -U git+https://github.com/bcgsc/straglr.git@v1.5.5#egg=straglr
 # alliance pysam installs are broken on narval
 pip install --no-cache-dir --no-binary :all: --ignore-installed pysam
 deactivate
