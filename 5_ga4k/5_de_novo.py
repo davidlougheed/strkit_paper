@@ -17,11 +17,12 @@ def main():
     with open("./data/trios.json", "r") as fh:
         trio_data: dict[str, dict[str, str]] = json.load(fh)
 
+    force = ()
     for caller in ("longtr", "strdust", "strkit", "strkit-no-snv", "straglr", "trgt"):
         for trio_id, bams in trio_data.items():
             mi_caller = CALLER_TO_MI_CALLER.get(caller, caller)
             out_path = f"./out/mi/{SAMPLE_PREFIX}{trio_id}.{caller}.json"
-            if os.path.exists(out_path):
+            if os.path.exists(out_path) and caller not in force:
                 print(f"SKIPPING [EXISTS] {out_path}")
                 continue
             subprocess.check_call(" ".join((

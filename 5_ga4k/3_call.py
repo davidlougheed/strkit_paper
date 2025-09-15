@@ -19,12 +19,13 @@ def main():
     with open("./data/trios.json", "r") as fh:
         trio_data: dict[str, dict[str, str]] = json.load(fh)
 
+    force = ()
     for script in ("longtr", "strdust", "strkit", "strkit-no-snv", "straglr", "trgt"):
         for trio_id, bams in trio_data.items():
             for ind_key, bam in bams.items():
                 sample = f"{SAMPLE_PREFIX}{trio_id}-{ind_key}"
                 time_file = f"./out/calls/hifi/{sample}.{script}.time"
-                if not os.path.exists(time_file) or non_zero_time_file(time_file):
+                if not os.path.exists(time_file) or non_zero_time_file(time_file) or script in force:
                     # hacky resubmission check - if time file not found or exists but mentions a non-zero status code.
                     subprocess.check_call(" ".join((
                         "sbatch",
