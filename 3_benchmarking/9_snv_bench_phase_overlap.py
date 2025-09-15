@@ -15,7 +15,7 @@ def get_sample_0_alleles(variant: pysam.VariantRecord) -> tuple[str, str] | None
 def load_benchmark_snvs() -> dict[tuple[str, int], tuple[str, ...]]:
     snvs: dict[tuple[str, int], tuple[str, ...]] = {}
 
-    with pysam.VariantFile(f"./data/HG002_GRCh38_1_22_v4.2.1_benchmark_hifiasm_v11_phasetransfer.vcf.gz") as vf:
+    with pysam.VariantFile(f"./data/HG002_GRCh38_1_22_v4.2.1_benchmark_hifiasm_v11_phasetransfer_passed.vcf.gz") as vf:
         for variant in tqdm(vf.fetch(), desc="loading benchmark SNVs"):
             alleles = variant.alleles
             if any(len(a) > 1 for a in alleles):

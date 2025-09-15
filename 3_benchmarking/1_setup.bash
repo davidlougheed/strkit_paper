@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 module load StdEnv/2023
-module load python/3.11
+module load python/3.11 bcftools
 
 # BEGIN DATA
 
@@ -16,10 +16,19 @@ for giab_file in "${giab_files[@]}"; do
 done
 
 snv_benchmark="HG002_GRCh38_1_22_v4.2.1_benchmark_hifiasm_v11_phasetransfer.vcf.gz"
+snv_benchmark_no_gz="HG002_GRCh38_1_22_v4.2.1_benchmark_hifiasm_v11_phasetransfer.vcf"
+snv_benchmark_passed="HG002_GRCh38_1_22_v4.2.1_benchmark_hifiasm_v11_phasetransfer_passed.vcf"
 
 if [[ ! -f "${snv_benchmark}" ]]; then
   wget "https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/AshkenazimTrio/HG002_NA24385_son/NISTv4.2.1/GRCh38/SupplementaryFiles/${snv_benchmark}" -O "${snv_benchmark}"
-  wget "https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/AshkenazimTrio/HG002_NA24385_son/NISTv4.2.1/GRCh38/SupplementaryFiles/${snv_benchmark}.tbi" -O "${snv_benchmark}.tbi"
+#  wget "https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/AshkenazimTrio/HG002_NA24385_son/NISTv4.2.1/GRCh38/SupplementaryFiles/${snv_benchmark}.tbi" -O "${snv_benchmark}.tbi"
+
+  # format isn't valid, just awful
+  gunzip "${snv_benchmark}"
+  bcftools view -h "${snv_benchmark_no_gz}" > "${snv_benchmark_passed}"
+  tail -n +64 "${snv_benchmark_no_gz}" | grep PASS >> "${snv_benchmark_passed}"
+  bgzip "${snv_benchmark_passed}"
+  tabix -f "${snv_benchmark_passed}.gz"
 fi
 
 cd .. || exit
