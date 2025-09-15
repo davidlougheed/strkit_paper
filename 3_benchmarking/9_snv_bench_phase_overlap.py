@@ -60,8 +60,8 @@ def main():
                 continue
 
             if ps != current_ps:
-                if len(current_ps_snvs) > 1 and current_ps != -1:
-                    total += len(current_ps_snvs)
+                if (ct := len(current_ps_snvs)) > 1 and current_ps != -1:
+                    total += ct
 
                     # Quantify: # correct, # false hets, # flips  ---  we only call hets
                     fl1 = 0
@@ -99,9 +99,9 @@ def main():
 
         # Final tally
         print(f"    {total=}")
-        print(f"    {false_hets=} ({false_hets/total*100:.2f}%)")
-        print(f"    {flips=} ({flips/total*100:.2f}%)")
-        print(f"    {correct=} ({correct/total*100:.2f}%)")
+        print(f"    {false_hets=} ({false_hets/total*100:.4f}%)")
+        print(f"    {flips=} ({flips/total*100:.4f}%)")
+        print(f"    {correct=} ({correct/total*100:.4f}%)")
         print(f"    {false_hets+flips+correct=}")
 
 
