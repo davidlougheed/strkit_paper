@@ -12,6 +12,7 @@ def main():
             subprocess.check_call([
                 "../bin/STRdust",
                 "-R", str(BASE_PATH / "data" / "catalog.strkit.bed"),
+                "--somatic",
                 "--unphased",
                 *(("--haploid", "X,Y") if karyotype == "XY" else ()),
                 REF_GENOME,
