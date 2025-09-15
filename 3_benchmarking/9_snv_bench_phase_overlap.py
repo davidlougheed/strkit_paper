@@ -105,9 +105,9 @@ def main():
 
         # TODO
         print(f"    {total=}")
-        print(f"    {false_hets=}")
-        print(f"    {flips=}")
-        print(f"    {correct=}")
+        print(f"    {false_hets=} ({false_hets/total*100:.2f}%)")
+        print(f"    {flips=} ({flips/total*100:.2f}%)")
+        print(f"    {correct=} ({correct/total*100:.2f}%)")
         print(f"    {false_hets+flips+correct=}")
 
 
