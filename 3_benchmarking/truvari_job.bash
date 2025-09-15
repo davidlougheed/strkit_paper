@@ -24,6 +24,7 @@ ls_bench_dir="${SLURM_TMPDIR}/bench/"
 export TMPDIR="${SLURM_TMPDIR}/tmp"
 mkdir -p "${TMPDIR}"
 
+# Truvari 4.x:
 truvari bench \
   -b ./data/HG002_GRCh38_TandemRepeats_v1.0.1.no_homopolymers.vcf.gz \
   -c "${VCF}" \
@@ -32,6 +33,15 @@ truvari bench \
   --pick ac \
   -o "${ls_bench_dir}" || exit
 
+# TODO: use when we figure out what's up with Truvari 5.x
+#truvari bench \
+#  -b ./data/HG002_GRCh38_TandemRepeats_v1.0.1.no_homopolymers.vcf.gz \
+#  -c "${VCF}" \
+#  --includebed ./data/HG002_GRCh38_TandemRepeats_v1.0.bed.gz \
+#  --sizemin 5 \
+#  --pick ac \
+#  -o "${ls_bench_dir}" || exit
+
 module load mafft  # required for refine
 
 bed_tool="${TOOL}"
@@ -39,14 +49,26 @@ if [[ "${bed_tool}" == "strkit-no-snv" ]] || [[ "${bed_tool}" == "strdust" ]]; t
   bed_tool="strkit"
 fi
 
+# Truvari 4.x:
 truvari refine \
   --use-original-vcfs \
-  --coords O \
   --reference "${REFERENCE}" \
   --regions "../2_giab_calls/out/adotto_catalog_${bed_tool}.bed" \
-  --subset \
   --threads 8 \
   "${ls_bench_dir}" || exit
+
+# https://github.com/ACEnglish/truvari/wiki/refine
+# - need all parameters (--coords O, --subset) for giabTR included here
+# - TODO: should we keep --use-original-vcfs ?
+# Truvari 5.x:
+#truvari refine \
+#  --use-original-vcfs \
+#  --coords O \
+#  --reference "${REFERENCE}" \
+#  --regions "../2_giab_calls/out/adotto_catalog_${bed_tool}.bed" \
+#  --subset \
+#  --threads 8 \
+#  "${ls_bench_dir}" || exit
 
 tech_dir="out/hg002_benchmark/${TECH}"
 bench_dir="${tech_dir}/${TOOL}${PHASED:+_phased}"
