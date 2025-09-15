@@ -4,6 +4,8 @@ import os.path
 import polars as pl
 import sys
 
+from scipy.stats import ttest_ind
+from statistics import mean
 from tqdm import tqdm
 
 CALLERS = ("longtr", "strdust", "strkit", "strkit-no-snv", "straglr", "trgt")
@@ -60,6 +62,20 @@ def main():
                 ])
 
     df = pl.from_dicts(df_list)
+
+    for metric in ("copy number", "copy number (±1)", "sequence", "seq. len.", "seq. len. ±1bp"):
+        mis_strkit = df.filter((pl.col("MI metric") == metric) & (pl.col("Caller") == "strkit"))["MI %"].to_list()
+        mis_strkit_no_snv = df.filter(
+            (pl.col("MI metric") == metric) & (pl.col("Caller") == "strkit-no-snv"))["MI %"].to_list()
+        mis_trgt = df.filter((pl.col("MI metric") == metric) & (pl.col("Caller") == "trgt"))["MI %"].to_list()
+
+        print(f"metric {metric}")
+        print(f"    strkit mean: {mean(mis_strkit)}")
+        print(f"    strkit-no-snv mean: {mean(mis_strkit_no_snv)}")
+        print(f"    trgt mean: {mean(mis_trgt)}")
+
+        print(f"    t test strkit vs trgt:        {ttest_ind(mis_trgt, mis_strkit, alternative='less').pvalue}")
+        print(f"    t test strkit-no-snv vs trgt: {ttest_ind(mis_trgt, mis_strkit_no_snv, alternative='less').pvalue}")
 
     plot = (
         df.plot
