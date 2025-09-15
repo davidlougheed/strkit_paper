@@ -69,6 +69,10 @@ def main():
             (pl.col("MI metric") == metric) & (pl.col("Caller") == "strkit-no-snv"))["MI %"].to_list()
         mis_trgt = df.filter((pl.col("MI metric") == metric) & (pl.col("Caller") == "trgt"))["MI %"].to_list()
 
+        print(f"{mis_strkit=}")
+        print(f"{mis_strkit_no_snv=}")
+        print(f"{mis_trgt=}")
+
         print(f"metric {metric}")
         print(f"    strkit mean: {mean(mis_strkit)}")
         print(f"    strkit-no-snv mean: {mean(mis_strkit_no_snv)}")
