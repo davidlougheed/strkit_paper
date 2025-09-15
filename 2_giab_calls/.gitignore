@@ -2,3 +2,4 @@
 *.bam
 *.bam.bai
 ./*.bed
+out_old
