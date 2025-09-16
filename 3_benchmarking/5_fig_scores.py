@@ -16,6 +16,12 @@ call_dir = Path("../2_giab_calls/out/calls")
 
 measures = ("F1", "PPV", "TPR")
 
+TECH_LABELS = {
+    "hifi": "PacBio HiFi (32×)",
+    "ont-simplex": "ONT R10 simplex (32×)",
+    "ont": "ONT R10 duplex (12×)",
+}
+
 
 def build_transl(f, dx, dy):
     from matplotlib.transforms import ScaledTranslation
@@ -230,7 +236,7 @@ def main():
     sns.set_theme(style="ticks", rc={"axes.spines.top": False, "font.family": "Arial"})
     # sns.set(font="Arial")
 
-    fig = plt.figure(figsize=(15, 10))
+    fig = plt.figure(figsize=(15, 15))
     fig.subplots_adjust(left=0.05, right=0.95, bottom=0.215, top=0.95, wspace=0.25, hspace=0.38)
 
     bar_df = pd.DataFrame.from_records(ns["hifi"][next(iter(ns["hifi"].keys()))])
@@ -238,7 +244,7 @@ def main():
     subfigs = fig.subfigures(nrows=2, ncols=1)
 
     for ti, (tech, subfig) in enumerate(zip(TECHS, subfigs), 1):
-        subfig.suptitle("PacBio HiFi" if tech == "hifi" else "ONT R10 Duplex")
+        subfig.suptitle(TECH_LABELS[tech])
         for mi, m in enumerate(measures, 1):
             ax1 = subfig.add_subplot(1, 3, mi)
             ax2 = ax1.twinx()
