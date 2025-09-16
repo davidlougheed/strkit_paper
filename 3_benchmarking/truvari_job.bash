@@ -45,7 +45,7 @@ truvari bench \
 module load mafft  # required for refine
 
 bed_tool="${TOOL}"
-if [[ "${bed_tool}" == "strkit-no-snv" ]] || [[ "${bed_tool}" == "strdust" ]]; then
+if [[ "${bed_tool}" == "strkit-no-snv" ]] || [[ "${bed_tool}" == "strdust" ]] || [[ "${bed_tool}" == "straglr" ]]; then
   bed_tool="strkit"
 fi
 
