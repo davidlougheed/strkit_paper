@@ -24,6 +24,11 @@ ls_bench_dir="${SLURM_TMPDIR}/bench/"
 export TMPDIR="${SLURM_TMPDIR}/tmp"
 mkdir -p "${TMPDIR}"
 
+pctseq='0.7'
+if [[ "${TOOL}" == "straglr" ]]; then
+  pctseq='0.0'  # Truvari 4.x: needed for symbolic alts  TODO: Truvari 5 resolves this
+fi
+
 # Truvari 4.x:
 truvari bench \
   -b ./data/HG002_GRCh38_TandemRepeats_v1.0.1.no_homopolymers.vcf.gz \
@@ -31,6 +36,7 @@ truvari bench \
   --includebed ./data/HG002_GRCh38_TandemRepeats_v1.0.bed.gz \
   --sizemin 5 \
   --pick ac \
+  --pctseq "${pctseq}" \
   -o "${ls_bench_dir}" || exit
 
 # TODO: use when we figure out what's up with Truvari 5.x
