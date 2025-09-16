@@ -28,7 +28,9 @@ def main():
         p1_depth = get_bam_depth(p1_bam)
         p2_depth = get_bam_depth(p2_bam)
 
-        records.append({"idx": idx, "trio": trio_id, "child": child_depth, "p1": p1_depth, "p2": p2_depth})
+        rec = {"idx": idx, "trio": trio_id, "child": child_depth, "p1": p1_depth, "p2": p2_depth}
+        print(rec)
+        records.append(rec)
 
     df = polars.from_dicts(records)
     with pl.Config(tbl_rows=50):
