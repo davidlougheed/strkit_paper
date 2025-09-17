@@ -138,6 +138,7 @@ def main():
         print(f"    {invalid_ps=} ({invalid_ps/total_ps*100:.4f}%)")
         # print(f"    {flips=} ({flips/total_ps*100:.4f}%)")
         print(f"    {correct_ps=} ({correct_ps/total_ps*100:.4f}%)")
+        print("=================================================")
 
 
 if __name__ == "__main__":
