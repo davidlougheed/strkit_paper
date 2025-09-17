@@ -41,6 +41,7 @@ def main():
 
         total: int = 0  # Total shared SNVs part of a phase set with >1 SNV from STRkit
         false_hets: int = 0
+        incorrect: int = 0
         correct: int = 0
         total_ps: int = 0  # Total shared SNVs part of a phase set with >1 SNV from STRkit
         flips: int = 0
@@ -54,6 +55,7 @@ def main():
         def _tally():
             nonlocal total
             nonlocal false_hets
+            nonlocal incorrect
             nonlocal correct
             nonlocal total_ps
             nonlocal flips
@@ -67,6 +69,8 @@ def main():
                 for snv, bench_snv in zip(current_ps_snvs, current_ps_bench_snvs):
                     if len(set(bench_snv)) == 1 and len(set(snv)) == 2:
                         false_hets += 1
+                    elif set(bench_snv) != set(snv):
+                        incorrect += 1
                     else:
                         correct += 1
 
