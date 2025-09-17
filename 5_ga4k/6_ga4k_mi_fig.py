@@ -92,7 +92,8 @@ def main():
         )
         .resolve_scale(x="shared")
     )
-    plot.save("./out/ga4k_mi_fig.png", ppi=350)
+    plot.save("./out/ga4k_mi_fig.png", ppi=300)
+    plot.save("./out/Supplemental_Fig_S2.pdf", ppi=300)
 
 
 if __name__ == "__main__":

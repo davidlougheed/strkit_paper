@@ -69,6 +69,10 @@ def main():
     ptr._figure.legends[0].set_bbox_to_anchor((0.8, 0.9))
     # plot.show()
     ptr.save("./out/bc1017_htt_peaks.png", dpi=300)
+    ptr.save("./out/Figure_3.pdf", dpi=300)
+
+    # TODO: panel two: overall k-mer distribution
+    # TODO: panel three?: comparison with other tools?
 
 
 if __name__ == "__main__":

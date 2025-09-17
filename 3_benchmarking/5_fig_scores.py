@@ -299,6 +299,7 @@ def main():
             # sns.relplot(data=df2, x="bin", y="y", kind="line", col="measure", hue="caller")
 
     plt.savefig("./out/fig_scores.png", dpi=300)
+    plt.savefig("./out/Supplemental_Fig_S1.pdf", dpi=300)
     plt.show()
 
 

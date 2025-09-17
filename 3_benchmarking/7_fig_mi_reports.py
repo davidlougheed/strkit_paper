@@ -230,6 +230,7 @@ def main():
 
         # TODO: compound figure
         plt.savefig(f"./out/fig_sequence_mi_{tech}.png", dpi=300)
+        plt.savefig(f"./out/fig_sequence_mi_{tech}.pdf", dpi=300)  # TODO: final compound figure with proper name
 
 
 if __name__ == "__main__":
