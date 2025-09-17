@@ -7,14 +7,14 @@ import polars as pl
 import subprocess
 
 
-def get_bam_depth(bf: str) -> int:
+def get_bam_depth(bf: str) -> float:
     p_depth = subprocess.Popen(("samtools", "depth", "-a", bf), stdout=subprocess.PIPE)
     res = subprocess.check_output(("awk", '{sum+=$3} END { print "Average = ",sum/NR}'), stdin=p_depth.stdout)
     p_depth.wait()
-    return int(res.decode("ascii"))
+    return float(res.decode("ascii"))
 
 
-def main():
+def compute_coverages():
     records = []
 
     with open("./data/trios.json", "rb") as fh:
@@ -35,6 +35,12 @@ def main():
     df = polars.from_dicts(records)
     with pl.Config(tbl_rows=50):
         print(df)
+
+    df.write_csv("./ga4k_coverages.csv")
+
+
+def main():
+    compute_coverages()
 
 
 if __name__ == "__main__":
