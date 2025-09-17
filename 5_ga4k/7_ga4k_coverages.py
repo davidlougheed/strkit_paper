@@ -11,7 +11,8 @@ def get_bam_depth(bf: str) -> float:
     p_depth = subprocess.Popen(("samtools", "depth", "-a", bf), stdout=subprocess.PIPE)
     res = subprocess.check_output(("awk", '{sum+=$3} END { print "Average = ",sum/NR}'), stdin=p_depth.stdout)
     p_depth.wait()
-    return float(res.decode("ascii"))
+    res_strs: list[str] = res.decode("ascii").strip().split(" ")
+    return float(res_strs[-1])
 
 
 def compute_coverages():
