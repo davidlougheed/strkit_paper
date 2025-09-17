@@ -132,6 +132,7 @@ def main():
         print(f"    {total=}")
         print(f"    {false_hets=} ({false_hets/total*100:.4f}%)")
         print(f"    {incorrect=} ({incorrect/total*100:.4f}%)")
+        print(f"    {(false_hets+incorrect)=} ({(false_hets+incorrect)/total*100:.4f}%)")
         print(f"    {correct=} ({correct/total*100:.4f}%)")
         print("-------------------------------------------------")
         print(f"    {total_ps=}")
