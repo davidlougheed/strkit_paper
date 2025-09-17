@@ -131,7 +131,9 @@ def main():
         # Final tally
         print(f"    {total=}")
         print(f"    {false_hets=} ({false_hets/total*100:.4f}%)")
+        print(f"    {incorrect=} ({incorrect/total*100:.4f}%)")
         print(f"    {correct=} ({correct/total*100:.4f}%)")
+        print("-------------------------------------------------")
         print(f"    {total_ps=}")
         print(f"    {invalid_ps=} ({invalid_ps/total_ps*100:.4f}%)")
         # print(f"    {flips=} ({flips/total_ps*100:.4f}%)")
