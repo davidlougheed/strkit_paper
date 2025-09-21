@@ -39,6 +39,7 @@ def main():
                             f"KARYOTYPE=XX,"  # "
                             f"SEX=f,"  # "
                             f"PHASED=,"
+                            f"EXECUTABLE=./trgt/target/release/trgt",  # trgt without haplotags
                             f"BAM={bam}"
                         ),
                         f"../2_giab_calls/{script}.bash",
