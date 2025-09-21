@@ -82,8 +82,8 @@ def main():
         print(f"    t test strkit-no-snv vs trgt: {ttest_ind(mis_trgt, mis_strkit_no_snv, alternative='less').pvalue}")
 
     plot = (
-        df.plot
-        .point()
+        alt.Chart(df)
+        .mark_tick()
         .encode(
             x=alt.X("Caller").title(None),
             y=alt.Y("MI %", scale=alt.Scale(domain=[0.55, 1.0])),
