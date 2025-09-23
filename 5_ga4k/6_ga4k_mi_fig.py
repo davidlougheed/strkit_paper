@@ -47,7 +47,7 @@ def main():
 
     for caller in tqdm(CALLERS, desc="caller"):
         for trio_id in trio_data:
-            cov_val = coverages[coverages["trio"] == int(trio_id)]["avg"]
+            cov_val = coverages[coverages["trio"] == int(trio_id)]["avg"].item()
             tqdm.write(f"trio coverage: {trio_id}={cov_val}")
             if cov_val >= 25:
                 cov = "25-30x"
