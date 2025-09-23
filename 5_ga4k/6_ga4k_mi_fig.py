@@ -145,7 +145,7 @@ def main():
     ptr = plot.plot()
     # noinspection PyProtectedMember
     for i, axis in enumerate(ptr._figure.axes):
-        axis.xaxis.set_tick_params(rotation=45)
+        axis.xaxis.set_tick_params(rotation=90)
         if i == 0:
             axis.legend(handles=[
                 Line2D(
