@@ -57,7 +57,10 @@ run_mi () {
 
 for tech in "${techs[@]}"; do
   for tool in "${tools[@]}"; do
-    run_mi "${tech}" "${tool}" ''
+    if [[ $(echo "${tech}" | cut -c1-3) != "ont" ]] || [[ "${tool}" != "trgt" ]]; then
+      # de morgan version of `not (tech[:3] == "ont" && tool == "trgt")`
+      run_mi "${tech}" "${tool}" ''
+    fi
 
     if [[ "${tech}" == "hifi" ]]; then
       if [[ "${tool}" == "longtr" ]] || [[ "${tool}" == "strkit" ]] || [[ "${tool}" == "trgt" ]]; then
