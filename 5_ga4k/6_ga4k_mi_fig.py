@@ -44,12 +44,11 @@ def main():
 
     coverages = pd.read_csv("./out/ga4k_coverages.csv")
     coverages["avg"] = coverages[["child", "p1", "p2"]].mean(axis=1)
-    print(coverages)
 
     for caller in tqdm(CALLERS, desc="caller"):
         for trio_id in trio_data:
-            cov_val = coverages[coverages["trio"] == trio_id]["avg"]
-            print(f"trio coverage: {trio_id}={cov_val}")
+            cov_val = coverages[coverages["trio"] == int(trio_id)]["avg"]
+            tqdm.write(f"trio coverage: {trio_id}={cov_val}")
             if cov_val >= 25:
                 cov = "25-30x"
             elif cov_val >= 10:
@@ -108,7 +107,7 @@ def main():
         .layout(size=(9, 6))
         .add(so.Dot(), so.Jitter(0.5))
         .scale(
-            color=so.Nominal({c: v for c, v in zip(CALLERS, PALETTE)}),
+            color=so.Nominal({LABELS[c]: v for c, v in zip(CALLERS, PALETTE)}),
             marker=so.Nominal({
                 "25-30x": "^",
                 "10-15x": "o",
