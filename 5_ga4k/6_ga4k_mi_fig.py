@@ -121,7 +121,7 @@ def main():
 
     plot = (
         so.Plot(df, x="Caller", y="MI %", color="Caller", marker="Coverage")
-        .layout(size=(9, 6))
+        .layout(size=(9, 5.5))
         .theme({
             **axes_style("white"),
             "axes.spines.top": False,
@@ -145,7 +145,7 @@ def main():
     ptr = plot.plot()
     # noinspection PyProtectedMember
     for i, axis in enumerate(ptr._figure.axes):
-        axis.xaxis.set_tick_params(rotation=90)
+        axis.xaxis.set_tick_params(rotation=45)
         if i == 0:
             axis.legend(handles=[
                 Line2D(
