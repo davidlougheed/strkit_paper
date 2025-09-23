@@ -249,7 +249,7 @@ def main():
     # sns.set(font="Arial")
 
     fig = plt.figure(figsize=(12, 12))
-    fig.subplots_adjust(left=0.05, right=0.95, bottom=0.215, top=0.95, wspace=0.25, hspace=0.38)
+    fig.subplots_adjust(left=0.05, right=0.94, bottom=0.218, top=0.95, wspace=0.25, hspace=0.40)
 
     bar_df = pd.DataFrame.from_records(ns["hifi"][next(iter(ns["hifi"].keys()))])
 
