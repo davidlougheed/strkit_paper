@@ -1,4 +1,5 @@
 # import altair as alt
+import matplotlib as mpl
 import orjson
 import os.path
 # import polars as pl
@@ -7,6 +8,7 @@ import seaborn.objects as so
 import sys
 
 from scipy.stats import ttest_ind
+from seaborn import axes_style
 from statistics import mean
 from tqdm import tqdm
 
@@ -34,6 +36,19 @@ PALETTE = [
     "#386cb0",  # Straglr
     "#e7298a",  # TRGT
 ]
+
+font_size = 10
+font_rc = {
+    "font.family": "Arial",
+    "font.size": font_size,
+    "axes.titlesize": font_size,
+    "axes.labelsize": font_size,
+    "xtick.labelsize": font_size,
+    "ytick.labelsize": font_size,
+    "legend.title_fontsize": font_size,
+    "legend.fontsize": font_size,
+}
+mpl.rcParams.update(font_rc)
 
 
 def main():
@@ -106,6 +121,13 @@ def main():
     plot = (
         so.Plot(df, x="Caller", y="MI %", color="Caller", marker="Coverage")
         .layout(size=(9, 6))
+        .theme({
+            **axes_style("white"),
+            "axes.spines.top": False,
+            "axes.spines.right": False,
+            **font_rc,
+            "patch.linewidth": 0,
+        })
         .add(so.Dot(), so.Jitter(0.5))
         .scale(
             color=so.Nominal({LABELS[c]: v for c, v in zip(CALLERS, PALETTE)}),
