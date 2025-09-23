@@ -5,10 +5,19 @@ import pandas as pd
 import seaborn as sns
 import matplotlib as mpl
 from matplotlib import pyplot as plt
+from matplotlib.lines import Line2D
 from pathlib import Path
 
-from common import CALLERS, LABELS
+from common import CALLERS, LABELS, TECH_LABELS
 
+PALETTE = [
+    "#d95f02",  # LongTR
+    "#984ea3",  # STRdust
+    "#238b45",  # STRkit
+    "#66c2a4",  # STRkit (no SNVs)
+    # "#386cb0",  # Straglr
+    "#e7298a",  # TRGT
+]
 
 mi_techs = ("hifi", "ont-simplex")
 bench_base_dir = Path("./out/hg002_benchmark")
@@ -63,7 +72,12 @@ def main():
 
             print(out_str)
 
-    for tech, sub_reports in reports.items():
+    fig = plt.figure(figsize=(6.5, 7.5))
+    fig.subplots_adjust(left=0.1, right=0.882, top=0.956, bottom=0.19, hspace=0.54)
+
+    # subfigs = fig.subfigures(nrows=2, ncols=1)
+
+    for t_idx, (tech, sub_reports) in enumerate(reports.items()):
         records = []
         count_records = []
 
@@ -178,21 +192,16 @@ def main():
         df_count = pd.DataFrame.from_records(count_records)
 
         # landscape fig
-        fig = plt.figure(figsize=(9, 5))
+        # fig = plt.figure(figsize=(9, 5))
 
-        fig.subplots_adjust(left=0.06, right=0.914, top=0.985, bottom=0.29)
-        p = sns.color_palette([
-            "#d95f02",  # LongTR
-            "#984ea3",  # STRdust
-            "#238b45",  # STRkit
-            "#66c2a4",  # STRkit (no SNVs)
-            # "#386cb0",  # Straglr
-            "#e7298a",  # TRGT
-        ])
+        # fig.subplots_adjust(left=0.06, right=0.914, top=0.985, bottom=0.29)
+        p = sns.color_palette(PALETTE)
 
         callers_hue_order = tuple("_" + c for c in CALLERS if c != "straglr")
 
-        ax = fig.add_subplot(111)
+        ax = fig.add_subplot(210 + (t_idx + 1))
+        ax.set_title(TECH_LABELS[tech])
+        ax.set_ylim(0.0, 1.0)
 
         ax2 = ax.twinx()
         ax2.set_ylim(0, 500000)
@@ -210,27 +219,35 @@ def main():
         )
 
         for c in bp.containers:
-            bp.bar_label(c, fontsize=7, rotation=90, padding=3, color="#999999")
+            bp.bar_label(c, fontsize=6, rotation=90, padding=2, color="#999999")
 
-        sns.move_legend(ax, "upper right")
-        legend = fig.legend(
-            title="$\\bf{Caller}$",
-            loc="outside lower center",
-            mode="expand",
-            ncols=5,
-            frameon=False,
-        )
         ax.get_legend().remove()
-
         plt.setp(ax.get_xticklabels(), rotation=45, ha="right")
-        # ax2.get_legend().remove()
 
-        for line in legend.get_lines():
-            line.set_linewidth(3)
+        if t_idx == 1:
+            # noinspection PyTypeChecker
+            legend = fig.legend(
+                title="Caller",
+                loc="outside lower center",
+                mode="expand",
+                ncols=5,
+                frameon=False,
+                handles=[Line2D([0], [0], color=c) for c in PALETTE],
+                labels=[
+                    LABELS["longtr"],
+                    LABELS["strdust"],
+                    LABELS["strkit"],
+                    LABELS["strkit-no-snv"],
+                    # LABELS["straglr"],
+                    LABELS["trgt"],
+                ],
+            )
+            for line in legend.get_lines():
+                line.set_linewidth(3)
 
-        # TODO: compound figure
-        plt.savefig(f"./out/fig_sequence_mi_{tech}.png", dpi=300)
-        plt.savefig(f"./out/fig_sequence_mi_{tech}.pdf", dpi=300)  # TODO: final compound figure with proper name
+    plt.savefig(f"./out/fig_sequence_mi_combined.png", dpi=300)
+    plt.savefig(f"./out/fig_sequence_mi_combined.pdf", dpi=300)  # TODO: final proper name
+    plt.show()
 
 
 if __name__ == "__main__":
