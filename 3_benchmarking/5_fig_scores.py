@@ -253,7 +253,7 @@ def main():
 
     bar_df = pd.DataFrame.from_records(ns["hifi"][next(iter(ns["hifi"].keys()))])
 
-    subfigs = fig.subfigures(nrows=2, ncols=1)
+    subfigs = fig.subfigures(nrows=len(TECHS), ncols=1)
 
     for ti, (tech, subfig) in enumerate(zip(TECHS, subfigs), 1):
         subfig.suptitle(TECH_LABELS[tech])
