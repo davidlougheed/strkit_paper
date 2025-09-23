@@ -7,6 +7,7 @@ import pandas as pd
 import seaborn.objects as so
 import sys
 
+from matplotlib.lines import Line2D
 from scipy.stats import ttest_ind
 from seaborn import axes_style
 from statistics import mean
@@ -128,7 +129,7 @@ def main():
             **font_rc,
             "patch.linewidth": 0,
         })
-        .add(so.Dot(alpha=0.5), so.Jitter(0.6))
+        .add(so.Dot(alpha=0.4), so.Jitter(0.6))
         .scale(
             color=so.Nominal({LABELS[c]: v for c, v in zip(CALLERS, PALETTE)}),
             marker=so.Nominal({
@@ -143,8 +144,14 @@ def main():
 
     ptr = plot.plot()
     # noinspection PyProtectedMember
-    for axis in ptr._figure.axes:
+    for i, axis in enumerate(ptr._figure.axes):
         axis.xaxis.set_tick_params(rotation=90)
+        if i == 0:
+            axis.legend(handles=[
+                Line2D([0], [0], color="#000000", marker="^", label="25-30×"),
+                Line2D([0], [0], color="#000000", marker="o", label="10-15×"),
+                Line2D([0], [0], color="#000000", marker="v", label="<10×"),
+            ])
 
     ptr.save("./out/ga4k_mi_fig.png", dpi=300)
     ptr.save("./out/Supplemental_Fig_S2.pdf", dpi=300)
