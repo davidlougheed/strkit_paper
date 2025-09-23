@@ -37,7 +37,7 @@ def compute_coverages():
     with pl.Config(tbl_rows=50):
         print(df)
 
-    df.write_csv("./ga4k_coverages.csv")
+    df.write_csv("./out/ga4k_coverages.csv")
 
 
 def main():
