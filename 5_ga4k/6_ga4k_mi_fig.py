@@ -128,7 +128,7 @@ def main():
             **font_rc,
             "patch.linewidth": 0,
         })
-        .add(so.Dot(), so.Jitter(0.5))
+        .add(so.Dot(alpha=0.5), so.Jitter(0.6))
         .scale(
             color=so.Nominal({LABELS[c]: v for c, v in zip(CALLERS, PALETTE)}),
             marker=so.Nominal({
