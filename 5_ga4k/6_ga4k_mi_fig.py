@@ -148,9 +148,9 @@ def main():
         axis.xaxis.set_tick_params(rotation=90)
         if i == 0:
             axis.legend(handles=[
-                Line2D([0], [0], color="#000000", marker="^", label="25-30×"),
-                Line2D([0], [0], color="#000000", marker="o", label="10-15×"),
-                Line2D([0], [0], color="#000000", marker="v", label="<10×"),
+                Line2D([0], [0], color="#FFFFFF", markerfacecolor="#333333", marker="^", label="25-30×"),
+                Line2D([0], [0], color="#FFFFFF", markerfacecolor="#333333", marker="o", label="10-15×"),
+                Line2D([0], [0], color="#FFFFFF", markerfacecolor="#333333", marker="v", label="<10×"),
             ])
 
     ptr.save("./out/ga4k_mi_fig.png", dpi=300)
