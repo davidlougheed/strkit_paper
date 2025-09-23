@@ -8,19 +8,13 @@ from io import StringIO
 from pathlib import Path
 from urllib.parse import unquote as url_unquote
 
-from common import CALLERS, LABELS, TECHS
+from common import CALLERS, LABELS, TECHS, TECH_LABELS
 
 
 bench_dir = Path("./out/hg002_benchmark")
 call_dir = Path("../2_giab_calls/out/calls")
 
 measures = ("F1", "PPV", "TPR")
-
-TECH_LABELS = {
-    "hifi": "PacBio HiFi (32×)",
-    "ont-simplex": "ONT R10 simplex (32×)",
-    "ont": "ONT R10 duplex (12×)",
-}
 
 
 def build_transl(f, dx, dy):

@@ -1,6 +1,11 @@
 CALLERS = ("longtr", "strdust", "strkit", "strkit-no-snv", "straglr", "trgt")
 
 TECHS = ("hifi", "ont-simplex", "ont")
+TECH_LABELS = {
+    "hifi": "PacBio HiFi (32×)",
+    "ont-simplex": "ONT R10 simplex (32×)",
+    "ont": "ONT R10 duplex (12×)",
+}
 
 LABELS = {
     # callers:
