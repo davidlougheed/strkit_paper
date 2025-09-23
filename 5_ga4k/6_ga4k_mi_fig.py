@@ -46,9 +46,10 @@ def main():
     coverages["avg"] = coverages[["child", "p1", "p2"]].mean(axis=1)
 
     for caller in tqdm(CALLERS, desc="caller"):
-        for trio_id in trio_data:
+        tqdm.write(f"caller={caller}")
+        for trio_id in tqdm(trio_data, desc="  trios"):
             cov_val = coverages[coverages["trio"] == int(trio_id)]["avg"].item()
-            tqdm.write(f"trio coverage: {trio_id}={cov_val}")
+            tqdm.write(f"  trio coverage: {trio_id}={cov_val}")
             if cov_val >= 25:
                 cov = "25-30x"
             elif cov_val >= 10:
@@ -114,6 +115,7 @@ def main():
                 "<10x": "v",
             }),
         )
+        .facet(col="MI metric")
     )
 
     ptr = plot.plot()
