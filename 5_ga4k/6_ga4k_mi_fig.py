@@ -137,10 +137,14 @@ def main():
                 "<10x": "v",
             }),
         )
-        .facet(col="MI metric")
+        .facet(col="MI metric", order=("copy number", "copy number (±1)", "seq. len.", "seq. len. ±1bp", "sequence"))
     )
 
     ptr = plot.plot()
+    # noinspection PyProtectedMember
+    for axis in ptr._figure.axes:
+        axis.xaxis.set_tick_params(rotation=90)
+
     ptr.save("./out/ga4k_mi_fig.png", dpi=300)
     ptr.save("./out/Supplemental_Fig_S2.pdf", dpi=300)
 
