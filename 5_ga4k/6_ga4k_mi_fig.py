@@ -137,6 +137,7 @@ def main():
                 "<10x": "v",
             }),
         )
+        .label(legend="test")
         .facet(col="MI metric", order=("copy number", "copy number (±1)", "seq. len.", "seq. len. ±1bp", "sequence"))
     )
 
