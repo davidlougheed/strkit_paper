@@ -233,10 +233,22 @@ def main():
     import pandas as pd
     import matplotlib.pyplot as plt
     import seaborn as sns
-    sns.set_theme(style="ticks", rc={"axes.spines.top": False, "font.family": "Arial"})
+
+    font_size = 10
+    sns.set_theme(style="ticks", rc={
+        "axes.spines.top": False,
+        "font.family": "Arial",
+        "font.size": font_size,
+        "axes.titlesize": font_size,
+        "axes.labelsize": font_size,
+        "xtick.labelsize": font_size,
+        "ytick.labelsize": font_size,
+        "legend.title_fontsize": font_size,
+        "legend.fontsize": font_size,
+    })
     # sns.set(font="Arial")
 
-    fig = plt.figure(figsize=(15, 15))
+    fig = plt.figure(figsize=(12, 12))
     fig.subplots_adjust(left=0.05, right=0.95, bottom=0.215, top=0.95, wspace=0.25, hspace=0.38)
 
     bar_df = pd.DataFrame.from_records(ns["hifi"][next(iter(ns["hifi"].keys()))])
