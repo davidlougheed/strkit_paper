@@ -78,7 +78,7 @@ def main():
                     # total_ps += ct
                     total_ps += 1
 
-                    # Quantify: # correct, # false hets, # flips  ---  we only call hets
+                    # Quantify: # correct, # flips  ---  we only call hets
                     fl1 = 0
                     fl2 = 0
 
