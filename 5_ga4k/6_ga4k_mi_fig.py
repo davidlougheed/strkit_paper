@@ -103,7 +103,7 @@ def main():
     def _df_metric_caller_mi_percent(m: str, c: str):
         return df[(df["MI metric"] == m) & (df["Caller"] == c)]["MI %"].tolist()
 
-    for metric in ("copy number", "copy number (±1)", "sequence", "seq. len.", "seq. len. ±1bp"):
+    for metric in ("copy number", "sequence", "seq. len.", "seq. len. ±1bp"):  # "copy number (±1)",
         mis_strkit = _df_metric_caller_mi_percent(metric, "STRkit")
         mis_strkit_no_snv = _df_metric_caller_mi_percent(metric, "STRkit (no SNVs)")
         mis_trgt = _df_metric_caller_mi_percent(metric, "TRGT")
