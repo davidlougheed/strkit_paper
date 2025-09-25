@@ -140,7 +140,7 @@ def main():
             }),
         )
         .label(legend="test")
-        .facet(col="MI metric", order=("copy number", "copy number (±1)", "seq. len.", "seq. len. ±1bp", "sequence"))
+        .facet(col="MI metric", order=("copy number", "seq. len.", "seq. len. ±1bp", "sequence"))
     )
 
     ptr = plot.plot()
