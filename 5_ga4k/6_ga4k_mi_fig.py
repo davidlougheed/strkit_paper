@@ -83,7 +83,8 @@ def main():
                 df_list.extend([
                     *([
                         {"MI metric": "copy number", "MI %": data["mi"]["val"], "Caller": cl, "Coverage": cov},
-                        {"MI metric": "copy number (±1)", "MI %": data["mi_pm1"]["val"], "Caller": cl, "Coverage": cov},
+                        # {"MI metric": "copy number (±1)", "MI %": data["mi_pm1"]["val"], "Caller": cl,
+                        #  "Coverage": cov},
                     ] if caller in ("straglr", "strkit", "strkit-no-snv", "trgt") else []),
                     *([
                         {"MI metric": "sequence", "MI %": data["mi_seq"]["val"], "Caller": cl, "Coverage": cov},
